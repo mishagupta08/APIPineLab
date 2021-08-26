@@ -1,0 +1,2831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PineLabsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BillingAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="Country" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="500" />
+          <Property Name="Firstname" Type="varchar" MaxLength="200" />
+          <Property Name="lastname" Type="varchar" MaxLength="200" />
+          <Property Name="AddLineOne" Type="varchar" MaxLength="1000" />
+          <Property Name="AddLineTwo" Type="varchar" MaxLength="1000" />
+          <Property Name="PostCode" Type="varchar" MaxLength="10" />
+          <Property Name="State" Type="varchar" MaxLength="100" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="OrderId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CarteDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductSku" Type="varchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="PriceType" Type="varchar" MaxLength="50" />
+          <Property Name="ProdPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="currencyCode" Type="varchar" MaxLength="10" />
+          <Property Name="Posted" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="Url" Type="varchar" MaxLength="200" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="SubcategoriesCount" Type="int" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" />
+          <Property Name="ApiCatId" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" />
+          <Property Name="Website" Type="varchar" MaxLength="500" />
+          <Property Name="Logo" Type="varchar" MaxLength="300" />
+          <Property Name="CreditPoint" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Address1" Type="varchar" MaxLength="500" />
+          <Property Name="Address2" Type="varchar" MaxLength="500" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="State" Type="varchar" MaxLength="100" />
+          <Property Name="Country" Type="varchar" MaxLength="100" />
+          <Property Name="Zip" Type="nchar" MaxLength="10" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="ContactName" Type="varchar" MaxLength="100" />
+          <Property Name="ContactNo1" Type="varchar" MaxLength="15" />
+          <Property Name="ContactNo2" Type="varchar" MaxLength="15" />
+          <Property Name="ContactEmail1" Type="varchar" MaxLength="100" />
+          <Property Name="ContactEmail2" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CompanyAccountName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyBankName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyAccountType" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyAccountNumber" Type="varchar" MaxLength="20" />
+          <Property Name="CompanyIFSCCode" Type="nchar" MaxLength="10" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="ConsumerKey" Type="varchar" MaxLength="100" />
+          <Property Name="ConsumerSecret" Type="varchar" MaxLength="100" />
+          <Property Name="AuthToken" Type="varchar" MaxLength="1000" />
+          <Property Name="AuthTokenGeneationDate" Type="datetime" />
+          <Property Name="LiveConsumerKey" Type="varchar(max)" />
+          <Property Name="LiveConsumerSecret" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PineLabs.dbo.companybak' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="companybak">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" />
+          <Property Name="Website" Type="varchar" MaxLength="500" />
+          <Property Name="Logo" Type="varchar" MaxLength="300" />
+          <Property Name="CreditPoint" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Address1" Type="varchar" MaxLength="500" />
+          <Property Name="Address2" Type="varchar" MaxLength="500" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="State" Type="varchar" MaxLength="100" />
+          <Property Name="Country" Type="varchar" MaxLength="100" />
+          <Property Name="Zip" Type="nchar" MaxLength="10" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="ContactName" Type="varchar" MaxLength="100" />
+          <Property Name="ContactNo1" Type="varchar" MaxLength="15" />
+          <Property Name="ContactNo2" Type="varchar" MaxLength="15" />
+          <Property Name="ContactEmail1" Type="varchar" MaxLength="100" />
+          <Property Name="ContactEmail2" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CompanyAccountName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyBankName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyAccountType" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyAccountNumber" Type="varchar" MaxLength="20" />
+          <Property Name="CompanyIFSCCode" Type="nchar" MaxLength="10" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="ConsumerKey" Type="varchar" MaxLength="100" />
+          <Property Name="ConsumerSecret" Type="varchar" MaxLength="100" />
+          <Property Name="AuthToken" Type="varchar" MaxLength="1000" />
+          <Property Name="AuthTokenGeneationDate" Type="datetime" />
+          <Property Name="LiveConsumerKey" Type="varchar(max)" />
+          <Property Name="LiveConsumerSecret" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="thumbnail" Type="varchar" MaxLength="1000" />
+          <Property Name="mobile" Type="varchar" MaxLength="1000" />
+          <Property Name="base" Type="varchar" MaxLength="1000" />
+          <Property Name="small" Type="varchar" MaxLength="1000" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="ProductId" Type="varchar" MaxLength="50" />
+          <Property Name="CategoryId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JobEMAILQue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="FormNo" Type="int" />
+          <Property Name="EMailBody" Type="nvarchar(max)" />
+          <Property Name="EmailDate" Type="datetime" />
+          <Property Name="IsMailSent" Type="bit" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="500" />
+          <Property Name="EmailType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="RecTimeStamp" Type="datetime" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FromEmailID" Type="nvarchar" MaxLength="100" />
+          <Property Name="Subject" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="JobEmailSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="SMTPServer" Type="nvarchar" MaxLength="500" />
+          <Property Name="SMSUserName" Type="nvarchar" MaxLength="500" />
+          <Property Name="SMSPassword" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="JobFinalEmailQue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Body" Type="varchar(max)" />
+          <Property Name="FromEmailID" Type="varchar(max)" />
+          <Property Name="ToEmailID" Type="varchar(max)" />
+          <Property Name="EmailType" Type="varchar(max)" />
+          <Property Name="IsMailSent" Type="bit" />
+          <Property Name="RectimeStamp" Type="datetime" />
+          <Property Name="JobEmailQueID" Type="int" />
+        </EntityType>
+        <EntityType Name="JobFinalSMSQue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="JOBSMSQueID" Type="int" />
+          <Property Name="SMSBody" Type="nvarchar(max)" />
+          <Property Name="SMSDate" Type="datetime" />
+          <Property Name="IsSMSSent" Type="bit" />
+          <Property Name="mobileno" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SMSType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="RecTimeStamp" Type="datetime" />
+          <Property Name="IsError" Type="bit" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobSMSQue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="FormNo" Type="int" />
+          <Property Name="SMSBody" Type="nvarchar(max)" />
+          <Property Name="SMSDate" Type="datetime" />
+          <Property Name="IsSMSSent" Type="bit" />
+          <Property Name="mobileno" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SMSType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="RecTimeStamp" Type="datetime" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobSMSSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="SMSAPI" Type="nvarchar" MaxLength="500" />
+          <Property Name="SMSUserName" Type="nvarchar" MaxLength="500" />
+          <Property Name="SMSPassword" Type="nvarchar" MaxLength="500" />
+          <Property Name="smsSenderId" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PineLabs.dbo.MessageApi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MessageApi">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="msgapi" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="passwrd" />
+            <PropertyRef Name="SenderId" />
+            <PropertyRef Name="Activests" />
+            <PropertyRef Name="cmpid" />
+            <PropertyRef Name="Memusername" />
+            <PropertyRef Name="CompWeb" />
+            <PropertyRef Name="mlmurl" />
+            <PropertyRef Name="ShopingPortal" />
+            <PropertyRef Name="AirTicket" />
+            <PropertyRef Name="cmplogo" />
+            <PropertyRef Name="favicn" />
+            <PropertyRef Name="IsPromo" />
+            <PropertyRef Name="IsFlight" />
+            <PropertyRef Name="IsLoginOTP" />
+            <PropertyRef Name="IsServiceOTP" />
+            <PropertyRef Name="LoginAPI" />
+            <PropertyRef Name="BalanceCheckAPI" />
+            <PropertyRef Name="GetBalAPI" />
+            <PropertyRef Name="sts" />
+            <PropertyRef Name="PortalType" />
+            <PropertyRef Name="MobileApp" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="msgapi" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="passwrd" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="SenderId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Activests" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="cmpid" Type="int" Nullable="false" />
+          <Property Name="Memusername" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CompWeb" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="mlmurl" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ShopingPortal" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AirTicket" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="cmplogo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="favicn" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsPromo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsFlight" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsLoginOTP" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsServiceOTP" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="LoginAPI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="BalanceCheckAPI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="GetBalAPI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sts" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="PortalType" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MobileApp" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PineLabs.dbo.messgeApi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="messgeApi">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="msgapi" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="passwrd" />
+            <PropertyRef Name="SenderId" />
+            <PropertyRef Name="Activests" />
+            <PropertyRef Name="cmpid" />
+            <PropertyRef Name="Memusername" />
+            <PropertyRef Name="CompWeb" />
+            <PropertyRef Name="mlmurl" />
+            <PropertyRef Name="ShopingPortal" />
+            <PropertyRef Name="AirTicket" />
+            <PropertyRef Name="cmplogo" />
+            <PropertyRef Name="favicn" />
+            <PropertyRef Name="IsPromo" />
+            <PropertyRef Name="IsFlight" />
+            <PropertyRef Name="IsLoginOTP" />
+            <PropertyRef Name="IsServiceOTP" />
+            <PropertyRef Name="LoginAPI" />
+            <PropertyRef Name="BalanceCheckAPI" />
+            <PropertyRef Name="GetBalAPI" />
+            <PropertyRef Name="sts" />
+            <PropertyRef Name="PortalType" />
+            <PropertyRef Name="MobileApp" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="msgapi" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="passwrd" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="SenderId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Activests" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="cmpid" Type="int" Nullable="false" />
+          <Property Name="Memusername" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CompWeb" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="mlmurl" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ShopingPortal" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AirTicket" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="cmplogo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="favicn" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsPromo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsFlight" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsLoginOTP" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsServiceOTP" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="LoginAPI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="BalanceCheckAPI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="GetBalAPI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sts" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="PortalType" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MobileApp" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="orderId" Type="varchar" MaxLength="50" />
+          <Property Name="refno" Type="varchar" MaxLength="50" />
+          <Property Name="CancelAllowed" Type="bit" />
+          <Property Name="CancelallowedWithIn" Type="varchar" MaxLength="10" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="ResponceContent" Type="varchar(max)" />
+          <Property Name="UserId" Type="varchar(max)" />
+          <Property Name="updatedate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="order_card">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivationCode" Type="varchar" MaxLength="100" />
+          <Property Name="ActivationUrl" Type="varchar" MaxLength="500" />
+          <Property Name="Amount" Type="varchar" MaxLength="10" />
+          <Property Name="barcode" Type="varchar" MaxLength="100" />
+          <Property Name="CardId" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CardNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CardPin" Type="varchar" MaxLength="50" />
+          <Property Name="LabelProductName" Type="varchar" MaxLength="50" />
+          <Property Name="OrderRefNo" Type="varchar" MaxLength="50" />
+          <Property Name="Validity" Type="varchar" MaxLength="100" />
+          <Property Name="RecepientEmail" Type="varchar" MaxLength="200" />
+          <Property Name="ProductSku" Type="varchar" MaxLength="50" />
+          <Property Name="ProductTheme" Type="varchar" MaxLength="50" />
+          <Property Name="LableCardNumber" Type="varchar" MaxLength="50" />
+          <Property Name="LableCardPin" Type="varchar" MaxLength="50" />
+          <Property Name="lableValidity" Type="varchar" MaxLength="100" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="EnrptCardNo" Type="varchar(max)" />
+          <Property Name="EnrptCardPin" Type="varchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="order_product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cardBehaviour" Type="varchar" MaxLength="50" />
+          <Property Name="base" Type="varchar" MaxLength="1000" />
+          <Property Name="mobile" Type="varchar" MaxLength="1000" />
+          <Property Name="thumbnail" Type="varchar" MaxLength="1000" />
+          <Property Name="small" Type="varchar" MaxLength="1000" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="productSku" Type="varchar" MaxLength="50" />
+          <Property Name="specialInstruction" Type="varchar(max)" />
+          <Property Name="OrderRefId" Type="varchar" MaxLength="50" />
+          <Property Name="created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrderPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="balance" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="code" Type="varchar" MaxLength="50" />
+          <Property Name="OrderRefNo" Type="varchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProductCategoryRelationTbl">
+          <Key>
+            <PropertyRef Name="Sno" />
+          </Key>
+          <Property Name="Sno" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductSku" Type="varchar" MaxLength="50" />
+          <Property Name="CategoryId" Type="varchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProductContentTbl">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductSku" Type="varchar" MaxLength="50" />
+          <Property Name="ProdContent" Type="varchar(max)" />
+          <Property Name="Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProductDenomination">
+          <Key>
+            <PropertyRef Name="Sno" />
+          </Key>
+          <Property Name="Sno" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductSku" Type="varchar" MaxLength="50" />
+          <Property Name="Denomination" Type="varchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProductDiscounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ProductSku" Type="varchar" MaxLength="50" />
+          <Property Name="DiscountType" Type="varchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="DiscountAmount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DiscountDesc" Type="varchar" MaxLength="100" />
+          <Property Name="CounponCode" Type="varchar" MaxLength="100" />
+          <Property Name="CouponPriority" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sku" Type="varchar" MaxLength="50" />
+          <Property Name="url" Type="varchar" MaxLength="1000" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="minPrice" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="maxPrice" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="code" Type="varchar" MaxLength="50" />
+          <Property Name="symbol" Type="varchar" MaxLength="50" />
+          <Property Name="numericCode" Type="varchar" MaxLength="50" />
+          <Property Name="created" Type="datetime" />
+          <Property Name="categoryId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductThemeTbl">
+          <Key>
+            <PropertyRef Name="Sno" />
+          </Key>
+          <Property Name="Sno" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductSku" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="varchar" MaxLength="1000" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="ThemeSku" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RelatedProductList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sku" Type="varchar" MaxLength="50" />
+          <Property Name="RelatedSku" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PineLabs.dbo.SmsApi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SmsApi">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="msgapi" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="passwrd" />
+            <PropertyRef Name="SenderId" />
+            <PropertyRef Name="Activests" />
+            <PropertyRef Name="cmpid" />
+            <PropertyRef Name="Memusername" />
+            <PropertyRef Name="CompWeb" />
+            <PropertyRef Name="mlmurl" />
+            <PropertyRef Name="ShopingPortal" />
+            <PropertyRef Name="AirTicket" />
+            <PropertyRef Name="cmplogo" />
+            <PropertyRef Name="favicn" />
+            <PropertyRef Name="IsPromo" />
+            <PropertyRef Name="IsFlight" />
+            <PropertyRef Name="IsLoginOTP" />
+            <PropertyRef Name="IsServiceOTP" />
+            <PropertyRef Name="LoginAPI" />
+            <PropertyRef Name="BalanceCheckAPI" />
+            <PropertyRef Name="GetBalAPI" />
+            <PropertyRef Name="sts" />
+            <PropertyRef Name="PortalType" />
+            <PropertyRef Name="MobileApp" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="msgapi" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="passwrd" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="SenderId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Activests" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="cmpid" Type="int" Nullable="false" />
+          <Property Name="Memusername" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CompWeb" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="mlmurl" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ShopingPortal" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AirTicket" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="cmplogo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="favicn" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsPromo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsFlight" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsLoginOTP" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsServiceOTP" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="LoginAPI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="BalanceCheckAPI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="GetBalAPI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sts" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="PortalType" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MobileApp" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblApiRequestResponse">
+          <Key>
+            <PropertyRef Name="reqid" />
+          </Key>
+          <Property Name="reqid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="request" Type="varchar(max)" />
+          <Property Name="response" Type="varchar(max)" />
+          <Property Name="url" Type="varchar(max)" />
+          <Property Name="createdon" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TblOrderRefNo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefNo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Userid" Type="varchar(max)" />
+          <Property Name="Created" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TempCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="Url" Type="varchar" MaxLength="200" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="SubcategoriesCount" Type="int" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" />
+          <Property Name="ApiCatId" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="temptable">
+          <Property Name="id" Type="int" />
+        </EntityType>-->
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="150" />
+          <Property Name="Password" Type="varchar" MaxLength="150" />
+          <Property Name="Firstname" Type="varchar" MaxLength="150" />
+          <Property Name="Lastname" Type="varchar" MaxLength="150" />
+          <Property Name="Mobile" Type="varchar" MaxLength="12" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <EntityType Name="WohooProductList">
+          <Key>
+            <PropertyRef Name="Sno" />
+          </Key>
+          <Property Name="Sno" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="PriceType" Type="varchar" MaxLength="50" />
+          <Property Name="Min" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Max" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="NumericCode" Type="varchar" MaxLength="50" />
+          <Property Name="Symbol" Type="varchar" MaxLength="50" />
+          <Property Name="ReloadCardNumber" Type="bit" />
+          <Property Name="FormatExpiry" Type="varchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Sku" Type="varchar" MaxLength="50" />
+          <Property Name="TncLink" Type="varchar" MaxLength="200" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="VoucherType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="GetAllCategoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllChildCategoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="catId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllParentCategoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="catId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="getBillAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Userid" Type="varchar(max)" Mode="In" />
+          <Parameter Name="refno" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetCartListByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uId" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="GetCartProductCountByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="GetCategoryListWithFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pageNo" Type="int" Mode="In" />
+          <Parameter Name="noOfrecord" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCountProductListWithFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="action" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmailQue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetImageBySku" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="skuData" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetProductDetailBySku" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="skuData" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetProductListWithFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pageNo" Type="int" Mode="In" />
+          <Parameter Name="noOfrecord" Type="int" Mode="In" />
+          <Parameter Name="action" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="getrootId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSMSQue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getUserDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Userid" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="InsertCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="recordXml" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="InsertCategoryImageList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="recordXml" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="InsertProductCategoryRelationList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertProductContent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertProductCurrencyList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="recordXml" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="InsertProductDenomination" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertProductDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertProductDiscounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertProductImageList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="recordXml" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="InsertProductList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="recordXml" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="InsertProductTheme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertRelatedProductList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertWohooProductDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertWohooProductImageDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="MyOrderReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_BulkEmailDataInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="regXML" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="sp_BulkSMSDataInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="regXML" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="sp_getOrderStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_JobEmailQue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FormNo" Type="int" Mode="In" />
+          <Parameter Name="EMailBody" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EmailId" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EmailType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Subject" Type="varchar(max)" Mode="In" />
+          <Parameter Name="FromEmailID" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_JobSMSQue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FormNo" Type="int" Mode="In" />
+          <Parameter Name="SMSBody" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MobileNo" Type="numeric" Mode="In" />
+          <Parameter Name="SMSType" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompanyID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_MyOrderdetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Userid" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Sp_MyOrderReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_SaveAPIRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="request" Type="varchar(max)" Mode="In" />
+          <Parameter Name="response" Type="varchar(max)" Mode="In" />
+          <Parameter Name="url" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Sp_UpdateOrderStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Action" Type="varchar(max)" Mode="In" />
+          <Parameter Name="RefNo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="activationCode" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ActivationUrl" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Amount" Type="varchar(max)" Mode="In" />
+          <Parameter Name="barcode" Type="varchar(max)" Mode="In" />
+          <Parameter Name="cardid" Type="varchar(max)" Mode="In" />
+          <Parameter Name="CardNumber" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EnrptCardNo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PinNo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EnrptCardPin" Type="varchar(max)" Mode="In" />
+          <Parameter Name="LabelProductName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="LableCardNumber" Type="varchar(max)" Mode="In" />
+          <Parameter Name="LableCardPin" Type="varchar(max)" Mode="In" />
+          <Parameter Name="lableValidity" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProductSku" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProductTheme" Type="varchar(max)" Mode="In" />
+          <Parameter Name="RecepientEmail" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Validity" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Status" Type="varchar(max)" Mode="In" />
+          <Parameter Name="userId" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UpdateCartDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Userid" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="PineLabsModelStoreContainer">
+          <EntitySet Name="BillingAddress" EntityType="Self.BillingAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarteDetail" EntityType="Self.CarteDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobEMAILQue" EntityType="Self.JobEMAILQue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobEmailSetting" EntityType="Self.JobEmailSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobFinalEmailQue" EntityType="Self.JobFinalEmailQue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobFinalSMSQue" EntityType="Self.JobFinalSMSQue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobSMSQue" EntityType="Self.JobSMSQue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobSMSSetting" EntityType="Self.JobSMSSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_card" EntityType="Self.order_card" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_product" EntityType="Self.order_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderPayment" EntityType="Self.OrderPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategoryRelationTbl" EntityType="Self.ProductCategoryRelationTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductContentTbl" EntityType="Self.ProductContentTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDenomination" EntityType="Self.ProductDenomination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDiscounts" EntityType="Self.ProductDiscounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductList" EntityType="Self.ProductList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductThemeTbl" EntityType="Self.ProductThemeTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RelatedProductList" EntityType="Self.RelatedProductList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblApiRequestResponse" EntityType="Self.tblApiRequestResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblOrderRefNo" EntityType="Self.TblOrderRefNo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WohooProductList" EntityType="Self.WohooProductList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="companybak" EntityType="Self.companybak" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [companybak].[Id] AS [Id], 
+    [companybak].[CompanyName] AS [CompanyName], 
+    [companybak].[Website] AS [Website], 
+    [companybak].[Logo] AS [Logo], 
+    [companybak].[CreditPoint] AS [CreditPoint], 
+    [companybak].[Address1] AS [Address1], 
+    [companybak].[Address2] AS [Address2], 
+    [companybak].[City] AS [City], 
+    [companybak].[State] AS [State], 
+    [companybak].[Country] AS [Country], 
+    [companybak].[Zip] AS [Zip], 
+    [companybak].[Phone] AS [Phone], 
+    [companybak].[ContactName] AS [ContactName], 
+    [companybak].[ContactNo1] AS [ContactNo1], 
+    [companybak].[ContactNo2] AS [ContactNo2], 
+    [companybak].[ContactEmail1] AS [ContactEmail1], 
+    [companybak].[ContactEmail2] AS [ContactEmail2], 
+    [companybak].[CreatedDate] AS [CreatedDate], 
+    [companybak].[CompanyAccountName] AS [CompanyAccountName], 
+    [companybak].[CompanyBankName] AS [CompanyBankName], 
+    [companybak].[CompanyAccountType] AS [CompanyAccountType], 
+    [companybak].[CompanyAccountNumber] AS [CompanyAccountNumber], 
+    [companybak].[CompanyIFSCCode] AS [CompanyIFSCCode], 
+    [companybak].[Username] AS [Username], 
+    [companybak].[Password] AS [Password], 
+    [companybak].[ConsumerKey] AS [ConsumerKey], 
+    [companybak].[ConsumerSecret] AS [ConsumerSecret], 
+    [companybak].[AuthToken] AS [AuthToken], 
+    [companybak].[AuthTokenGeneationDate] AS [AuthTokenGeneationDate], 
+    [companybak].[LiveConsumerKey] AS [LiveConsumerKey], 
+    [companybak].[LiveConsumerSecret] AS [LiveConsumerSecret]
+    FROM [dbo].[companybak] AS [companybak]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MessageApi" EntityType="Self.MessageApi" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MessageApi].[id] AS [id], 
+    [MessageApi].[msgapi] AS [msgapi], 
+    [MessageApi].[username] AS [username], 
+    [MessageApi].[passwrd] AS [passwrd], 
+    [MessageApi].[SenderId] AS [SenderId], 
+    [MessageApi].[Activests] AS [Activests], 
+    [MessageApi].[cmpid] AS [cmpid], 
+    [MessageApi].[Memusername] AS [Memusername], 
+    [MessageApi].[CompWeb] AS [CompWeb], 
+    [MessageApi].[mlmurl] AS [mlmurl], 
+    [MessageApi].[ShopingPortal] AS [ShopingPortal], 
+    [MessageApi].[AirTicket] AS [AirTicket], 
+    [MessageApi].[cmplogo] AS [cmplogo], 
+    [MessageApi].[favicn] AS [favicn], 
+    [MessageApi].[IsPromo] AS [IsPromo], 
+    [MessageApi].[IsFlight] AS [IsFlight], 
+    [MessageApi].[IsLoginOTP] AS [IsLoginOTP], 
+    [MessageApi].[IsServiceOTP] AS [IsServiceOTP], 
+    [MessageApi].[LoginAPI] AS [LoginAPI], 
+    [MessageApi].[BalanceCheckAPI] AS [BalanceCheckAPI], 
+    [MessageApi].[GetBalAPI] AS [GetBalAPI], 
+    [MessageApi].[sts] AS [sts], 
+    [MessageApi].[PortalType] AS [PortalType], 
+    [MessageApi].[MobileApp] AS [MobileApp]
+    FROM [dbo].[MessageApi] AS [MessageApi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="messgeApi" EntityType="Self.messgeApi" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [messgeApi].[id] AS [id], 
+    [messgeApi].[msgapi] AS [msgapi], 
+    [messgeApi].[username] AS [username], 
+    [messgeApi].[passwrd] AS [passwrd], 
+    [messgeApi].[SenderId] AS [SenderId], 
+    [messgeApi].[Activests] AS [Activests], 
+    [messgeApi].[cmpid] AS [cmpid], 
+    [messgeApi].[Memusername] AS [Memusername], 
+    [messgeApi].[CompWeb] AS [CompWeb], 
+    [messgeApi].[mlmurl] AS [mlmurl], 
+    [messgeApi].[ShopingPortal] AS [ShopingPortal], 
+    [messgeApi].[AirTicket] AS [AirTicket], 
+    [messgeApi].[cmplogo] AS [cmplogo], 
+    [messgeApi].[favicn] AS [favicn], 
+    [messgeApi].[IsPromo] AS [IsPromo], 
+    [messgeApi].[IsFlight] AS [IsFlight], 
+    [messgeApi].[IsLoginOTP] AS [IsLoginOTP], 
+    [messgeApi].[IsServiceOTP] AS [IsServiceOTP], 
+    [messgeApi].[LoginAPI] AS [LoginAPI], 
+    [messgeApi].[BalanceCheckAPI] AS [BalanceCheckAPI], 
+    [messgeApi].[GetBalAPI] AS [GetBalAPI], 
+    [messgeApi].[sts] AS [sts], 
+    [messgeApi].[PortalType] AS [PortalType], 
+    [messgeApi].[MobileApp] AS [MobileApp]
+    FROM [dbo].[messgeApi] AS [messgeApi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SmsApi" EntityType="Self.SmsApi" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SmsApi].[id] AS [id], 
+    [SmsApi].[msgapi] AS [msgapi], 
+    [SmsApi].[username] AS [username], 
+    [SmsApi].[passwrd] AS [passwrd], 
+    [SmsApi].[SenderId] AS [SenderId], 
+    [SmsApi].[Activests] AS [Activests], 
+    [SmsApi].[cmpid] AS [cmpid], 
+    [SmsApi].[Memusername] AS [Memusername], 
+    [SmsApi].[CompWeb] AS [CompWeb], 
+    [SmsApi].[mlmurl] AS [mlmurl], 
+    [SmsApi].[ShopingPortal] AS [ShopingPortal], 
+    [SmsApi].[AirTicket] AS [AirTicket], 
+    [SmsApi].[cmplogo] AS [cmplogo], 
+    [SmsApi].[favicn] AS [favicn], 
+    [SmsApi].[IsPromo] AS [IsPromo], 
+    [SmsApi].[IsFlight] AS [IsFlight], 
+    [SmsApi].[IsLoginOTP] AS [IsLoginOTP], 
+    [SmsApi].[IsServiceOTP] AS [IsServiceOTP], 
+    [SmsApi].[LoginAPI] AS [LoginAPI], 
+    [SmsApi].[BalanceCheckAPI] AS [BalanceCheckAPI], 
+    [SmsApi].[GetBalAPI] AS [GetBalAPI], 
+    [SmsApi].[sts] AS [sts], 
+    [SmsApi].[PortalType] AS [PortalType], 
+    [SmsApi].[MobileApp] AS [MobileApp]
+    FROM [dbo].[SmsApi] AS [SmsApi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TempCategory" EntityType="Self.TempCategory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TempCategory].[Id] AS [Id], 
+    [TempCategory].[Name] AS [Name], 
+    [TempCategory].[Url] AS [Url], 
+    [TempCategory].[Description] AS [Description], 
+    [TempCategory].[SubcategoriesCount] AS [SubcategoriesCount], 
+    [TempCategory].[Created] AS [Created], 
+    [TempCategory].[ParentId] AS [ParentId], 
+    [TempCategory].[ApiCatId] AS [ApiCatId], 
+    [TempCategory].[ModifiedDate] AS [ModifiedDate], 
+    [TempCategory].[Status] AS [Status]
+    FROM [dbo].[TempCategory] AS [TempCategory]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PineLabsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PineLabsEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="GetCategoryListWithFilter" ReturnType="Collection(PineLabsModel.GetCategoryListWithFilter_Result)">
+            <Parameter Name="pageNo" Mode="In" Type="Int32" />
+            <Parameter Name="noOfrecord" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertCategory">
+          <Parameter Name="recordXml" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertProductCurrencyList">
+          <Parameter Name="recordXml" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertProductImageList">
+          <Parameter Name="recordXml" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertProductList">
+          <Parameter Name="recordXml" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetImageBySku" ReturnType="Collection(PineLabsModel.GetImageBySku_Result)">
+          <Parameter Name="skuData" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetProductListWithFilter" ReturnType="Collection(PineLabsModel.GetProductListWithFilter_Result)">
+            <Parameter Name="pageNo" Mode="In" Type="Int32" />
+            <Parameter Name="noOfrecord" Mode="In" Type="Int32" />
+            <Parameter Name="action" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertCategoryImageList">
+          <Parameter Name="recordXml" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllCategoryList" ReturnType="Collection(PineLabsModel.GetCategoryListWithFilter_Result)" />
+          <FunctionImport Name="GetProductDetailBySku" ReturnType="Collection(PineLabsModel.GetProductDetailBySku_Result)">
+          <Parameter Name="skuData" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertWohooProductDetail" />
+          <FunctionImport Name="GetCartListByUserId" ReturnType="Collection(PineLabsModel.GetCartListByUserId_Result)">
+          <Parameter Name="uId" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="GetCountProductListWithFilter" ReturnType="Collection(Int32)">
+            <Parameter Name="action" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCartProductCountByUserId" ReturnType="Collection(Int32)">
+          <Parameter Name="userid" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="MyOrderReport" ReturnType="Collection(PineLabsModel.MyOrderReport_Result)">
+          <Parameter Name="UserId" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <EntitySet Name="BillingAddresses" EntityType="PineLabsModel.BillingAddress" />
+          <EntitySet Name="CarteDetails" EntityType="PineLabsModel.CarteDetail" />
+          <EntitySet Name="Categories" EntityType="PineLabsModel.Category" />
+          <EntitySet Name="Companies" EntityType="PineLabsModel.Company" />
+          <EntitySet Name="Images" EntityType="PineLabsModel.Image" />
+          <EntitySet Name="JobEMAILQues" EntityType="PineLabsModel.JobEMAILQue" />
+          <EntitySet Name="JobEmailSettings" EntityType="PineLabsModel.JobEmailSetting" />
+          <EntitySet Name="JobFinalEmailQues" EntityType="PineLabsModel.JobFinalEmailQue" />
+          <EntitySet Name="JobFinalSMSQues" EntityType="PineLabsModel.JobFinalSMSQue" />
+          <EntitySet Name="JobSMSQues" EntityType="PineLabsModel.JobSMSQue" />
+          <EntitySet Name="JobSMSSettings" EntityType="PineLabsModel.JobSMSSetting" />
+          <EntitySet Name="Orders" EntityType="PineLabsModel.Order" />
+          <EntitySet Name="order_card" EntityType="PineLabsModel.order_card" />
+          <EntitySet Name="order_product" EntityType="PineLabsModel.order_product" />
+          <EntitySet Name="OrderPayments" EntityType="PineLabsModel.OrderPayment" />
+          <EntitySet Name="ProductCategoryRelationTbls" EntityType="PineLabsModel.ProductCategoryRelationTbl" />
+          <EntitySet Name="ProductContentTbls" EntityType="PineLabsModel.ProductContentTbl" />
+          <EntitySet Name="ProductDenominations" EntityType="PineLabsModel.ProductDenomination" />
+          <EntitySet Name="ProductDiscounts" EntityType="PineLabsModel.ProductDiscount" />
+          <EntitySet Name="ProductLists" EntityType="PineLabsModel.ProductList" />
+          <EntitySet Name="ProductThemeTbls" EntityType="PineLabsModel.ProductThemeTbl" />
+          <EntitySet Name="RelatedProductLists" EntityType="PineLabsModel.RelatedProductList" />
+          <EntitySet Name="Roles" EntityType="PineLabsModel.Role" />
+          <EntitySet Name="tblApiRequestResponses" EntityType="PineLabsModel.tblApiRequestResponse" />
+          <EntitySet Name="TblOrderRefNoes" EntityType="PineLabsModel.TblOrderRefNo" />
+          <EntitySet Name="Users" EntityType="PineLabsModel.User" />
+          <EntitySet Name="WohooProductLists" EntityType="PineLabsModel.WohooProductList" />
+          <EntitySet Name="companybaks" EntityType="PineLabsModel.companybak" />
+          <EntitySet Name="MessageApis" EntityType="PineLabsModel.MessageApi" />
+          <EntitySet Name="messgeApis" EntityType="PineLabsModel.messgeApi" />
+          <EntitySet Name="SmsApis" EntityType="PineLabsModel.SmsApi" />
+          <EntitySet Name="TempCategories" EntityType="PineLabsModel.TempCategory" />
+          <FunctionImport Name="GetAllChildCategoryList" ReturnType="Collection(String)">
+            <Parameter Name="catId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllParentCategoryList" ReturnType="Collection(String)">
+            <Parameter Name="catId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getBillAddress" ReturnType="Collection(PineLabsModel.getBillAddress_Result)">
+            <Parameter Name="Userid" Mode="In" Type="String" />
+            <Parameter Name="refno" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmailQue" ReturnType="Collection(PineLabsModel.GetEmailQue_Result)" />
+          <FunctionImport Name="getrootId">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSMSQue" ReturnType="Collection(PineLabsModel.GetSMSQue_Result)" />
+          <FunctionImport Name="getUserDetail" ReturnType="Collection(PineLabsModel.getUserDetail_Result)">
+            <Parameter Name="Userid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertProductCategoryRelationList" />
+          <FunctionImport Name="InsertProductContent" />
+          <FunctionImport Name="InsertProductDenomination" />
+          <FunctionImport Name="InsertProductDetail" />
+          <FunctionImport Name="InsertProductDiscounts" />
+          <FunctionImport Name="InsertProductTheme" />
+          <FunctionImport Name="InsertRelatedProductList" />
+          <FunctionImport Name="InsertWohooProductImageDetail" />
+          <FunctionImport Name="sp_BulkEmailDataInsert">
+            <Parameter Name="regXML" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_BulkSMSDataInsert">
+            <Parameter Name="regXML" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_getOrderStatus" ReturnType="Collection(PineLabsModel.sp_getOrderStatus_Result)" />
+          <FunctionImport Name="sp_JobEmailQue" ReturnType="Collection(Int32)">
+            <Parameter Name="FormNo" Mode="In" Type="Int32" />
+            <Parameter Name="EMailBody" Mode="In" Type="String" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="EmailType" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Subject" Mode="In" Type="String" />
+            <Parameter Name="FromEmailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_JobSMSQue" ReturnType="Collection(Int32)">
+            <Parameter Name="FormNo" Mode="In" Type="Int32" />
+            <Parameter Name="SMSBody" Mode="In" Type="String" />
+            <Parameter Name="MobileNo" Mode="In" Type="Decimal" />
+            <Parameter Name="SMSType" Mode="In" Type="String" />
+            <Parameter Name="CompanyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_MyOrderdetail" ReturnType="Collection(PineLabsModel.Sp_MyOrderdetail_Result)">
+            <Parameter Name="OrderId" Mode="In" Type="String" />
+            <Parameter Name="Userid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_MyOrderReport" ReturnType="Collection(PineLabsModel.Sp_MyOrderReport_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SaveAPIRequest" ReturnType="Collection(PineLabsModel.sp_SaveAPIRequest_Result)">
+            <Parameter Name="request" Mode="In" Type="String" />
+            <Parameter Name="response" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_UpdateOrderStatus" ReturnType="Collection(PineLabsModel.Sp_UpdateOrderStatus_Result)">
+            <Parameter Name="Action" Mode="In" Type="String" />
+            <Parameter Name="RefNo" Mode="In" Type="String" />
+            <Parameter Name="activationCode" Mode="In" Type="String" />
+            <Parameter Name="ActivationUrl" Mode="In" Type="String" />
+            <Parameter Name="Amount" Mode="In" Type="String" />
+            <Parameter Name="barcode" Mode="In" Type="String" />
+            <Parameter Name="cardid" Mode="In" Type="String" />
+            <Parameter Name="CardNumber" Mode="In" Type="String" />
+            <Parameter Name="EnrptCardNo" Mode="In" Type="String" />
+            <Parameter Name="PinNo" Mode="In" Type="String" />
+            <Parameter Name="EnrptCardPin" Mode="In" Type="String" />
+            <Parameter Name="LabelProductName" Mode="In" Type="String" />
+            <Parameter Name="LableCardNumber" Mode="In" Type="String" />
+            <Parameter Name="LableCardPin" Mode="In" Type="String" />
+            <Parameter Name="lableValidity" Mode="In" Type="String" />
+            <Parameter Name="ProductSku" Mode="In" Type="String" />
+            <Parameter Name="ProductTheme" Mode="In" Type="String" />
+            <Parameter Name="RecepientEmail" Mode="In" Type="String" />
+            <Parameter Name="Validity" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCartDetail" ReturnType="Collection(PineLabsModel.UpdateCartDetail_Result)">
+            <Parameter Name="Userid" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetCategoryListWithFilter_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="SubcategoriesCount" Nullable="true" />
+          <Property Type="String" Name="ParentId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApiCatId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ParentCategoryName" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="String" Name="StatusStr" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetImageBySku_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="thumbnail" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="base" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="small" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ProductId" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="CategoryId" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="sku" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetProductListWithFilter_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="sku" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="minPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="maxPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="symbol" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="numericCode" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="created" Nullable="true" Precision="23" />
+          <Property Type="String" Name="thumbnail" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="base" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="small" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CategoryId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllCategoryList_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="SubcategoriesCount" Nullable="true" />
+          <Property Type="String" Name="ParentId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApiCatId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ParentCategoryName" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="String" Name="thumbnail" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="base" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="StatusStr" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetProductDetailBySku_Result">
+          <Property Type="Decimal" Name="Sno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Id" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="PriceType" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Min" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Max" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NumericCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Symbol" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReloadCardNumber" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FormatExpiry" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Sku" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TncLink" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetCartListByUserId_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="ProductSku" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="UserId" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="PriceType" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="ProdPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="thumbnail" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="base" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="small" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
+          </ComplexType>
+        <ComplexType Name="MyOrderReport_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OrderID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="refNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Created" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Userid" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Amount" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="EnrptCardNo" Nullable="true" />
+          <Property Type="String" Name="EnrptCardPin" Nullable="true" />
+          <Property Type="String" Name="labelProductName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Validity" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="productSku" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="301" />
+          <Property Type="String" Name="Thumbnail" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="base" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Small" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <EntityType Name="BillingAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AddLineOne" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="AddLineTwo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="PostCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OrderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CarteDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="PriceType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProdPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="currencyCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Posted" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="SubcategoriesCount" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApiCatId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="CreditPoint" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Address1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContactEmail1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactEmail2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CompanyAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyBankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyAccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyAccountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyIFSCCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AuthToken" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="AuthTokenGeneationDate" Type="DateTime" Precision="3" />
+          <Property Name="LiveConsumerKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LiveConsumerSecret" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="thumbnail" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="base" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="small" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="ProductId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JobEMAILQue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="FormNo" Type="Int32" />
+          <Property Name="EMailBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailDate" Type="DateTime" Precision="3" />
+          <Property Name="IsMailSent" Type="Boolean" />
+          <Property Name="EmailID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmailType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="RecTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FromEmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JobEmailSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="SMTPServer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SMSUserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SMSPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="JobFinalEmailQue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FromEmailID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ToEmailID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmailType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsMailSent" Type="Boolean" />
+          <Property Name="RectimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="JobEmailQueID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="JobFinalSMSQue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="JOBSMSQueID" Type="Int32" />
+          <Property Name="SMSBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SMSDate" Type="DateTime" Precision="3" />
+          <Property Name="IsSMSSent" Type="Boolean" />
+          <Property Name="mobileno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SMSType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="RecTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="IsError" Type="Boolean" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="JobSMSQue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="FormNo" Type="Int32" />
+          <Property Name="SMSBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SMSDate" Type="DateTime" Precision="3" />
+          <Property Name="IsSMSSent" Type="Boolean" />
+          <Property Name="mobileno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SMSType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="RecTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="JobSMSSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="SMSAPI" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SMSUserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SMSPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="smsSenderId" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="orderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="refno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CancelAllowed" Type="Boolean" />
+          <Property Name="CancelallowedWithIn" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="ResponceContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="updatedate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="order_card">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActivationUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CardId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CardPin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LabelProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Validity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RecepientEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ProductSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductTheme" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LableCardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LableCardPin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lableValidity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="EnrptCardNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EnrptCardPin" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="order_product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cardBehaviour" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="base" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="thumbnail" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="small" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="productSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="specialInstruction" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRefId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OrderPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="balance" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProductCategoryRelationTbl">
+          <Key>
+            <PropertyRef Name="Sno" />
+          </Key>
+          <Property Name="Sno" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProductContentTbl">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProdContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProductDenomination">
+          <Key>
+            <PropertyRef Name="Sno" />
+          </Key>
+          <Property Name="Sno" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Denomination" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProductDiscount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ProductSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiscountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountDesc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CounponCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CouponPriority" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="minPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="maxPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numericCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+          <Property Name="categoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProductThemeTbl">
+          <Key>
+            <PropertyRef Name="Sno" />
+          </Key>
+          <Property Name="Sno" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="ThemeSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RelatedProductList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RelatedSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblApiRequestResponse">
+          <Key>
+            <PropertyRef Name="reqid" />
+          </Key>
+          <Property Name="reqid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="request" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="response" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="createdon" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TblOrderRefNo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefNo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WohooProductList">
+          <Key>
+            <PropertyRef Name="Sno" />
+          </Key>
+          <Property Name="Sno" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="PriceType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Min" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Max" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumericCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReloadCardNumber" Type="Boolean" />
+          <Property Name="FormatExpiry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Sku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TncLink" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="companybak">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="CreditPoint" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Address1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContactEmail1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactEmail2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CompanyAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyBankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyAccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyAccountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyIFSCCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AuthToken" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="AuthTokenGeneationDate" Type="DateTime" Precision="3" />
+          <Property Name="LiveConsumerKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LiveConsumerSecret" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MessageApi">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="msgapi" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="passwrd" />
+            <PropertyRef Name="SenderId" />
+            <PropertyRef Name="Activests" />
+            <PropertyRef Name="cmpid" />
+            <PropertyRef Name="Memusername" />
+            <PropertyRef Name="CompWeb" />
+            <PropertyRef Name="mlmurl" />
+            <PropertyRef Name="ShopingPortal" />
+            <PropertyRef Name="AirTicket" />
+            <PropertyRef Name="cmplogo" />
+            <PropertyRef Name="favicn" />
+            <PropertyRef Name="IsPromo" />
+            <PropertyRef Name="IsFlight" />
+            <PropertyRef Name="IsLoginOTP" />
+            <PropertyRef Name="IsServiceOTP" />
+            <PropertyRef Name="LoginAPI" />
+            <PropertyRef Name="BalanceCheckAPI" />
+            <PropertyRef Name="GetBalAPI" />
+            <PropertyRef Name="sts" />
+            <PropertyRef Name="PortalType" />
+            <PropertyRef Name="MobileApp" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="msgapi" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="passwrd" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SenderId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Activests" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cmpid" Type="Int32" Nullable="false" />
+          <Property Name="Memusername" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompWeb" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mlmurl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ShopingPortal" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AirTicket" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="cmplogo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="favicn" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsPromo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsFlight" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsLoginOTP" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsServiceOTP" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LoginAPI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BalanceCheckAPI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GetBalAPI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sts" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PortalType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MobileApp" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="messgeApi">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="msgapi" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="passwrd" />
+            <PropertyRef Name="SenderId" />
+            <PropertyRef Name="Activests" />
+            <PropertyRef Name="cmpid" />
+            <PropertyRef Name="Memusername" />
+            <PropertyRef Name="CompWeb" />
+            <PropertyRef Name="mlmurl" />
+            <PropertyRef Name="ShopingPortal" />
+            <PropertyRef Name="AirTicket" />
+            <PropertyRef Name="cmplogo" />
+            <PropertyRef Name="favicn" />
+            <PropertyRef Name="IsPromo" />
+            <PropertyRef Name="IsFlight" />
+            <PropertyRef Name="IsLoginOTP" />
+            <PropertyRef Name="IsServiceOTP" />
+            <PropertyRef Name="LoginAPI" />
+            <PropertyRef Name="BalanceCheckAPI" />
+            <PropertyRef Name="GetBalAPI" />
+            <PropertyRef Name="sts" />
+            <PropertyRef Name="PortalType" />
+            <PropertyRef Name="MobileApp" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="msgapi" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="passwrd" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SenderId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Activests" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cmpid" Type="Int32" Nullable="false" />
+          <Property Name="Memusername" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompWeb" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mlmurl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ShopingPortal" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AirTicket" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="cmplogo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="favicn" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsPromo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsFlight" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsLoginOTP" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsServiceOTP" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LoginAPI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BalanceCheckAPI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GetBalAPI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sts" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PortalType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MobileApp" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SmsApi">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="msgapi" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="passwrd" />
+            <PropertyRef Name="SenderId" />
+            <PropertyRef Name="Activests" />
+            <PropertyRef Name="cmpid" />
+            <PropertyRef Name="Memusername" />
+            <PropertyRef Name="CompWeb" />
+            <PropertyRef Name="mlmurl" />
+            <PropertyRef Name="ShopingPortal" />
+            <PropertyRef Name="AirTicket" />
+            <PropertyRef Name="cmplogo" />
+            <PropertyRef Name="favicn" />
+            <PropertyRef Name="IsPromo" />
+            <PropertyRef Name="IsFlight" />
+            <PropertyRef Name="IsLoginOTP" />
+            <PropertyRef Name="IsServiceOTP" />
+            <PropertyRef Name="LoginAPI" />
+            <PropertyRef Name="BalanceCheckAPI" />
+            <PropertyRef Name="GetBalAPI" />
+            <PropertyRef Name="sts" />
+            <PropertyRef Name="PortalType" />
+            <PropertyRef Name="MobileApp" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="msgapi" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="passwrd" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SenderId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Activests" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cmpid" Type="Int32" Nullable="false" />
+          <Property Name="Memusername" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompWeb" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mlmurl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ShopingPortal" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AirTicket" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="cmplogo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="favicn" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsPromo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsFlight" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsLoginOTP" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsServiceOTP" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LoginAPI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BalanceCheckAPI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GetBalAPI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sts" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PortalType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MobileApp" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TempCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="SubcategoriesCount" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApiCatId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <ComplexType Name="getBillAddress_Result">
+          <Property Type="String" Name="Firstname" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="lastname" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="8000" />
+          <Property Type="Decimal" Name="UserId" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OrderId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="GetEmailQue_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="Formno" Nullable="true" />
+          <Property Type="String" Name="Body" Nullable="true" />
+          <Property Type="String" Name="EmailType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FromEmail" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ToEmail" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="IsMailSent" Nullable="true" />
+          <Property Type="Int32" Name="CompanyID" Nullable="true" />
+          <Property Type="String" Name="Subject" Nullable="true" />
+          <Property Type="String" Name="SMTPServer" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SMSUserName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SMSPassword" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="GetSMSQue_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="Formno" Nullable="true" />
+          <Property Type="String" Name="SMSBody" Nullable="true" />
+          <Property Type="String" Name="SMSType" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="MobileNo" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="SMSAPI" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="SMSUSerNAme" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="SMSPassword" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="SMSSenderID" Nullable="false" MaxLength="255" />
+          <Property Type="Boolean" Name="IsSMSSent" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getUserDetail_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Firstname" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Lastname" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Modified" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="DateTime" Name="LastLogin" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_getOrderStatus_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="orderId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="refno" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="CancelAllowed" Nullable="true" />
+          <Property Type="String" Name="CancelallowedWithIn" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ResponceContent" Nullable="true" />
+          <Property Type="String" Name="UserId" Nullable="true" />
+          <Property Type="DateTime" Name="updatedate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Sp_MyOrderdetail_Result">
+          <Property Type="String" Name="Amount" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="EnrptCardNo" Nullable="true" />
+          <Property Type="String" Name="EnrptCardPin" Nullable="true" />
+          <Property Type="String" Name="labelProductName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Validity" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="productSku" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Sp_MyOrderReport_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OrderID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="refNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Created" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_SaveAPIRequest_Result">
+          <Property Type="Int32" Name="reqid" Nullable="false" />
+          <Property Type="String" Name="request" Nullable="true" />
+          <Property Type="String" Name="response" Nullable="true" />
+          <Property Type="String" Name="url" Nullable="true" />
+          <Property Type="DateTime" Name="createdon" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Sp_UpdateOrderStatus_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="orderId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="refno" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="CancelAllowed" Nullable="true" />
+          <Property Type="String" Name="CancelallowedWithIn" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ResponceContent" Nullable="true" />
+          <Property Type="String" Name="UserId" Nullable="true" />
+          <Property Type="DateTime" Name="updatedate" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="Id1" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="ActivationCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ActivationUrl" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Amount" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="barcode" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="CardId" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="CardNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CardPin" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LabelProductName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OrderRefNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Validity" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RecepientEmail" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ProductSku" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProductTheme" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LableCardNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LableCardPin" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lableValidity" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Created1" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EnrptCardNo" Nullable="true" />
+          <Property Type="String" Name="EnrptCardPin" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="UpdateCartDetail_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="ProductSku" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="UserId" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="PriceType" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="ProdPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="currencyCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Posted" Nullable="true" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PineLabsModelStoreContainer" CdmEntityContainer="PineLabsEntities">
+          <FunctionImportMapping FunctionImportName="GetCategoryListWithFilter" FunctionName="PineLabsModel.Store.GetCategoryListWithFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.GetCategoryListWithFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubcategoriesCount" ColumnName="SubcategoriesCount" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ApiCatId" ColumnName="ApiCatId" />
+                <ScalarProperty Name="ParentCategoryName" ColumnName="ParentCategoryName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusStr" ColumnName="StatusStr" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertCategory" FunctionName="PineLabsModel.Store.InsertCategory" >
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertProductCurrencyList" FunctionName="PineLabsModel.Store.InsertProductCurrencyList" />
+          <FunctionImportMapping FunctionImportName="InsertProductImageList" FunctionName="PineLabsModel.Store.InsertProductImageList" />
+          <FunctionImportMapping FunctionImportName="InsertProductList" FunctionName="PineLabsModel.Store.InsertProductList" />
+          <FunctionImportMapping FunctionImportName="GetImageBySku" FunctionName="PineLabsModel.Store.GetImageBySku">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.GetImageBySku_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="small" ColumnName="small" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProductListWithFilter" FunctionName="PineLabsModel.Store.GetProductListWithFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.GetProductListWithFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="minPrice" ColumnName="minPrice" />
+                <ScalarProperty Name="maxPrice" ColumnName="maxPrice" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+                <ScalarProperty Name="numericCode" ColumnName="numericCode" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="small" ColumnName="small" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertCategoryImageList" FunctionName="PineLabsModel.Store.InsertCategoryImageList" />
+          <FunctionImportMapping FunctionImportName="GetAllCategoryList" FunctionName="PineLabsModel.Store.GetAllCategoryList">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.GetCategoryListWithFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubcategoriesCount" ColumnName="SubcategoriesCount" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ApiCatId" ColumnName="ApiCatId" />
+                <ScalarProperty Name="ParentCategoryName" ColumnName="ParentCategoryName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusStr" ColumnName="StatusStr" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProductDetailBySku" FunctionName="PineLabsModel.Store.GetProductDetailBySku">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.GetProductDetailBySku_Result">
+                <ScalarProperty Name="Sno" ColumnName="Sno" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
+                <ScalarProperty Name="Max" ColumnName="Max" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NumericCode" ColumnName="NumericCode" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ReloadCardNumber" ColumnName="ReloadCardNumber" />
+                <ScalarProperty Name="FormatExpiry" ColumnName="FormatExpiry" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Sku" ColumnName="Sku" />
+                <ScalarProperty Name="TncLink" ColumnName="TncLink" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertWohooProductDetail" FunctionName="PineLabsModel.Store.InsertWohooProductDetail" />
+          <FunctionImportMapping FunctionImportName="GetCartListByUserId" FunctionName="PineLabsModel.Store.GetCartListByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.GetCartListByUserId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+                <ScalarProperty Name="ProdPrice" ColumnName="ProdPrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="small" ColumnName="small" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCountProductListWithFilter" FunctionName="PineLabsModel.Store.GetCountProductListWithFilter" />
+          <FunctionImportMapping FunctionImportName="GetCartProductCountByUserId" FunctionName="PineLabsModel.Store.GetCartProductCountByUserId" />
+          <FunctionImportMapping FunctionImportName="MyOrderReport" FunctionName="PineLabsModel.Store.MyOrderReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.MyOrderReport_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="refNo" ColumnName="refNo" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="EnrptCardNo" ColumnName="EnrptCardNo" />
+                <ScalarProperty Name="EnrptCardPin" ColumnName="EnrptCardPin" />
+                <ScalarProperty Name="labelProductName" ColumnName="labelProductName" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="productSku" ColumnName="productSku" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="Small" ColumnName="Small" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="BillingAddresses">
+            <EntityTypeMapping TypeName="PineLabsModel.BillingAddress">
+              <MappingFragment StoreEntitySet="BillingAddress">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="AddLineTwo" ColumnName="AddLineTwo" />
+                <ScalarProperty Name="AddLineOne" ColumnName="AddLineOne" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarteDetails">
+            <EntityTypeMapping TypeName="PineLabsModel.CarteDetail">
+              <MappingFragment StoreEntitySet="CarteDetail">
+                <ScalarProperty Name="Posted" ColumnName="Posted" />
+                <ScalarProperty Name="currencyCode" ColumnName="currencyCode" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="ProdPrice" ColumnName="ProdPrice" />
+                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="PineLabsModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApiCatId" ColumnName="ApiCatId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="SubcategoriesCount" ColumnName="SubcategoriesCount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="PineLabsModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="LiveConsumerSecret" ColumnName="LiveConsumerSecret" />
+                <ScalarProperty Name="LiveConsumerKey" ColumnName="LiveConsumerKey" />
+                <ScalarProperty Name="AuthTokenGeneationDate" ColumnName="AuthTokenGeneationDate" />
+                <ScalarProperty Name="AuthToken" ColumnName="AuthToken" />
+                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
+                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CompanyIFSCCode" ColumnName="CompanyIFSCCode" />
+                <ScalarProperty Name="CompanyAccountNumber" ColumnName="CompanyAccountNumber" />
+                <ScalarProperty Name="CompanyAccountType" ColumnName="CompanyAccountType" />
+                <ScalarProperty Name="CompanyBankName" ColumnName="CompanyBankName" />
+                <ScalarProperty Name="CompanyAccountName" ColumnName="CompanyAccountName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ContactEmail2" ColumnName="ContactEmail2" />
+                <ScalarProperty Name="ContactEmail1" ColumnName="ContactEmail1" />
+                <ScalarProperty Name="ContactNo2" ColumnName="ContactNo2" />
+                <ScalarProperty Name="ContactNo1" ColumnName="ContactNo1" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="CreditPoint" ColumnName="CreditPoint" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="PineLabsModel.Image">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="small" ColumnName="small" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobEMAILQues">
+            <EntityTypeMapping TypeName="PineLabsModel.JobEMAILQue">
+              <MappingFragment StoreEntitySet="JobEMAILQue">
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="FromEmailID" ColumnName="FromEmailID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RecTimeStamp" ColumnName="RecTimeStamp" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="EmailType" ColumnName="EmailType" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
+                <ScalarProperty Name="EmailDate" ColumnName="EmailDate" />
+                <ScalarProperty Name="EMailBody" ColumnName="EMailBody" />
+                <ScalarProperty Name="FormNo" ColumnName="FormNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobEmailSettings">
+            <EntityTypeMapping TypeName="PineLabsModel.JobEmailSetting">
+              <MappingFragment StoreEntitySet="JobEmailSetting">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SMSPassword" ColumnName="SMSPassword" />
+                <ScalarProperty Name="SMSUserName" ColumnName="SMSUserName" />
+                <ScalarProperty Name="SMTPServer" ColumnName="SMTPServer" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobFinalEmailQues">
+            <EntityTypeMapping TypeName="PineLabsModel.JobFinalEmailQue">
+              <MappingFragment StoreEntitySet="JobFinalEmailQue">
+                <ScalarProperty Name="JobEmailQueID" ColumnName="JobEmailQueID" />
+                <ScalarProperty Name="RectimeStamp" ColumnName="RectimeStamp" />
+                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
+                <ScalarProperty Name="EmailType" ColumnName="EmailType" />
+                <ScalarProperty Name="ToEmailID" ColumnName="ToEmailID" />
+                <ScalarProperty Name="FromEmailID" ColumnName="FromEmailID" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobFinalSMSQues">
+            <EntityTypeMapping TypeName="PineLabsModel.JobFinalSMSQue">
+              <MappingFragment StoreEntitySet="JobFinalSMSQue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsError" ColumnName="IsError" />
+                <ScalarProperty Name="RecTimeStamp" ColumnName="RecTimeStamp" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="SMSType" ColumnName="SMSType" />
+                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+                <ScalarProperty Name="IsSMSSent" ColumnName="IsSMSSent" />
+                <ScalarProperty Name="SMSDate" ColumnName="SMSDate" />
+                <ScalarProperty Name="SMSBody" ColumnName="SMSBody" />
+                <ScalarProperty Name="JOBSMSQueID" ColumnName="JOBSMSQueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSMSQues">
+            <EntityTypeMapping TypeName="PineLabsModel.JobSMSQue">
+              <MappingFragment StoreEntitySet="JobSMSQue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RecTimeStamp" ColumnName="RecTimeStamp" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="SMSType" ColumnName="SMSType" />
+                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+                <ScalarProperty Name="IsSMSSent" ColumnName="IsSMSSent" />
+                <ScalarProperty Name="SMSDate" ColumnName="SMSDate" />
+                <ScalarProperty Name="SMSBody" ColumnName="SMSBody" />
+                <ScalarProperty Name="FormNo" ColumnName="FormNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSMSSettings">
+            <EntityTypeMapping TypeName="PineLabsModel.JobSMSSetting">
+              <MappingFragment StoreEntitySet="JobSMSSetting">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="smsSenderId" ColumnName="smsSenderId" />
+                <ScalarProperty Name="SMSPassword" ColumnName="SMSPassword" />
+                <ScalarProperty Name="SMSUserName" ColumnName="SMSUserName" />
+                <ScalarProperty Name="SMSAPI" ColumnName="SMSAPI" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="PineLabsModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ResponceContent" ColumnName="ResponceContent" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CancelallowedWithIn" ColumnName="CancelallowedWithIn" />
+                <ScalarProperty Name="CancelAllowed" ColumnName="CancelAllowed" />
+                <ScalarProperty Name="refno" ColumnName="refno" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_card">
+            <EntityTypeMapping TypeName="PineLabsModel.order_card">
+              <MappingFragment StoreEntitySet="order_card">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="EnrptCardPin" ColumnName="EnrptCardPin" />
+                <ScalarProperty Name="EnrptCardNo" ColumnName="EnrptCardNo" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="lableValidity" ColumnName="lableValidity" />
+                <ScalarProperty Name="LableCardPin" ColumnName="LableCardPin" />
+                <ScalarProperty Name="LableCardNumber" ColumnName="LableCardNumber" />
+                <ScalarProperty Name="ProductTheme" ColumnName="ProductTheme" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="RecepientEmail" ColumnName="RecepientEmail" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
+                <ScalarProperty Name="LabelProductName" ColumnName="LabelProductName" />
+                <ScalarProperty Name="CardPin" ColumnName="CardPin" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ActivationUrl" ColumnName="ActivationUrl" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_product">
+            <EntityTypeMapping TypeName="PineLabsModel.order_product">
+              <MappingFragment StoreEntitySet="order_product">
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="OrderRefId" ColumnName="OrderRefId" />
+                <ScalarProperty Name="specialInstruction" ColumnName="specialInstruction" />
+                <ScalarProperty Name="productSku" ColumnName="productSku" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="small" ColumnName="small" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="cardBehaviour" ColumnName="cardBehaviour" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderPayments">
+            <EntityTypeMapping TypeName="PineLabsModel.OrderPayment">
+              <MappingFragment StoreEntitySet="OrderPayment">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategoryRelationTbls">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductCategoryRelationTbl">
+              <MappingFragment StoreEntitySet="ProductCategoryRelationTbl">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Sno" ColumnName="Sno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductContentTbls">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductContentTbl">
+              <MappingFragment StoreEntitySet="ProductContentTbl">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ProdContent" ColumnName="ProdContent" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDenominations">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductDenomination">
+              <MappingFragment StoreEntitySet="ProductDenomination">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Denomination" ColumnName="Denomination" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Sno" ColumnName="Sno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDiscounts">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductDiscount">
+              <MappingFragment StoreEntitySet="ProductDiscounts">
+                <ScalarProperty Name="CouponPriority" ColumnName="CouponPriority" />
+                <ScalarProperty Name="CounponCode" ColumnName="CounponCode" />
+                <ScalarProperty Name="DiscountDesc" ColumnName="DiscountDesc" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductLists">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductList">
+              <MappingFragment StoreEntitySet="ProductList">
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="numericCode" ColumnName="numericCode" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="maxPrice" ColumnName="maxPrice" />
+                <ScalarProperty Name="minPrice" ColumnName="minPrice" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductThemeTbls">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductThemeTbl">
+              <MappingFragment StoreEntitySet="ProductThemeTbl">
+                <ScalarProperty Name="ThemeSku" ColumnName="ThemeSku" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Sno" ColumnName="Sno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelatedProductLists">
+            <EntityTypeMapping TypeName="PineLabsModel.RelatedProductList">
+              <MappingFragment StoreEntitySet="RelatedProductList">
+                <ScalarProperty Name="RelatedSku" ColumnName="RelatedSku" />
+                <ScalarProperty Name="Sku" ColumnName="Sku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="PineLabsModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblApiRequestResponses">
+            <EntityTypeMapping TypeName="PineLabsModel.tblApiRequestResponse">
+              <MappingFragment StoreEntitySet="tblApiRequestResponse">
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="response" ColumnName="response" />
+                <ScalarProperty Name="request" ColumnName="request" />
+                <ScalarProperty Name="reqid" ColumnName="reqid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblOrderRefNoes">
+            <EntityTypeMapping TypeName="PineLabsModel.TblOrderRefNo">
+              <MappingFragment StoreEntitySet="TblOrderRefNo">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PineLabsModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WohooProductLists">
+            <EntityTypeMapping TypeName="PineLabsModel.WohooProductList">
+              <MappingFragment StoreEntitySet="WohooProductList">
+                <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TncLink" ColumnName="TncLink" />
+                <ScalarProperty Name="Sku" ColumnName="Sku" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="FormatExpiry" ColumnName="FormatExpiry" />
+                <ScalarProperty Name="ReloadCardNumber" ColumnName="ReloadCardNumber" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="NumericCode" ColumnName="NumericCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Max" ColumnName="Max" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
+                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sno" ColumnName="Sno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="companybaks">
+            <EntityTypeMapping TypeName="PineLabsModel.companybak">
+              <MappingFragment StoreEntitySet="companybak">
+                <ScalarProperty Name="LiveConsumerSecret" ColumnName="LiveConsumerSecret" />
+                <ScalarProperty Name="LiveConsumerKey" ColumnName="LiveConsumerKey" />
+                <ScalarProperty Name="AuthTokenGeneationDate" ColumnName="AuthTokenGeneationDate" />
+                <ScalarProperty Name="AuthToken" ColumnName="AuthToken" />
+                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
+                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CompanyIFSCCode" ColumnName="CompanyIFSCCode" />
+                <ScalarProperty Name="CompanyAccountNumber" ColumnName="CompanyAccountNumber" />
+                <ScalarProperty Name="CompanyAccountType" ColumnName="CompanyAccountType" />
+                <ScalarProperty Name="CompanyBankName" ColumnName="CompanyBankName" />
+                <ScalarProperty Name="CompanyAccountName" ColumnName="CompanyAccountName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ContactEmail2" ColumnName="ContactEmail2" />
+                <ScalarProperty Name="ContactEmail1" ColumnName="ContactEmail1" />
+                <ScalarProperty Name="ContactNo2" ColumnName="ContactNo2" />
+                <ScalarProperty Name="ContactNo1" ColumnName="ContactNo1" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="CreditPoint" ColumnName="CreditPoint" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageApis">
+            <EntityTypeMapping TypeName="PineLabsModel.MessageApi">
+              <MappingFragment StoreEntitySet="MessageApi">
+                <ScalarProperty Name="MobileApp" ColumnName="MobileApp" />
+                <ScalarProperty Name="PortalType" ColumnName="PortalType" />
+                <ScalarProperty Name="sts" ColumnName="sts" />
+                <ScalarProperty Name="GetBalAPI" ColumnName="GetBalAPI" />
+                <ScalarProperty Name="BalanceCheckAPI" ColumnName="BalanceCheckAPI" />
+                <ScalarProperty Name="LoginAPI" ColumnName="LoginAPI" />
+                <ScalarProperty Name="IsServiceOTP" ColumnName="IsServiceOTP" />
+                <ScalarProperty Name="IsLoginOTP" ColumnName="IsLoginOTP" />
+                <ScalarProperty Name="IsFlight" ColumnName="IsFlight" />
+                <ScalarProperty Name="IsPromo" ColumnName="IsPromo" />
+                <ScalarProperty Name="favicn" ColumnName="favicn" />
+                <ScalarProperty Name="cmplogo" ColumnName="cmplogo" />
+                <ScalarProperty Name="AirTicket" ColumnName="AirTicket" />
+                <ScalarProperty Name="ShopingPortal" ColumnName="ShopingPortal" />
+                <ScalarProperty Name="mlmurl" ColumnName="mlmurl" />
+                <ScalarProperty Name="CompWeb" ColumnName="CompWeb" />
+                <ScalarProperty Name="Memusername" ColumnName="Memusername" />
+                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
+                <ScalarProperty Name="Activests" ColumnName="Activests" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="passwrd" ColumnName="passwrd" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="msgapi" ColumnName="msgapi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="messgeApis">
+            <EntityTypeMapping TypeName="PineLabsModel.messgeApi">
+              <MappingFragment StoreEntitySet="messgeApi">
+                <ScalarProperty Name="MobileApp" ColumnName="MobileApp" />
+                <ScalarProperty Name="PortalType" ColumnName="PortalType" />
+                <ScalarProperty Name="sts" ColumnName="sts" />
+                <ScalarProperty Name="GetBalAPI" ColumnName="GetBalAPI" />
+                <ScalarProperty Name="BalanceCheckAPI" ColumnName="BalanceCheckAPI" />
+                <ScalarProperty Name="LoginAPI" ColumnName="LoginAPI" />
+                <ScalarProperty Name="IsServiceOTP" ColumnName="IsServiceOTP" />
+                <ScalarProperty Name="IsLoginOTP" ColumnName="IsLoginOTP" />
+                <ScalarProperty Name="IsFlight" ColumnName="IsFlight" />
+                <ScalarProperty Name="IsPromo" ColumnName="IsPromo" />
+                <ScalarProperty Name="favicn" ColumnName="favicn" />
+                <ScalarProperty Name="cmplogo" ColumnName="cmplogo" />
+                <ScalarProperty Name="AirTicket" ColumnName="AirTicket" />
+                <ScalarProperty Name="ShopingPortal" ColumnName="ShopingPortal" />
+                <ScalarProperty Name="mlmurl" ColumnName="mlmurl" />
+                <ScalarProperty Name="CompWeb" ColumnName="CompWeb" />
+                <ScalarProperty Name="Memusername" ColumnName="Memusername" />
+                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
+                <ScalarProperty Name="Activests" ColumnName="Activests" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="passwrd" ColumnName="passwrd" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="msgapi" ColumnName="msgapi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SmsApis">
+            <EntityTypeMapping TypeName="PineLabsModel.SmsApi">
+              <MappingFragment StoreEntitySet="SmsApi">
+                <ScalarProperty Name="MobileApp" ColumnName="MobileApp" />
+                <ScalarProperty Name="PortalType" ColumnName="PortalType" />
+                <ScalarProperty Name="sts" ColumnName="sts" />
+                <ScalarProperty Name="GetBalAPI" ColumnName="GetBalAPI" />
+                <ScalarProperty Name="BalanceCheckAPI" ColumnName="BalanceCheckAPI" />
+                <ScalarProperty Name="LoginAPI" ColumnName="LoginAPI" />
+                <ScalarProperty Name="IsServiceOTP" ColumnName="IsServiceOTP" />
+                <ScalarProperty Name="IsLoginOTP" ColumnName="IsLoginOTP" />
+                <ScalarProperty Name="IsFlight" ColumnName="IsFlight" />
+                <ScalarProperty Name="IsPromo" ColumnName="IsPromo" />
+                <ScalarProperty Name="favicn" ColumnName="favicn" />
+                <ScalarProperty Name="cmplogo" ColumnName="cmplogo" />
+                <ScalarProperty Name="AirTicket" ColumnName="AirTicket" />
+                <ScalarProperty Name="ShopingPortal" ColumnName="ShopingPortal" />
+                <ScalarProperty Name="mlmurl" ColumnName="mlmurl" />
+                <ScalarProperty Name="CompWeb" ColumnName="CompWeb" />
+                <ScalarProperty Name="Memusername" ColumnName="Memusername" />
+                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
+                <ScalarProperty Name="Activests" ColumnName="Activests" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="passwrd" ColumnName="passwrd" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="msgapi" ColumnName="msgapi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempCategories">
+            <EntityTypeMapping TypeName="PineLabsModel.TempCategory">
+              <MappingFragment StoreEntitySet="TempCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ApiCatId" ColumnName="ApiCatId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="SubcategoriesCount" ColumnName="SubcategoriesCount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllChildCategoryList" FunctionName="PineLabsModel.Store.GetAllChildCategoryList" />
+          <FunctionImportMapping FunctionImportName="GetAllParentCategoryList" FunctionName="PineLabsModel.Store.GetAllParentCategoryList" />
+          <FunctionImportMapping FunctionImportName="getBillAddress" FunctionName="PineLabsModel.Store.getBillAddress">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.getBillAddress_Result">
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="State1" ColumnName="State1" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmailQue" FunctionName="PineLabsModel.Store.GetEmailQue">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.GetEmailQue_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Formno" ColumnName="Formno" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="EmailType" ColumnName="EmailType" />
+                <ScalarProperty Name="FromEmail" ColumnName="FromEmail" />
+                <ScalarProperty Name="ToEmail" ColumnName="ToEmail" />
+                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="SMTPServer" ColumnName="SMTPServer" />
+                <ScalarProperty Name="SMSUserName" ColumnName="SMSUserName" />
+                <ScalarProperty Name="SMSPassword" ColumnName="SMSPassword" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getrootId" FunctionName="PineLabsModel.Store.getrootId" />
+          <FunctionImportMapping FunctionImportName="GetSMSQue" FunctionName="PineLabsModel.Store.GetSMSQue">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.GetSMSQue_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Formno" ColumnName="Formno" />
+                <ScalarProperty Name="SMSBody" ColumnName="SMSBody" />
+                <ScalarProperty Name="SMSType" ColumnName="SMSType" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="SMSAPI" ColumnName="SMSAPI" />
+                <ScalarProperty Name="SMSUSerNAme" ColumnName="SMSUSerNAme" />
+                <ScalarProperty Name="SMSPassword" ColumnName="SMSPassword" />
+                <ScalarProperty Name="SMSSenderID" ColumnName="SMSSenderID" />
+                <ScalarProperty Name="IsSMSSent" ColumnName="IsSMSSent" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getUserDetail" FunctionName="PineLabsModel.Store.getUserDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.getUserDetail_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertProductCategoryRelationList" FunctionName="PineLabsModel.Store.InsertProductCategoryRelationList" />
+          <FunctionImportMapping FunctionImportName="InsertProductContent" FunctionName="PineLabsModel.Store.InsertProductContent" />
+          <FunctionImportMapping FunctionImportName="InsertProductDenomination" FunctionName="PineLabsModel.Store.InsertProductDenomination" />
+          <FunctionImportMapping FunctionImportName="InsertProductDetail" FunctionName="PineLabsModel.Store.InsertProductDetail" />
+          <FunctionImportMapping FunctionImportName="InsertProductDiscounts" FunctionName="PineLabsModel.Store.InsertProductDiscounts" />
+          <FunctionImportMapping FunctionImportName="InsertProductTheme" FunctionName="PineLabsModel.Store.InsertProductTheme" />
+          <FunctionImportMapping FunctionImportName="InsertRelatedProductList" FunctionName="PineLabsModel.Store.InsertRelatedProductList" />
+          <FunctionImportMapping FunctionImportName="InsertWohooProductImageDetail" FunctionName="PineLabsModel.Store.InsertWohooProductImageDetail" />
+          <FunctionImportMapping FunctionImportName="sp_BulkEmailDataInsert" FunctionName="PineLabsModel.Store.sp_BulkEmailDataInsert" />
+          <FunctionImportMapping FunctionImportName="sp_BulkSMSDataInsert" FunctionName="PineLabsModel.Store.sp_BulkSMSDataInsert" />
+          <FunctionImportMapping FunctionImportName="sp_getOrderStatus" FunctionName="PineLabsModel.Store.sp_getOrderStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.sp_getOrderStatus_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="refno" ColumnName="refno" />
+                <ScalarProperty Name="CancelAllowed" ColumnName="CancelAllowed" />
+                <ScalarProperty Name="CancelallowedWithIn" ColumnName="CancelallowedWithIn" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ResponceContent" ColumnName="ResponceContent" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_JobEmailQue" FunctionName="PineLabsModel.Store.sp_JobEmailQue" />
+          <FunctionImportMapping FunctionImportName="sp_JobSMSQue" FunctionName="PineLabsModel.Store.sp_JobSMSQue" />
+          <FunctionImportMapping FunctionImportName="Sp_MyOrderdetail" FunctionName="PineLabsModel.Store.Sp_MyOrderdetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.Sp_MyOrderdetail_Result">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="EnrptCardNo" ColumnName="EnrptCardNo" />
+                <ScalarProperty Name="EnrptCardPin" ColumnName="EnrptCardPin" />
+                <ScalarProperty Name="labelProductName" ColumnName="labelProductName" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="productSku" ColumnName="productSku" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_MyOrderReport" FunctionName="PineLabsModel.Store.Sp_MyOrderReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.Sp_MyOrderReport_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="refNo" ColumnName="refNo" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SaveAPIRequest" FunctionName="PineLabsModel.Store.sp_SaveAPIRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.sp_SaveAPIRequest_Result">
+                <ScalarProperty Name="reqid" ColumnName="reqid" />
+                <ScalarProperty Name="request" ColumnName="request" />
+                <ScalarProperty Name="response" ColumnName="response" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_UpdateOrderStatus" FunctionName="PineLabsModel.Store.Sp_UpdateOrderStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.Sp_UpdateOrderStatus_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="refno" ColumnName="refno" />
+                <ScalarProperty Name="CancelAllowed" ColumnName="CancelAllowed" />
+                <ScalarProperty Name="CancelallowedWithIn" ColumnName="CancelallowedWithIn" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ResponceContent" ColumnName="ResponceContent" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="Id1" ColumnName="Id1" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="ActivationUrl" ColumnName="ActivationUrl" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CardPin" ColumnName="CardPin" />
+                <ScalarProperty Name="LabelProductName" ColumnName="LabelProductName" />
+                <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="RecepientEmail" ColumnName="RecepientEmail" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="ProductTheme" ColumnName="ProductTheme" />
+                <ScalarProperty Name="LableCardNumber" ColumnName="LableCardNumber" />
+                <ScalarProperty Name="LableCardPin" ColumnName="LableCardPin" />
+                <ScalarProperty Name="lableValidity" ColumnName="lableValidity" />
+                <ScalarProperty Name="Created1" ColumnName="Created1" />
+                <ScalarProperty Name="EnrptCardNo" ColumnName="EnrptCardNo" />
+                <ScalarProperty Name="EnrptCardPin" ColumnName="EnrptCardPin" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCartDetail" FunctionName="PineLabsModel.Store.UpdateCartDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.UpdateCartDetail_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+                <ScalarProperty Name="ProdPrice" ColumnName="ProdPrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="currencyCode" ColumnName="currencyCode" />
+                <ScalarProperty Name="Posted" ColumnName="Posted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

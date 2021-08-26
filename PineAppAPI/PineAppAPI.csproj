@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2CF3B877-29A7-43C9-9293-A849EB69B085}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PineAppAPI</RootNamespace>
+    <AssemblyName>PineAppAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.1.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.1.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Models\pineLabsEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>pineLabsEntity.edmx</DependentUpon>
+      <LastGenOutput>pineLabsEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\pineLabsEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>pineLabsEntity.edmx</DependentUpon>
+      <LastGenOutput>pineLabsEntity.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BillingAddress.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarteDetail.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoryResponce.cs" />
+    <Compile Include="Models\Company.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\companybak.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyDetail.cs" />
+    <Compile Include="Models\Filters.cs" />
+    <Compile Include="Models\GetAllCategoryList_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getBillAddress_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCartListByUserId_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCategoryListWithFilter_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEmailQue_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetImageBySku_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetProductDetailBySku_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetProductListWithFilter_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSMSQue_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getUserDetail_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Image.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobEMAILQue.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobEmailSetting.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobFinalEmailQue.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobFinalSMSQue.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobSMSQue.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobSMSSetting.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MessageApi.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\messgeApi.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyOrderReport_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\M_ResCardActivated.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderContainer.cs" />
+    <Compile Include="Models\OrderPayment.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderReport.cs" />
+    <Compile Include="Models\OrderRequestModel.cs" />
+    <Compile Include="Models\OrderStatusResponce.cs" />
+    <Compile Include="Models\order_card.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\order_product.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PartialClasses.cs" />
+    <Compile Include="Models\PineLabsContext.cs" />
+    <Compile Include="Models\pineLabsEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pineLabsEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pineLabsEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pineLabsEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pineLabsEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductCategoryRelationTbl.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductContentTbl.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDenomination.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDetailContainer.cs" />
+    <Compile Include="Models\ProductDiscount.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductList.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductResponce.cs" />
+    <Compile Include="Models\ProductThemeTbl.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RelatedProductList.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RequestModel.cs" />
+    <Compile Include="Models\ResponceDetail.cs" />
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SmsApi.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_getOrderStatus_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sp_MyOrderdetail_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sp_MyOrderReport_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_SaveAPIRequest_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sp_UpdateOrderStatus_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblApiRequestResponse.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblOrderRefNo.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TempCategory.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TokenParameter.cs" />
+    <Compile Include="Models\TokenResponce.cs" />
+    <Compile Include="Models\UpdateCartDetail_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WohooProductList.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\BasicmlmRepository.cs" />
+    <Compile Include="Repositories\PineLabRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="SqlHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="Models\pineLabsEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>pineLabsEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\pineLabsEntity.edmx.diagram">
+      <DependentUpon>pineLabsEntity.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\PineAppAPiPublish.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

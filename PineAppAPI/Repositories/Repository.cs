@@ -15,6 +15,8 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 using System.Configuration;
+using System.Net.Http;
+using System.Threading;
 
 namespace PineAppAPI.Repositories
 {
@@ -750,7 +752,9 @@ namespace PineAppAPI.Repositories
             return responseDetail;
         }
 
-      
+        
+
+
 
         public async Task<ResponceDetail> ManageProducts(Filters filterDetail)
         {
@@ -2139,6 +2143,83 @@ namespace PineAppAPI.Repositories
                 Console.WriteLine(ex.Message);
             }
             return res;
+        }
+
+        public async Task<ResponceDetail> MangeOtpFunctions(User userDetail, string Operation)
+        {
+            ResponceDetail responseDetail = new ResponceDetail();
+            try
+            {
+
+                if (Operation == "GenerateOtp")
+                {
+
+                    var usr = await Task.Run(() => entity.Users.FirstOrDefault(u => u.Username == userDetail.Username && u.Password == userDetail.Password));
+                    if (usr == null)
+                    {
+                        responseDetail.Message = "User Not Found";
+                    }
+                    else
+                    {
+                        //code to generate otp here
+                        var otp = Guid.NewGuid().ToString().Substring(0, 5);
+                        usr.OtpCode = otp;
+
+                        await entity.SaveChangesAsync();
+                        var OTPMessage = "Dear " + userDetail.Username + ", Your OTP is " + otp + " for - from -. Regards DTIL";
+                        responseDetail.Message = "Otp is send to registered mobile no.";
+                        responseDetail.Status = true;
+                        
+                        SendOtp(usr, OTPMessage);
+                    }
+                }
+                else if (Operation == "ValidateOtp")
+                {
+                    var usr = await Task.Run(() => entity.Users
+                    .FirstOrDefault(u => u.Username == userDetail.Username && u.Password == userDetail.Password));
+                    if (usr == null)
+                    {
+                        responseDetail.Message = "User Mot Found";
+                    }
+                    else
+                    {
+                        //code to generate otp here
+                        if (string.IsNullOrEmpty(usr.OtpCode))
+                        {
+                            responseDetail.Message = "Otp not available.";
+                        }
+                        else if (usr.OtpCode == userDetail.OtpCode)
+                        {
+                            // delete otp as it is matched now.
+                            usr.OtpCode = null;
+                            responseDetail.Message = "Otp Matched.";
+                            responseDetail.Status = true;
+                            await entity.SaveChangesAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                responseDetail.Message = e.Message;
+            }
+
+            return responseDetail;
+        }
+
+        public void SendOtp(object usr, string OTPMessage)
+        {
+            var detail = (User)usr;
+            using (HttpClient client = new HttpClient())
+            {
+                var path = "http://dtilsms.rcsms.net/submitsms.jsp?user=recharge&key=10b9582484XX&mobile=" + detail.Mobile + "&message=" + OTPMessage + "&senderid=INFOSM&accusage=1";
+                var response = client.GetAsync(path);
+                if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var result = response.Result.Content.ReadAsStringAsync();
+                    Console.WriteLine(result.Result);
+                }
+            }
         }
     }
 }

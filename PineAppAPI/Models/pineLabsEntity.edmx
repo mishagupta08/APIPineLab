@@ -570,11 +570,6 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="temptable">
-          <Property Name="id" Type="int" />
-        </EntityType>-->
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -592,6 +587,7 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
           <Property Name="LastLogin" Type="datetime" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="RoleId" Type="int" />
+          <Property Name="OtpCode" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="WohooProductList">
           <Key>
@@ -985,7 +981,6 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
           <EntitySet Name="Roles" EntityType="PineLabsModel.Role" />
           <EntitySet Name="tblApiRequestResponses" EntityType="PineLabsModel.tblApiRequestResponse" />
           <EntitySet Name="TblOrderRefNoes" EntityType="PineLabsModel.TblOrderRefNo" />
-          <EntitySet Name="Users" EntityType="PineLabsModel.User" />
           <EntitySet Name="WohooProductLists" EntityType="PineLabsModel.WohooProductList" />
           <EntitySet Name="companybaks" EntityType="PineLabsModel.companybak" />
           <EntitySet Name="MessageApis" EntityType="PineLabsModel.MessageApi" />
@@ -993,10 +988,10 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
           <EntitySet Name="SmsApis" EntityType="PineLabsModel.SmsApi" />
           <EntitySet Name="TempCategories" EntityType="PineLabsModel.TempCategory" />
           <FunctionImport Name="GetAllChildCategoryList" ReturnType="Collection(String)">
-            <Parameter Name="catId" Mode="In" Type="String" />
+          <Parameter Name="catId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetAllParentCategoryList" ReturnType="Collection(String)">
-            <Parameter Name="catId" Mode="In" Type="String" />
+          <Parameter Name="catId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="getBillAddress" ReturnType="Collection(PineLabsModel.getBillAddress_Result)">
             <Parameter Name="Userid" Mode="In" Type="String" />
@@ -1004,11 +999,11 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
           </FunctionImport>
           <FunctionImport Name="GetEmailQue" ReturnType="Collection(PineLabsModel.GetEmailQue_Result)" />
           <FunctionImport Name="getrootId">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetSMSQue" ReturnType="Collection(PineLabsModel.GetSMSQue_Result)" />
           <FunctionImport Name="getUserDetail" ReturnType="Collection(PineLabsModel.getUserDetail_Result)">
-            <Parameter Name="Userid" Mode="In" Type="String" />
+          <Parameter Name="Userid" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertProductCategoryRelationList" />
           <FunctionImport Name="InsertProductContent" />
@@ -1019,10 +1014,10 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
           <FunctionImport Name="InsertRelatedProductList" />
           <FunctionImport Name="InsertWohooProductImageDetail" />
           <FunctionImport Name="sp_BulkEmailDataInsert">
-            <Parameter Name="regXML" Mode="In" Type="String" />
+          <Parameter Name="regXML" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_BulkSMSDataInsert">
-            <Parameter Name="regXML" Mode="In" Type="String" />
+          <Parameter Name="regXML" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_getOrderStatus" ReturnType="Collection(PineLabsModel.sp_getOrderStatus_Result)" />
           <FunctionImport Name="sp_JobEmailQue" ReturnType="Collection(Int32)">
@@ -1046,7 +1041,7 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
             <Parameter Name="Userid" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sp_MyOrderReport" ReturnType="Collection(PineLabsModel.Sp_MyOrderReport_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Decimal" />
+          <Parameter Name="UserId" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="sp_SaveAPIRequest" ReturnType="Collection(PineLabsModel.sp_SaveAPIRequest_Result)">
             <Parameter Name="request" Mode="In" Type="String" />
@@ -1077,8 +1072,9 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
             <Parameter Name="userId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UpdateCartDetail" ReturnType="Collection(PineLabsModel.UpdateCartDetail_Result)">
-            <Parameter Name="Userid" Mode="In" Type="String" />
+          <Parameter Name="Userid" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Users" EntityType="PineLabsModel.User" />
         </EntityContainer>
         <ComplexType Name="GetCategoryListWithFilter_Result">
           <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
@@ -1533,24 +1529,6 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
           <Property Name="Userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Firstname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Lastname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Mobile" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Created" Type="DateTime" Precision="3" />
-          <Property Name="Modified" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="LastLogin" Type="DateTime" Precision="3" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="RoleId" Type="Int32" />
-        </EntityType>
         <EntityType Name="WohooProductList">
           <Key>
             <PropertyRef Name="Sno" />
@@ -1913,6 +1891,25 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
           <Property Type="String" Name="currencyCode" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="Posted" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="OtpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2432,25 +2429,6 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="PineLabsModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Modified" ColumnName="Modified" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WohooProductLists">
             <EntityTypeMapping TypeName="PineLabsModel.WohooProductList">
               <MappingFragment StoreEntitySet="WohooProductList">
@@ -2805,6 +2783,26 @@ warning 6013: The table/view 'PineLabs.dbo.temptable' does not have a primary ke
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PineLabsModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="OtpCode" ColumnName="OtpCode" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

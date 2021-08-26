@@ -1,9 +1,22 @@
-﻿using Newtonsoft.Json;
-using PineAppAPI.Models;
+﻿using PineAppAPI.Models;
+using RestSharp.Serializers;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data;
+using System.Data.SqlClient;
+using System.Text;
+using System.Security.Cryptography;
+using System.IO;
 using System.Configuration;
 using System.Net.Http;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace PineAppAPI.Repositories
 {
@@ -12,6 +25,7 @@ namespace PineAppAPI.Repositories
         string accessToken = ConfigurationManager.AppSettings["WalletToken"];
         string BasicMLMURL = "http://basicmlm.bisplindia.in/";
         static HttpClient client = new HttpClient();
+        PineLabsEntities entity = new PineLabsEntities();
 
         public async Task<ResponceDetail> ValidateTransactionLogin(User objUser)
         {
@@ -100,5 +114,8 @@ namespace PineAppAPI.Repositories
             }
             return responseDetail;
         }
+
+
+      
     }
 }

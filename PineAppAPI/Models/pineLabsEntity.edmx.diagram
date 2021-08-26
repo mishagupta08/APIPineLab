@@ -30,13 +30,13 @@
         <EntityTypeShape EntityType="PineLabsModel.Role" Width="1.5" PointX="14.75" PointY="0.75" />
         <EntityTypeShape EntityType="PineLabsModel.tblApiRequestResponse" Width="1.5" PointX="2.75" PointY="14.75" />
         <EntityTypeShape EntityType="PineLabsModel.TblOrderRefNo" Width="1.5" PointX="14.75" PointY="3.75" />
-        <EntityTypeShape EntityType="PineLabsModel.User" Width="1.5" PointX="14.75" PointY="6.75" />
         <EntityTypeShape EntityType="PineLabsModel.WohooProductList" Width="1.5" PointX="8.75" PointY="14.75" />
         <EntityTypeShape EntityType="PineLabsModel.companybak" Width="1.5" PointX="14.75" PointY="11.75" />
         <EntityTypeShape EntityType="PineLabsModel.MessageApi" Width="1.5" PointX="16.75" PointY="0.75" />
         <EntityTypeShape EntityType="PineLabsModel.messgeApi" Width="1.5" PointX="4.75" PointY="16.75" />
         <EntityTypeShape EntityType="PineLabsModel.SmsApi" Width="1.5" PointX="16.75" PointY="7.75" />
         <EntityTypeShape EntityType="PineLabsModel.TempCategory" Width="1.5" PointX="10.75" PointY="16.75" />
+        <EntityTypeShape EntityType="PineLabsModel.User" Width="1.5" PointX="0.75" PointY="17.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

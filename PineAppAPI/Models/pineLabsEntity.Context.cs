@@ -52,13 +52,13 @@ namespace PineAppAPI.Models
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<tblApiRequestResponse> tblApiRequestResponses { get; set; }
         public virtual DbSet<TblOrderRefNo> TblOrderRefNoes { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WohooProductList> WohooProductLists { get; set; }
         public virtual DbSet<companybak> companybaks { get; set; }
         public virtual DbSet<MessageApi> MessageApis { get; set; }
         public virtual DbSet<messgeApi> messgeApis { get; set; }
         public virtual DbSet<SmsApi> SmsApis { get; set; }
         public virtual DbSet<TempCategory> TempCategories { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     
         public virtual ObjectResult<GetCategoryListWithFilter_Result> GetCategoryListWithFilter(Nullable<int> pageNo, Nullable<int> noOfrecord)
         {

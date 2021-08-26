@@ -209,15 +209,15 @@ namespace PineAppAPI.Controllers
             return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
         }
 
-        //[HttpPost, Route("api/Home/SendOTP")]
-        //public async Task<IHttpActionResult> SendOTP(string refNo)
-        //{
-        //    this.basicmlmRepository = new BasicmlmRepository();
-        //    var postDataJson = await Request.Content.ReadAsStringAsync();
-        //    var requestObject = JsonConvert.DeserializeObject<User>(postDataJson);
-        //    var result = await this.basicmlmRepository.GetWalletBalance(requestObject);
-        //    return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
-        //}
+        [HttpPost, Route("api/Home/MangeOtpFunctions/{operation}")]
+        public async Task<IHttpActionResult> MangeOtpFunctions(string operation)
+        {
+            var detail = await Request.Content.ReadAsStringAsync();
+            var objUser = JsonConvert.DeserializeObject<User>(detail);
+            this.repository = new Repository();
+            var result = await this.repository.MangeOtpFunctions(objUser, operation);
+            return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
+        }
 
         [HttpPost, Route("api/Home/VerifyTrasaction")]
         public async Task<IHttpActionResult> VerifyTrasaction()

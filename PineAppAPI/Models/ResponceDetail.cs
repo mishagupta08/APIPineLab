@@ -46,7 +46,7 @@ namespace PineAppAPI.Models
         public M_ResCardActivated CardActivated { get; set; }
         public WalletResponse WalletResponse { get; set; }
         public Distributor Distributor { get; set; }
-
+        public string OrderId { get; set; }
 
     }
 }

@@ -35,7 +35,7 @@ namespace PineAppAPI.Repositories
         private string InsertProductCategoryRelationListSP = "InsertProductCategoryRelationList @pProdCat";
         private static byte[] KeyByte = Encoding.ASCII.GetBytes("6b04d38748f94490a636cf1be3d82841");
         private static byte[] IVByte = Encoding.ASCII.GetBytes("f8adbf3c94b7463d");
-       
+
 
         public async Task<ResponceDetail> LoginSuperAdmin(string username, string password)
         {
@@ -237,6 +237,8 @@ namespace PineAppAPI.Repositories
             ResponceDetail responseDetail = new ResponceDetail();
             try
             {
+                string orderId = string.Empty;
+                orderId = "DT" + DateTime.Now.ToString("yyyyMMddHHmmssfff"); ;
                 if (operation == "SaveBillingAddress")
                 {
                     if (order.billingAddress == null)
@@ -250,6 +252,7 @@ namespace PineAppAPI.Repositories
                         {
                             order.billingAddress.UserId = order.UserId;
                             order.billingAddress.CreatedDate = System.DateTime.Now;
+                            order.billingAddress.OrderId = orderId;
                             entity.BillingAddresses.Add(order.billingAddress);
                         }
                         else
@@ -264,25 +267,27 @@ namespace PineAppAPI.Repositories
                             exist.Mobile = order.billingAddress.Mobile;
                             exist.PostCode = order.billingAddress.PostCode;
                             exist.State = order.billingAddress.State;
+                            exist.OrderId = orderId;
                             //exist.CreatedDate = System.DateTime.Now;
 
                         }
                         await entity.SaveChangesAsync();
 
                         responseDetail.Message = "Address saved successfully.";
+                        responseDetail.OrderId = orderId;
                         responseDetail.Status = true;
                     }
                 }
                 else if (operation == "CreateOrder")
                 {
-                    var exist = await Task.Run(() => entity.BillingAddresses.FirstOrDefault(p => p.UserId == order.UserId && (string.IsNullOrEmpty(p.OrderId) || p.OrderId.Equals("0.0"))));
+                    var exist = await Task.Run(() => entity.BillingAddresses.FirstOrDefault(p => p.UserId == order.UserId && p.OrderId == order.orderId));
                     if (exist == null)
                     {
                         responseDetail.Message = "Address detail not found.";
                     }
                     else
                     {
-                        exist.OrderId = "DT" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                        //exist.OrderId = "DT" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
                         var Userid = Convert.ToString(order.UserId);
                         var OrderRefNo = await Task.Run(() => entity.TblOrderRefNoes.FirstOrDefault(p => p.Userid == Userid && p.RefNo == exist.OrderId));
 
@@ -400,7 +405,7 @@ namespace PineAppAPI.Repositories
                                                 {
                                                     cards.lableValidity = crd.validity.ToString();
                                                 }
-                                                
+
                                             }
 
                                             cards.OrderRefNo = exist.OrderId;
@@ -418,7 +423,7 @@ namespace PineAppAPI.Repositories
                                             {
                                                 cards.Validity = crd.validity.ToString();
                                             }
-                                                
+
                                             cards.Created = System.DateTime.Now;
                                             entity.order_card.Add(cards);
 
@@ -450,9 +455,9 @@ namespace PineAppAPI.Repositories
                                         var statusId = SaveJobSMSQue(Convert.ToInt32(addressdetail.UserId), sms1, Convert.ToString(addressdetail.Mobile.Replace("91", "")), "giftVoucher", "1");
 
                                         string msgbody = string.Empty;
-                                        var user = await Task.Run(() => entity.Users.FirstOrDefault(p => p.Id == order.UserId ));
+                                        var user = await Task.Run(() => entity.Users.FirstOrDefault(p => p.Id == order.UserId));
                                         string URL = System.Web.HttpContext.Current.Request.Url.Host.ToUpper().Replace("HTTP://", "").Replace("HTTPS://", "").Replace("WWW.", "").Replace("/", "").Replace("Utility.", "").Replace("Care.", "");// System.Web.HttpContext.Current.Request.UserHostName;
-                                        msgbody = "<div class='container'><h3> Hello " + user.Firstname +""+user.Lastname+"("+user.Username+")!!</h3>";
+                                        msgbody = "<div class='container'><h3> Hello " + user.Firstname + "" + user.Lastname + "(" + user.Username + ")!!</h3>";
                                         msgbody += "<p>You have just received your gift voucher worth Rs." + responseDetail.CreateOrderResponceDetail.cards.Sum(s => Convert.ToDecimal(s.amount)) + ".Please find the details of E-gift Voucher and use the given details for redemption at respective shop.</p></div>";
                                         msgbody += "<div class='col-md-12'> <table cellpadding='5' cellspacing='1' border='2' style='font-family:Arial'><thead style='background-color:Aqua;text-transform:uppercase;font-weight:bold;font-size:13px'><tr align='center'><th>Amount</th><th>ForUse</th><th>VoucherCode</th><th>Pin</th><th>Expiry</th></tr></thead>";
                                         msgbody += "<tbody style='font-size:12px'>";
@@ -469,27 +474,27 @@ namespace PineAppAPI.Repositories
 
                                         var status = SaveJobEmailQue(Convert.ToInt32(addressdetail.UserId), msgbody, Convert.ToString(addressdetail.Email), "Gift Voucher", Convert.ToInt32(1), "PineShop more E-Gift Voucher Order no" + exist.OrderId, "");
                                     }
-                                        //var cartRes1 = await this.ManageCart(new CarteDetail { UserId = order.UserId }, "UpdteCartAftrOdrComplete");
-                                        //await entity.SaveChangesAsync();
-                                        if (responseDetail.CreateOrderResponceDetail.products != null)
-                                        {
+                                    //var cartRes1 = await this.ManageCart(new CarteDetail { UserId = order.UserId }, "UpdteCartAftrOdrComplete");
+                                    //await entity.SaveChangesAsync();
+                                    if (responseDetail.CreateOrderResponceDetail.products != null)
+                                    {
 
-                                            var op = new order_product();
-                                            var orderProd = new Product();
-                                            //                                        await entity.SaveChangesAsync();
+                                        var op = new order_product();
+                                        var orderProd = new Product();
+                                        //                                        await entity.SaveChangesAsync();
 
-                                        }
-                                        if (responseDetail.CreateOrderResponceDetail.status == "COMPLETE")
-                                        {
-                                            responseDetail.Message = "Order created successfully RefNo. " + exist.OrderId;
+                                    }
+                                    if (responseDetail.CreateOrderResponceDetail.status == "COMPLETE")
+                                    {
+                                        responseDetail.Message = "Order created successfully RefNo. " + exist.OrderId;
 
-                                            //
+                                        //
 
-                                        }
-                                        else if (responseDetail.CreateOrderResponceDetail.status == "PROCESSING")
-                                        {
-                                            responseDetail.Message = " Please wait 5 to 10 min Still we could not Process Your order RefNo. " + exist.OrderId;
-                                        }
+                                    }
+                                    else if (responseDetail.CreateOrderResponceDetail.status == "PROCESSING")
+                                    {
+                                        responseDetail.Message = " Please wait 5 to 10 min Still we could not Process Your order RefNo. " + exist.OrderId;
+                                    }
 
 
                                     //}
@@ -509,7 +514,7 @@ namespace PineAppAPI.Repositories
             return responseDetail;
         }
 
-       
+
 
         public int SaveJobEmailQue(int formNo, string emailBody, string emailId, string emailType, int companyId, string subject, string fromEmailID)
         {
@@ -525,9 +530,9 @@ namespace PineAppAPI.Repositories
                 new SqlParameter("@FromEmailID", fromEmailID)
           };
             //Lets get the list of all employees in a datataable
-           
-               string CONNECTION_STRING = LiveCONNECTION_STRING;
-            
+
+            string CONNECTION_STRING = LiveCONNECTION_STRING;
+
             using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "sp_JobEmailQue", parameters))
             {
                 //check if any record exist or not
@@ -552,9 +557,9 @@ namespace PineAppAPI.Repositories
                 new SqlParameter("@companyId", companyId)
           };
             //Lets get the list of all employees in a datataable
-           
-              string  CONNECTION_STRING = LiveCONNECTION_STRING;
-            
+
+            string CONNECTION_STRING = LiveCONNECTION_STRING;
+
             using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "sp_JobSMSQue", parameters))
             {
                 //check if any record exist or not
@@ -601,7 +606,7 @@ namespace PineAppAPI.Repositories
             {
                 orderReq.payments = new List<Payment1>();
                 var total = cartRes.CartList.Sum(p => p.TotalPrice);
-                 var totalQty= cartRes.CartList.Sum(p => p.Quantity);
+                var totalQty = cartRes.CartList.Sum(p => p.Quantity);
                 orderReq.payments.Add(new Payment1 { code = "svc", amount = total.ToString() });
                 orderReq.products = new List<Product1>();
                 var prod = new Product1();
@@ -752,7 +757,7 @@ namespace PineAppAPI.Repositories
             return responseDetail;
         }
 
-        
+
 
 
 
@@ -840,7 +845,7 @@ namespace PineAppAPI.Repositories
                         cartDetail.TotalPrice = cartDetail.ProdPrice * cartDetail.Quantity;
                         cartDetail.Created = System.DateTime.Now;
                         cartDetail.Posted = "1";
-                        var alreadyExist = await Task.Run(() => entity.CarteDetails.FirstOrDefault(c => c.ProductSku == cartDetail.ProductSku && c.PriceType == cartDetail.PriceType && c.ProdPrice == cartDetail.ProdPrice && c.Posted=="1"));
+                        var alreadyExist = await Task.Run(() => entity.CarteDetails.FirstOrDefault(c => c.ProductSku == cartDetail.ProductSku && c.PriceType == cartDetail.PriceType && c.ProdPrice == cartDetail.ProdPrice && c.Posted == "1"));
                         if (alreadyExist == null)
                         {
                             responseDetail.Message = "Product Added into cart.";
@@ -874,7 +879,7 @@ namespace PineAppAPI.Repositories
                 {
 
                     var Result = (from ord in entity.CarteDetails
-                                  where ord.UserId == cartDetail.UserId && ord.Posted=="1"
+                                  where ord.UserId == cartDetail.UserId && ord.Posted == "1"
                                   select ord).ToList();
 
                     foreach (var item in Result)
@@ -886,7 +891,7 @@ namespace PineAppAPI.Repositories
                 }
                 else if (Operation == "DeleteCart" || Operation == "UpdateQuantity")
                 {
-                    var cart = await Task.Run(() => entity.CarteDetails.FirstOrDefault(c => c.Id == cartDetail.Id && c.Posted=="1"));
+                    var cart = await Task.Run(() => entity.CarteDetails.FirstOrDefault(c => c.Id == cartDetail.Id && c.Posted == "1"));
                     if (cart == null)
                     {
                         responseDetail.Message = "Product Not Fount.";
@@ -1668,12 +1673,12 @@ namespace PineAppAPI.Repositories
 
         public DataSet GetOrderReport(string UserId)
         {
-           
+
             DataSet dsReturn = null;
             try
             {
                 //var OrderReport = await Task.Run(() => entity.MyOrderReport(UserId));
-               
+
                 SqlParameter[] parameters = new SqlParameter[]
               {
                 new SqlParameter("@UserId", UserId),
@@ -1681,7 +1686,7 @@ namespace PineAppAPI.Repositories
                  // new SqlParameter("@PageSize", PageSize),
                  //  new SqlParameter("@RecordCount", 0)
               };
-                 var CONNECTION_STRING = LiveCONNECTION_STRING;
+                var CONNECTION_STRING = LiveCONNECTION_STRING;
                 using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "MyOrderReport", parameters))
                 //using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "Sp_MyOrderReport", parameters))
                 {
@@ -1692,19 +1697,19 @@ namespace PineAppAPI.Repositories
                     }
 
                 }
-               
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-               
+
             }
 
 
             return dsReturn;
         }
 
-         public DataSet GetOrderDetailReport(string userId,string refNo)
+        public DataSet GetOrderDetailReport(string userId, string refNo)
         {
             DataSet dsReturn = null;
             try
@@ -2056,7 +2061,7 @@ namespace PineAppAPI.Repositories
             var res = new ResponceDetail();
             try
             {
-                DataSet ds = GetOrderDetailReport(Convert.ToString(user.Id),refno);
+                DataSet ds = GetOrderDetailReport(Convert.ToString(user.Id), refno);
                 List<MyOrderDetail> order = new List<MyOrderDetail>();
                 var OrderDetailReport = new MyOrderDetail();
                 if (ds.Tables[0].Rows.Count > 0)
@@ -2138,7 +2143,7 @@ namespace PineAppAPI.Repositories
                     res.Status = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -2169,7 +2174,7 @@ namespace PineAppAPI.Repositories
                         var OTPMessage = "Dear " + userDetail.Username + ", Your OTP is " + otp + " for - from -. Regards DTIL";
                         responseDetail.Message = "Otp is send to registered mobile no.";
                         responseDetail.Status = true;
-                        
+
                         SendOtp(usr, OTPMessage);
                     }
                 }

@@ -10,5 +10,6 @@ namespace PineAppAPI.Models
         public BillingAddress billingAddress { get; set; }
 
         public decimal UserId { get; set; }
+        public string orderId { get; set; }
     }
 }

@@ -47,9 +47,9 @@ namespace PineAppAPI.Repositories
                     responseDetail.Message = "Please send complete details.";
                 }
 
-                var role = await Task.Run(() => entity.Roles.FirstOrDefault(g => g.Name.Contains("Admin")));
+                //var role = await Task.Run(() => entity.Roles.FirstOrDefault(g => g.Name.Contains("Admin")));
 
-                var user = await Task.Run(() => entity.Users.FirstOrDefault(g => g.Username == username && g.Password == password && g.Status == true && g.RoleId == role.Id));
+                var user = await Task.Run(() => entity.Users.FirstOrDefault(g => g.Username == username && g.Password == password && g.Status == true /*&& g.RoleId == role.Id*/));
 
                 if (user == null)
                 {
@@ -2225,6 +2225,149 @@ namespace PineAppAPI.Repositories
                     Console.WriteLine(result.Result);
                 }
             }
+        }
+        public async Task<ResponceDetail> ManageFundRequest(User objUser, Int32 userId)
+        {
+            var res = new ResponceDetail();
+            try
+            {
+                DataSet ds = GetFundRequest(userId);
+                List<FundRequestResponse> lstFundRequest = new List<FundRequestResponse>();
+                FundRequestResponse fundRequest = new FundRequestResponse();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        fundRequest = new FundRequestResponse();
+                        fundRequest.ID = Convert.ToInt32(dr["ID"]);
+                        fundRequest.UserName = Convert.ToString(dr["UserName"]);
+                        fundRequest.Password = Convert.ToString(dr["Password"]);
+                        fundRequest.Amount = Convert.ToDecimal(dr["Amount"]);
+                        fundRequest.RequestDate = Convert.ToString(dr["RequestDate"]);
+                        fundRequest.UserName = Convert.ToString(dr["RequestedBy"]);
+                        fundRequest.HostIP = Convert.ToString(dr["HostIP"]);
+                        fundRequest.IsFundApprove = Convert.ToBoolean(dr["IsFundApprove"]);
+                        fundRequest.RequestedUserId = Convert.ToInt32(dr["RequestedUserId"]);
+                        fundRequest.RequestedToUserId = Convert.ToInt32(dr["RequestedToUserId"]);
+                        fundRequest.Mobile = Convert.ToString(dr["Mobille"]);
+                        fundRequest.Remark = Convert.ToString(dr["Remark"]);
+                        lstFundRequest.Add(fundRequest);
+                    }
+
+                    res.lstFundRequest = lstFundRequest;
+                    res.Status = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return res;
+        }
+
+        public DataSet GetFundRequest(Int32 userId)
+        {
+            DataSet dsReturn = null;
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+              {
+                  new SqlParameter("@UserID", userId)
+
+              };
+                var CONNECTION_STRING = LiveCONNECTION_STRING;
+                using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "sp_GetFundRequest", parameters))
+                {
+                    //check if any record exist or not
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        dsReturn = ds;
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+            return dsReturn;
+        }
+        public async Task<ResponceDetail> SaveFundRequest(FundRequest objFundRequest)
+        {
+            var res = new ResponceDetail();
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("<Fund>");
+                sb.AppendLine("<FundData>");
+                sb.AppendLine(("<UserID>"
+                                + objFundRequest.UserID + "</UserID>"));
+                sb.AppendLine(("<Amount> "
+                                + objFundRequest.Amount + "</Amount>"));
+                sb.AppendLine(("<ModeID> "
+                                + objFundRequest.ModeID + "</ModeID>"));
+                sb.AppendLine(("<Remark> "
+                                + objFundRequest.Remark + "</Remark>"));
+                sb.AppendLine(("<CreatedBy>"
+                                + objFundRequest.CreatedBy + "</CreatedBy>"));               
+                //sb.AppendLine(("<UpdatedDate>"
+                //               + (Convert.ToString("0").Trim() + "</UpdatedDate>")));
+                sb.AppendLine(("<HostIP>"
+                                + objFundRequest.HostIP + "</HostIP>"));
+                sb.AppendLine("</FundData>");
+                sb.AppendLine("</Fund>");
+                DataSet ds = Fund(sb.ToString());
+                FundRequest FundRequest = new FundRequest();
+                //FundRequestResponse fundRequest = new FundRequestResponse();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                       
+                    }
+
+                    res.objFundRequest = FundRequest;
+                    res.Status = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return res;
+        }
+        public DataSet Fund(string regXML)
+        {
+            DataSet dsReturn = null;
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+              {
+                  new SqlParameter("@regXML", regXML)
+
+              };
+                var CONNECTION_STRING = LiveCONNECTION_STRING;
+                using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "sp_FundRequest", parameters))
+                {
+                    //check if any record exist or not
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        dsReturn = ds;
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+
+
+            return dsReturn;
         }
     }
 }

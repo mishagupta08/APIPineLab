@@ -53,6 +53,19 @@
           <Property Name="ApiCatId" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
         </EntityType>
+        <EntityType Name="CategoryMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="Id" />
@@ -90,7 +103,7 @@
           <Property Name="LiveConsumerSecret" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PineLabs.dbo.companybak' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'LivePineLabs.dbo.companybak' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="companybak">
           <Key>
             <PropertyRef Name="Id" />
@@ -221,8 +234,21 @@ warning 6002: The table/view 'PineLabs.dbo.companybak' does not have a primary k
           <Property Name="smsSenderId" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="Ledger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Credit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Debit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="RectimeStamp" Type="datetime" />
+          <Property Name="TxnID" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PineLabs.dbo.MessageApi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'LivePineLabs.dbo.MessageApi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MessageApi">
           <Key>
             <PropertyRef Name="id" />
@@ -276,7 +302,7 @@ warning 6002: The table/view 'PineLabs.dbo.MessageApi' does not have a primary k
           <Property Name="MobileApp" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PineLabs.dbo.messgeApi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'LivePineLabs.dbo.messgeApi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="messgeApi">
           <Key>
             <PropertyRef Name="id" />
@@ -370,6 +396,34 @@ warning 6002: The table/view 'PineLabs.dbo.messgeApi' does not have a primary ke
           <Property Name="EnrptCardPin" Type="varchar(max)" />
           <Property Name="CreatedOn" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LivePineLabs.dbo.order_card09092021' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="order_card09092021">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivationCode" Type="varchar" MaxLength="100" />
+          <Property Name="ActivationUrl" Type="varchar" MaxLength="500" />
+          <Property Name="Amount" Type="varchar" MaxLength="10" />
+          <Property Name="barcode" Type="varchar" MaxLength="100" />
+          <Property Name="CardId" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CardNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CardPin" Type="varchar" MaxLength="50" />
+          <Property Name="LabelProductName" Type="varchar" MaxLength="50" />
+          <Property Name="OrderRefNo" Type="varchar" MaxLength="50" />
+          <Property Name="Validity" Type="varchar" MaxLength="100" />
+          <Property Name="RecepientEmail" Type="varchar" MaxLength="200" />
+          <Property Name="ProductSku" Type="varchar" MaxLength="50" />
+          <Property Name="ProductTheme" Type="varchar" MaxLength="50" />
+          <Property Name="LableCardNumber" Type="varchar" MaxLength="50" />
+          <Property Name="LableCardPin" Type="varchar" MaxLength="50" />
+          <Property Name="lableValidity" Type="varchar" MaxLength="100" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="EnrptCardNo" Type="varchar(max)" />
+          <Property Name="EnrptCardPin" Type="varchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="order_product">
           <Key>
             <PropertyRef Name="Id" />
@@ -386,7 +440,54 @@ warning 6002: The table/view 'PineLabs.dbo.messgeApi' does not have a primary ke
           <Property Name="OrderRefId" Type="varchar" MaxLength="50" />
           <Property Name="created" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LivePineLabs.dbo.order_productbak09092021' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="order_productbak09092021">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cardBehaviour" Type="varchar" MaxLength="50" />
+          <Property Name="base" Type="varchar" MaxLength="1000" />
+          <Property Name="mobile" Type="varchar" MaxLength="1000" />
+          <Property Name="thumbnail" Type="varchar" MaxLength="1000" />
+          <Property Name="small" Type="varchar" MaxLength="1000" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="productSku" Type="varchar" MaxLength="50" />
+          <Property Name="specialInstruction" Type="varchar(max)" />
+          <Property Name="OrderRefId" Type="varchar" MaxLength="50" />
+          <Property Name="created" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LivePineLabs.dbo.orderbak09092021' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="orderbak09092021">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="orderId" Type="varchar" MaxLength="50" />
+          <Property Name="refno" Type="varchar" MaxLength="50" />
+          <Property Name="CancelAllowed" Type="bit" />
+          <Property Name="CancelallowedWithIn" Type="varchar" MaxLength="10" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="ResponceContent" Type="varchar(max)" />
+          <Property Name="UserId" Type="varchar(max)" />
+          <Property Name="updatedate" Type="datetime" />
+        </EntityType>
         <EntityType Name="OrderPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="balance" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="code" Type="varchar" MaxLength="50" />
+          <Property Name="OrderRefNo" Type="varchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LivePineLabs.dbo.OrderPaymentbak09092021' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OrderPaymentbak09092021">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -481,7 +582,7 @@ warning 6002: The table/view 'PineLabs.dbo.messgeApi' does not have a primary ke
           <Property Name="Name" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PineLabs.dbo.SmsApi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'LivePineLabs.dbo.SmsApi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SmsApi">
           <Key>
             <PropertyRef Name="id" />
@@ -544,6 +645,25 @@ warning 6002: The table/view 'PineLabs.dbo.SmsApi' does not have a primary key d
           <Property Name="url" Type="varchar(max)" />
           <Property Name="createdon" Type="datetime" />
         </EntityType>
+        <EntityType Name="TblFundRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="UserId" Type="int" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="RequestDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="RectimeStamp" Type="datetime" />
+          <Property Name="HostIP" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsFundApprove" Type="bit" />
+          <Property Name="ModeID" Type="int" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="AdminRemark" Type="nvarchar(max)" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="TblOrderRefNo">
           <Key>
             <PropertyRef Name="Id" />
@@ -554,7 +674,7 @@ warning 6002: The table/view 'PineLabs.dbo.SmsApi' does not have a primary key d
           <Property Name="Created" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'LivePineLabs.dbo.TempCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TempCategory">
           <Key>
             <PropertyRef Name="Id" />
@@ -570,6 +690,11 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'LivePineLabs.dbo.temptable' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="temptable">
+          <Property Name="id" Type="int" />
+        </EntityType>-->
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -588,6 +713,7 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Name="CompanyId" Type="int" />
           <Property Name="RoleId" Type="int" />
           <Property Name="OtpCode" Type="varchar" MaxLength="10" />
+          <Property Name="ParentID" Type="int" />
         </EntityType>
         <EntityType Name="WohooProductList">
           <Key>
@@ -688,6 +814,15 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
         <Function Name="sp_BulkSMSDataInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="regXML" Type="xml" Mode="In" />
         </Function>
+        <Function Name="sp_FundRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="regXML" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="sp_GetBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetFundRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_getOrderStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_JobEmailQue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FormNo" Type="int" Mode="In" />
@@ -747,6 +882,7 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <EntitySet Name="BillingAddress" EntityType="Self.BillingAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarteDetail" EntityType="Self.CarteDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryMaster" EntityType="Self.CategoryMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobEMAILQue" EntityType="Self.JobEMAILQue" Schema="dbo" store:Type="Tables" />
@@ -755,6 +891,7 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <EntitySet Name="JobFinalSMSQue" EntityType="Self.JobFinalSMSQue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobSMSQue" EntityType="Self.JobSMSQue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobSMSSetting" EntityType="Self.JobSMSSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ledger" EntityType="Self.Ledger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order_card" EntityType="Self.order_card" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order_product" EntityType="Self.order_product" Schema="dbo" store:Type="Tables" />
@@ -768,6 +905,7 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <EntitySet Name="RelatedProductList" EntityType="Self.RelatedProductList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblApiRequestResponse" EntityType="Self.tblApiRequestResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblFundRequest" EntityType="Self.TblFundRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblOrderRefNo" EntityType="Self.TblOrderRefNo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WohooProductList" EntityType="Self.WohooProductList" Schema="dbo" store:Type="Tables" />
@@ -861,6 +999,69 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
     [messgeApi].[PortalType] AS [PortalType], 
     [messgeApi].[MobileApp] AS [MobileApp]
     FROM [dbo].[messgeApi] AS [messgeApi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="order_card09092021" EntityType="Self.order_card09092021" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [order_card09092021].[Id] AS [Id], 
+    [order_card09092021].[ActivationCode] AS [ActivationCode], 
+    [order_card09092021].[ActivationUrl] AS [ActivationUrl], 
+    [order_card09092021].[Amount] AS [Amount], 
+    [order_card09092021].[barcode] AS [barcode], 
+    [order_card09092021].[CardId] AS [CardId], 
+    [order_card09092021].[CardNumber] AS [CardNumber], 
+    [order_card09092021].[CardPin] AS [CardPin], 
+    [order_card09092021].[LabelProductName] AS [LabelProductName], 
+    [order_card09092021].[OrderRefNo] AS [OrderRefNo], 
+    [order_card09092021].[Validity] AS [Validity], 
+    [order_card09092021].[RecepientEmail] AS [RecepientEmail], 
+    [order_card09092021].[ProductSku] AS [ProductSku], 
+    [order_card09092021].[ProductTheme] AS [ProductTheme], 
+    [order_card09092021].[LableCardNumber] AS [LableCardNumber], 
+    [order_card09092021].[LableCardPin] AS [LableCardPin], 
+    [order_card09092021].[lableValidity] AS [lableValidity], 
+    [order_card09092021].[Created] AS [Created], 
+    [order_card09092021].[EnrptCardNo] AS [EnrptCardNo], 
+    [order_card09092021].[EnrptCardPin] AS [EnrptCardPin], 
+    [order_card09092021].[CreatedOn] AS [CreatedOn]
+    FROM [dbo].[order_card09092021] AS [order_card09092021]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="order_productbak09092021" EntityType="Self.order_productbak09092021" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [order_productbak09092021].[Id] AS [Id], 
+    [order_productbak09092021].[cardBehaviour] AS [cardBehaviour], 
+    [order_productbak09092021].[base] AS [base], 
+    [order_productbak09092021].[mobile] AS [mobile], 
+    [order_productbak09092021].[thumbnail] AS [thumbnail], 
+    [order_productbak09092021].[small] AS [small], 
+    [order_productbak09092021].[name] AS [name], 
+    [order_productbak09092021].[productSku] AS [productSku], 
+    [order_productbak09092021].[specialInstruction] AS [specialInstruction], 
+    [order_productbak09092021].[OrderRefId] AS [OrderRefId], 
+    [order_productbak09092021].[created] AS [created]
+    FROM [dbo].[order_productbak09092021] AS [order_productbak09092021]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="orderbak09092021" EntityType="Self.orderbak09092021" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [orderbak09092021].[Id] AS [Id], 
+    [orderbak09092021].[status] AS [status], 
+    [orderbak09092021].[orderId] AS [orderId], 
+    [orderbak09092021].[refno] AS [refno], 
+    [orderbak09092021].[CancelAllowed] AS [CancelAllowed], 
+    [orderbak09092021].[CancelallowedWithIn] AS [CancelallowedWithIn], 
+    [orderbak09092021].[Created] AS [Created], 
+    [orderbak09092021].[ResponceContent] AS [ResponceContent], 
+    [orderbak09092021].[UserId] AS [UserId], 
+    [orderbak09092021].[updatedate] AS [updatedate]
+    FROM [dbo].[orderbak09092021] AS [orderbak09092021]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OrderPaymentbak09092021" EntityType="Self.OrderPaymentbak09092021" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OrderPaymentbak09092021].[Id] AS [Id], 
+    [OrderPaymentbak09092021].[balance] AS [balance], 
+    [OrderPaymentbak09092021].[code] AS [code], 
+    [OrderPaymentbak09092021].[OrderRefNo] AS [OrderRefNo], 
+    [OrderPaymentbak09092021].[Created] AS [Created]
+    FROM [dbo].[OrderPaymentbak09092021] AS [OrderPaymentbak09092021]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SmsApi" EntityType="Self.SmsApi" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -956,37 +1157,6 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <FunctionImport Name="MyOrderReport" ReturnType="Collection(PineLabsModel.MyOrderReport_Result)">
           <Parameter Name="UserId" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <EntitySet Name="BillingAddresses" EntityType="PineLabsModel.BillingAddress" />
-          <EntitySet Name="CarteDetails" EntityType="PineLabsModel.CarteDetail" />
-          <EntitySet Name="Categories" EntityType="PineLabsModel.Category" />
-          <EntitySet Name="Companies" EntityType="PineLabsModel.Company" />
-          <EntitySet Name="Images" EntityType="PineLabsModel.Image" />
-          <EntitySet Name="JobEMAILQues" EntityType="PineLabsModel.JobEMAILQue" />
-          <EntitySet Name="JobEmailSettings" EntityType="PineLabsModel.JobEmailSetting" />
-          <EntitySet Name="JobFinalEmailQues" EntityType="PineLabsModel.JobFinalEmailQue" />
-          <EntitySet Name="JobFinalSMSQues" EntityType="PineLabsModel.JobFinalSMSQue" />
-          <EntitySet Name="JobSMSQues" EntityType="PineLabsModel.JobSMSQue" />
-          <EntitySet Name="JobSMSSettings" EntityType="PineLabsModel.JobSMSSetting" />
-          <EntitySet Name="Orders" EntityType="PineLabsModel.Order" />
-          <EntitySet Name="order_card" EntityType="PineLabsModel.order_card" />
-          <EntitySet Name="order_product" EntityType="PineLabsModel.order_product" />
-          <EntitySet Name="OrderPayments" EntityType="PineLabsModel.OrderPayment" />
-          <EntitySet Name="ProductCategoryRelationTbls" EntityType="PineLabsModel.ProductCategoryRelationTbl" />
-          <EntitySet Name="ProductContentTbls" EntityType="PineLabsModel.ProductContentTbl" />
-          <EntitySet Name="ProductDenominations" EntityType="PineLabsModel.ProductDenomination" />
-          <EntitySet Name="ProductDiscounts" EntityType="PineLabsModel.ProductDiscount" />
-          <EntitySet Name="ProductLists" EntityType="PineLabsModel.ProductList" />
-          <EntitySet Name="ProductThemeTbls" EntityType="PineLabsModel.ProductThemeTbl" />
-          <EntitySet Name="RelatedProductLists" EntityType="PineLabsModel.RelatedProductList" />
-          <EntitySet Name="Roles" EntityType="PineLabsModel.Role" />
-          <EntitySet Name="tblApiRequestResponses" EntityType="PineLabsModel.tblApiRequestResponse" />
-          <EntitySet Name="TblOrderRefNoes" EntityType="PineLabsModel.TblOrderRefNo" />
-          <EntitySet Name="WohooProductLists" EntityType="PineLabsModel.WohooProductList" />
-          <EntitySet Name="companybaks" EntityType="PineLabsModel.companybak" />
-          <EntitySet Name="MessageApis" EntityType="PineLabsModel.MessageApi" />
-          <EntitySet Name="messgeApis" EntityType="PineLabsModel.messgeApi" />
-          <EntitySet Name="SmsApis" EntityType="PineLabsModel.SmsApi" />
-          <EntitySet Name="TempCategories" EntityType="PineLabsModel.TempCategory" />
           <FunctionImport Name="GetAllChildCategoryList" ReturnType="Collection(String)">
           <Parameter Name="catId" Mode="In" Type="String" />
           </FunctionImport>
@@ -1074,8 +1244,55 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <FunctionImport Name="UpdateCartDetail" ReturnType="Collection(PineLabsModel.UpdateCartDetail_Result)">
           <Parameter Name="Userid" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="BillingAddresses" EntityType="PineLabsModel.BillingAddress" />
+          <EntitySet Name="CarteDetails" EntityType="PineLabsModel.CarteDetail" />
+          <EntitySet Name="Categories" EntityType="PineLabsModel.Category" />
+          <EntitySet Name="CategoryMasters" EntityType="PineLabsModel.CategoryMaster" />
+          <EntitySet Name="Companies" EntityType="PineLabsModel.Company" />
+          <EntitySet Name="Images" EntityType="PineLabsModel.Image" />
+          <EntitySet Name="JobEMAILQues" EntityType="PineLabsModel.JobEMAILQue" />
+          <EntitySet Name="JobEmailSettings" EntityType="PineLabsModel.JobEmailSetting" />
+          <EntitySet Name="JobFinalEmailQues" EntityType="PineLabsModel.JobFinalEmailQue" />
+          <EntitySet Name="JobFinalSMSQues" EntityType="PineLabsModel.JobFinalSMSQue" />
+          <EntitySet Name="JobSMSQues" EntityType="PineLabsModel.JobSMSQue" />
+          <EntitySet Name="JobSMSSettings" EntityType="PineLabsModel.JobSMSSetting" />
+          <EntitySet Name="Ledgers" EntityType="PineLabsModel.Ledger" />
+          <EntitySet Name="Orders" EntityType="PineLabsModel.Order" />
+          <EntitySet Name="order_card" EntityType="PineLabsModel.order_card" />
+          <EntitySet Name="order_product" EntityType="PineLabsModel.order_product" />
+          <EntitySet Name="OrderPayments" EntityType="PineLabsModel.OrderPayment" />
+          <EntitySet Name="ProductCategoryRelationTbls" EntityType="PineLabsModel.ProductCategoryRelationTbl" />
+          <EntitySet Name="ProductContentTbls" EntityType="PineLabsModel.ProductContentTbl" />
+          <EntitySet Name="ProductDenominations" EntityType="PineLabsModel.ProductDenomination" />
+          <EntitySet Name="ProductDiscounts" EntityType="PineLabsModel.ProductDiscount" />
+          <EntitySet Name="ProductLists" EntityType="PineLabsModel.ProductList" />
+          <EntitySet Name="ProductThemeTbls" EntityType="PineLabsModel.ProductThemeTbl" />
+          <EntitySet Name="RelatedProductLists" EntityType="PineLabsModel.RelatedProductList" />
+          <EntitySet Name="Roles" EntityType="PineLabsModel.Role" />
+          <EntitySet Name="tblApiRequestResponses" EntityType="PineLabsModel.tblApiRequestResponse" />
+          <EntitySet Name="TblFundRequests" EntityType="PineLabsModel.TblFundRequest" />
+          <EntitySet Name="TblOrderRefNoes" EntityType="PineLabsModel.TblOrderRefNo" />
           <EntitySet Name="Users" EntityType="PineLabsModel.User" />
-        </EntityContainer>
+          <EntitySet Name="WohooProductLists" EntityType="PineLabsModel.WohooProductList" />
+          <EntitySet Name="companybaks" EntityType="PineLabsModel.companybak" />
+          <EntitySet Name="MessageApis" EntityType="PineLabsModel.MessageApi" />
+          <EntitySet Name="messgeApis" EntityType="PineLabsModel.messgeApi" />
+          <EntitySet Name="order_card09092021" EntityType="PineLabsModel.order_card09092021" />
+          <EntitySet Name="order_productbak09092021" EntityType="PineLabsModel.order_productbak09092021" />
+          <EntitySet Name="orderbak09092021" EntityType="PineLabsModel.orderbak09092021" />
+          <EntitySet Name="OrderPaymentbak09092021" EntityType="PineLabsModel.OrderPaymentbak09092021" />
+          <EntitySet Name="SmsApis" EntityType="PineLabsModel.SmsApi" />
+          <EntitySet Name="TempCategories" EntityType="PineLabsModel.TempCategory" />
+          <FunctionImport Name="sp_FundRequest" ReturnType="Collection(PineLabsModel.sp_FundRequest_Result)">
+            <Parameter Name="regXML" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetBalance" ReturnType="Collection(PineLabsModel.sp_GetBalance_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetFundRequest" ReturnType="Collection(PineLabsModel.sp_GetFundRequest_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          </EntityContainer>
         <ComplexType Name="GetCategoryListWithFilter_Result">
           <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
@@ -1181,6 +1398,140 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Type="String" Name="base" Nullable="true" MaxLength="1000" />
           <Property Type="String" Name="Small" Nullable="true" MaxLength="1000" />
         </ComplexType>
+        <ComplexType Name="getBillAddress_Result">
+          <Property Type="String" Name="Firstname" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="lastname" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="8000" />
+          <Property Type="Decimal" Name="UserId" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OrderId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="GetEmailQue_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="Formno" Nullable="true" />
+          <Property Type="String" Name="Body" Nullable="true" />
+          <Property Type="String" Name="EmailType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FromEmail" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ToEmail" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="IsMailSent" Nullable="true" />
+          <Property Type="Int32" Name="CompanyID" Nullable="true" />
+          <Property Type="String" Name="Subject" Nullable="true" />
+          <Property Type="String" Name="SMTPServer" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SMSUserName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SMSPassword" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="GetSMSQue_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="Formno" Nullable="true" />
+          <Property Type="String" Name="SMSBody" Nullable="true" />
+          <Property Type="String" Name="SMSType" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="MobileNo" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="SMSAPI" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="SMSUSerNAme" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="SMSPassword" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="SMSSenderID" Nullable="false" MaxLength="255" />
+          <Property Type="Boolean" Name="IsSMSSent" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getUserDetail_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Firstname" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Lastname" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Modified" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="DateTime" Name="LastLogin" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_getOrderStatus_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="orderId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="refno" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="CancelAllowed" Nullable="true" />
+          <Property Type="String" Name="CancelallowedWithIn" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ResponceContent" Nullable="true" />
+          <Property Type="String" Name="UserId" Nullable="true" />
+          <Property Type="DateTime" Name="updatedate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Sp_MyOrderdetail_Result">
+          <Property Type="String" Name="Amount" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="EnrptCardNo" Nullable="true" />
+          <Property Type="String" Name="EnrptCardPin" Nullable="true" />
+          <Property Type="String" Name="labelProductName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Validity" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="productSku" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Sp_MyOrderReport_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OrderID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="refNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Created" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_SaveAPIRequest_Result">
+          <Property Type="Int32" Name="reqid" Nullable="false" />
+          <Property Type="String" Name="request" Nullable="true" />
+          <Property Type="String" Name="response" Nullable="true" />
+          <Property Type="String" Name="url" Nullable="true" />
+          <Property Type="DateTime" Name="createdon" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Sp_UpdateOrderStatus_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="orderId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="refno" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="CancelAllowed" Nullable="true" />
+          <Property Type="String" Name="CancelallowedWithIn" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ResponceContent" Nullable="true" />
+          <Property Type="String" Name="UserId" Nullable="true" />
+          <Property Type="DateTime" Name="updatedate" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="Id1" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="ActivationCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ActivationUrl" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Amount" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="barcode" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="CardId" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="CardNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CardPin" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LabelProductName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OrderRefNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Validity" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RecepientEmail" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ProductSku" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProductTheme" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LableCardNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LableCardPin" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lableValidity" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Created1" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EnrptCardNo" Nullable="true" />
+          <Property Type="String" Name="EnrptCardPin" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="UpdateCartDetail_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="ProductSku" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="UserId" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="PriceType" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="ProdPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="currencyCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Posted" Nullable="true" MaxLength="100" />
+        </ComplexType>
         <EntityType Name="BillingAddress">
           <Key>
             <PropertyRef Name="Id" />
@@ -1228,6 +1579,19 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ApiCatId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CategoryMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -1358,6 +1722,19 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Name="SMSPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="smsSenderId" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Ledger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="RectimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="TxnID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -1520,6 +1897,25 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="createdon" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="TblFundRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RequestDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="RectimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="HostIP" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsFundApprove" Type="Boolean" />
+          <Property Name="ModeID" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdminRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
         <EntityType Name="TblOrderRefNo">
           <Key>
             <PropertyRef Name="Id" />
@@ -1528,6 +1924,26 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Name="RefNo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="OtpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ParentID" Type="Int32" />
         </EntityType>
         <EntityType Name="WohooProductList">
           <Key>
@@ -1690,6 +2106,73 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Name="PortalType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="MobileApp" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
+        <EntityType Name="order_card09092021">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActivationUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CardId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CardPin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LabelProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Validity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RecepientEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ProductSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductTheme" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LableCardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LableCardPin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lableValidity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="EnrptCardNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EnrptCardPin" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="order_productbak09092021">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cardBehaviour" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="base" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="thumbnail" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="small" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="productSku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="specialInstruction" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRefId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="orderbak09092021">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="orderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="refno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CancelAllowed" Type="Boolean" />
+          <Property Name="CancelallowedWithIn" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="ResponceContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="updatedate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OrderPaymentbak09092021">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="balance" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="SmsApi">
           <Key>
             <PropertyRef Name="id" />
@@ -1757,160 +2240,45 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Boolean" />
         </EntityType>
-        <ComplexType Name="getBillAddress_Result">
-          <Property Type="String" Name="Firstname" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="lastname" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="State" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="8000" />
+        <ComplexType Name="sp_FundRequest_Result">
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="RectimeStamp" Nullable="true" Precision="23" />
+          <Property Type="String" Name="HostIP" Nullable="true" MaxLength="1000" />
+          <Property Type="Boolean" Name="IsFundApprove" Nullable="true" />
+          <Property Type="Int32" Name="ModeID" Nullable="true" />
+          <Property Type="String" Name="Remark" Nullable="true" />
+          <Property Type="String" Name="AdminRemark" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_GetBalance_Result">
           <Property Type="Decimal" Name="UserId" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="OrderId" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State1" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="10" />
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="credit" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="debit" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="balance" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="ttlBalance" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="due" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
-        <ComplexType Name="GetEmailQue_Result">
+        <ComplexType Name="sp_GetFundRequest_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="Formno" Nullable="true" />
-          <Property Type="String" Name="Body" Nullable="true" />
-          <Property Type="String" Name="EmailType" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="FromEmail" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="ToEmail" Nullable="true" MaxLength="500" />
-          <Property Type="Boolean" Name="IsMailSent" Nullable="true" />
-          <Property Type="Int32" Name="CompanyID" Nullable="true" />
-          <Property Type="String" Name="Subject" Nullable="true" />
-          <Property Type="String" Name="SMTPServer" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="SMSUserName" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="SMSPassword" Nullable="true" MaxLength="500" />
-        </ComplexType>
-        <ComplexType Name="GetSMSQue_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="Formno" Nullable="true" />
-          <Property Type="String" Name="SMSBody" Nullable="true" />
-          <Property Type="String" Name="SMSType" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="MobileNo" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="SMSAPI" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="SMSUSerNAme" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="SMSPassword" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="SMSSenderID" Nullable="false" MaxLength="255" />
-          <Property Type="Boolean" Name="IsSMSSent" Nullable="true" />
-          <Property Type="Int32" Name="CompanyId" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="getUserDetail_Result">
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="Username" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="Password" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Firstname" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Lastname" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="RequestDate" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="RequestedBy" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="HostIP" Nullable="true" MaxLength="1000" />
+          <Property Type="Boolean" Name="IsFundApprove" Nullable="true" />
+          <Property Type="Int32" Name="RequestedUserId" Nullable="true" />
+          <Property Type="Int32" Name="RequestedToUserId" Nullable="true" />
           <Property Type="String" Name="Mobile" Nullable="true" MaxLength="12" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="Modified" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Status" Nullable="true" />
-          <Property Type="DateTime" Name="LastLogin" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="CompanyId" Nullable="true" />
-          <Property Type="Int32" Name="RoleId" Nullable="true" />
+          <Property Type="String" Name="Remark" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="sp_getOrderStatus_Result">
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="orderId" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="refno" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="CancelAllowed" Nullable="true" />
-          <Property Type="String" Name="CancelallowedWithIn" Nullable="true" MaxLength="10" />
-          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
-          <Property Type="String" Name="ResponceContent" Nullable="true" />
-          <Property Type="String" Name="UserId" Nullable="true" />
-          <Property Type="DateTime" Name="updatedate" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="Sp_MyOrderdetail_Result">
-          <Property Type="String" Name="Amount" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="EnrptCardNo" Nullable="true" />
-          <Property Type="String" Name="EnrptCardPin" Nullable="true" />
-          <Property Type="String" Name="labelProductName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Validity" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="productSku" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="Sp_MyOrderReport_Result">
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="OrderID" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="refNo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Created" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="sp_SaveAPIRequest_Result">
-          <Property Type="Int32" Name="reqid" Nullable="false" />
-          <Property Type="String" Name="request" Nullable="true" />
-          <Property Type="String" Name="response" Nullable="true" />
-          <Property Type="String" Name="url" Nullable="true" />
-          <Property Type="DateTime" Name="createdon" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="Sp_UpdateOrderStatus_Result">
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="orderId" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="refno" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="CancelAllowed" Nullable="true" />
-          <Property Type="String" Name="CancelallowedWithIn" Nullable="true" MaxLength="10" />
-          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
-          <Property Type="String" Name="ResponceContent" Nullable="true" />
-          <Property Type="String" Name="UserId" Nullable="true" />
-          <Property Type="DateTime" Name="updatedate" Nullable="true" Precision="23" />
-          <Property Type="Decimal" Name="Id1" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="ActivationCode" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="ActivationUrl" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Amount" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="barcode" Nullable="true" MaxLength="100" />
-          <Property Type="Decimal" Name="CardId" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="CardNumber" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CardPin" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="LabelProductName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="OrderRefNo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Validity" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="RecepientEmail" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="ProductSku" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ProductTheme" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="LableCardNumber" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="LableCardPin" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="lableValidity" Nullable="true" MaxLength="100" />
-          <Property Type="DateTime" Name="Created1" Nullable="true" Precision="23" />
-          <Property Type="String" Name="EnrptCardNo" Nullable="true" />
-          <Property Type="String" Name="EnrptCardPin" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="UpdateCartDetail_Result">
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="ProductSku" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
-          <Property Type="Decimal" Name="UserId" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Int32" Name="Quantity" Nullable="true" />
-          <Property Type="String" Name="PriceType" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="ProdPrice" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="currencyCode" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Posted" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Firstname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Lastname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Mobile" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Created" Type="DateTime" Precision="3" />
-          <Property Name="Modified" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="LastLogin" Type="DateTime" Precision="3" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="RoleId" Type="Int32" />
-          <Property Name="OtpCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -2056,544 +2424,6 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="BillingAddresses">
-            <EntityTypeMapping TypeName="PineLabsModel.BillingAddress">
-              <MappingFragment StoreEntitySet="BillingAddress">
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
-                <ScalarProperty Name="AddLineTwo" ColumnName="AddLineTwo" />
-                <ScalarProperty Name="AddLineOne" ColumnName="AddLineOne" />
-                <ScalarProperty Name="lastname" ColumnName="lastname" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CarteDetails">
-            <EntityTypeMapping TypeName="PineLabsModel.CarteDetail">
-              <MappingFragment StoreEntitySet="CarteDetail">
-                <ScalarProperty Name="Posted" ColumnName="Posted" />
-                <ScalarProperty Name="currencyCode" ColumnName="currencyCode" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="ProdPrice" ColumnName="ProdPrice" />
-                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="PineLabsModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ApiCatId" ColumnName="ApiCatId" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="SubcategoriesCount" ColumnName="SubcategoriesCount" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="PineLabsModel.Company">
-              <MappingFragment StoreEntitySet="Company">
-                <ScalarProperty Name="LiveConsumerSecret" ColumnName="LiveConsumerSecret" />
-                <ScalarProperty Name="LiveConsumerKey" ColumnName="LiveConsumerKey" />
-                <ScalarProperty Name="AuthTokenGeneationDate" ColumnName="AuthTokenGeneationDate" />
-                <ScalarProperty Name="AuthToken" ColumnName="AuthToken" />
-                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
-                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="CompanyIFSCCode" ColumnName="CompanyIFSCCode" />
-                <ScalarProperty Name="CompanyAccountNumber" ColumnName="CompanyAccountNumber" />
-                <ScalarProperty Name="CompanyAccountType" ColumnName="CompanyAccountType" />
-                <ScalarProperty Name="CompanyBankName" ColumnName="CompanyBankName" />
-                <ScalarProperty Name="CompanyAccountName" ColumnName="CompanyAccountName" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ContactEmail2" ColumnName="ContactEmail2" />
-                <ScalarProperty Name="ContactEmail1" ColumnName="ContactEmail1" />
-                <ScalarProperty Name="ContactNo2" ColumnName="ContactNo2" />
-                <ScalarProperty Name="ContactNo1" ColumnName="ContactNo1" />
-                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="CreditPoint" ColumnName="CreditPoint" />
-                <ScalarProperty Name="Logo" ColumnName="Logo" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="PineLabsModel.Image">
-              <MappingFragment StoreEntitySet="Images">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="small" ColumnName="small" />
-                <ScalarProperty Name="base" ColumnName="base" />
-                <ScalarProperty Name="mobile" ColumnName="mobile" />
-                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobEMAILQues">
-            <EntityTypeMapping TypeName="PineLabsModel.JobEMAILQue">
-              <MappingFragment StoreEntitySet="JobEMAILQue">
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="FromEmailID" ColumnName="FromEmailID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="RecTimeStamp" ColumnName="RecTimeStamp" />
-                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
-                <ScalarProperty Name="EmailType" ColumnName="EmailType" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
-                <ScalarProperty Name="EmailDate" ColumnName="EmailDate" />
-                <ScalarProperty Name="EMailBody" ColumnName="EMailBody" />
-                <ScalarProperty Name="FormNo" ColumnName="FormNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobEmailSettings">
-            <EntityTypeMapping TypeName="PineLabsModel.JobEmailSetting">
-              <MappingFragment StoreEntitySet="JobEmailSetting">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="SMSPassword" ColumnName="SMSPassword" />
-                <ScalarProperty Name="SMSUserName" ColumnName="SMSUserName" />
-                <ScalarProperty Name="SMTPServer" ColumnName="SMTPServer" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobFinalEmailQues">
-            <EntityTypeMapping TypeName="PineLabsModel.JobFinalEmailQue">
-              <MappingFragment StoreEntitySet="JobFinalEmailQue">
-                <ScalarProperty Name="JobEmailQueID" ColumnName="JobEmailQueID" />
-                <ScalarProperty Name="RectimeStamp" ColumnName="RectimeStamp" />
-                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
-                <ScalarProperty Name="EmailType" ColumnName="EmailType" />
-                <ScalarProperty Name="ToEmailID" ColumnName="ToEmailID" />
-                <ScalarProperty Name="FromEmailID" ColumnName="FromEmailID" />
-                <ScalarProperty Name="Body" ColumnName="Body" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobFinalSMSQues">
-            <EntityTypeMapping TypeName="PineLabsModel.JobFinalSMSQue">
-              <MappingFragment StoreEntitySet="JobFinalSMSQue">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IsError" ColumnName="IsError" />
-                <ScalarProperty Name="RecTimeStamp" ColumnName="RecTimeStamp" />
-                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
-                <ScalarProperty Name="SMSType" ColumnName="SMSType" />
-                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
-                <ScalarProperty Name="IsSMSSent" ColumnName="IsSMSSent" />
-                <ScalarProperty Name="SMSDate" ColumnName="SMSDate" />
-                <ScalarProperty Name="SMSBody" ColumnName="SMSBody" />
-                <ScalarProperty Name="JOBSMSQueID" ColumnName="JOBSMSQueID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobSMSQues">
-            <EntityTypeMapping TypeName="PineLabsModel.JobSMSQue">
-              <MappingFragment StoreEntitySet="JobSMSQue">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="RecTimeStamp" ColumnName="RecTimeStamp" />
-                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
-                <ScalarProperty Name="SMSType" ColumnName="SMSType" />
-                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
-                <ScalarProperty Name="IsSMSSent" ColumnName="IsSMSSent" />
-                <ScalarProperty Name="SMSDate" ColumnName="SMSDate" />
-                <ScalarProperty Name="SMSBody" ColumnName="SMSBody" />
-                <ScalarProperty Name="FormNo" ColumnName="FormNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobSMSSettings">
-            <EntityTypeMapping TypeName="PineLabsModel.JobSMSSetting">
-              <MappingFragment StoreEntitySet="JobSMSSetting">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="smsSenderId" ColumnName="smsSenderId" />
-                <ScalarProperty Name="SMSPassword" ColumnName="SMSPassword" />
-                <ScalarProperty Name="SMSUserName" ColumnName="SMSUserName" />
-                <ScalarProperty Name="SMSAPI" ColumnName="SMSAPI" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="PineLabsModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ResponceContent" ColumnName="ResponceContent" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="CancelallowedWithIn" ColumnName="CancelallowedWithIn" />
-                <ScalarProperty Name="CancelAllowed" ColumnName="CancelAllowed" />
-                <ScalarProperty Name="refno" ColumnName="refno" />
-                <ScalarProperty Name="orderId" ColumnName="orderId" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="order_card">
-            <EntityTypeMapping TypeName="PineLabsModel.order_card">
-              <MappingFragment StoreEntitySet="order_card">
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="EnrptCardPin" ColumnName="EnrptCardPin" />
-                <ScalarProperty Name="EnrptCardNo" ColumnName="EnrptCardNo" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="lableValidity" ColumnName="lableValidity" />
-                <ScalarProperty Name="LableCardPin" ColumnName="LableCardPin" />
-                <ScalarProperty Name="LableCardNumber" ColumnName="LableCardNumber" />
-                <ScalarProperty Name="ProductTheme" ColumnName="ProductTheme" />
-                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
-                <ScalarProperty Name="RecepientEmail" ColumnName="RecepientEmail" />
-                <ScalarProperty Name="Validity" ColumnName="Validity" />
-                <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
-                <ScalarProperty Name="LabelProductName" ColumnName="LabelProductName" />
-                <ScalarProperty Name="CardPin" ColumnName="CardPin" />
-                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-                <ScalarProperty Name="CardId" ColumnName="CardId" />
-                <ScalarProperty Name="barcode" ColumnName="barcode" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="ActivationUrl" ColumnName="ActivationUrl" />
-                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="order_product">
-            <EntityTypeMapping TypeName="PineLabsModel.order_product">
-              <MappingFragment StoreEntitySet="order_product">
-                <ScalarProperty Name="created" ColumnName="created" />
-                <ScalarProperty Name="OrderRefId" ColumnName="OrderRefId" />
-                <ScalarProperty Name="specialInstruction" ColumnName="specialInstruction" />
-                <ScalarProperty Name="productSku" ColumnName="productSku" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="small" ColumnName="small" />
-                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
-                <ScalarProperty Name="mobile" ColumnName="mobile" />
-                <ScalarProperty Name="base" ColumnName="base" />
-                <ScalarProperty Name="cardBehaviour" ColumnName="cardBehaviour" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderPayments">
-            <EntityTypeMapping TypeName="PineLabsModel.OrderPayment">
-              <MappingFragment StoreEntitySet="OrderPayment">
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="balance" ColumnName="balance" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductCategoryRelationTbls">
-            <EntityTypeMapping TypeName="PineLabsModel.ProductCategoryRelationTbl">
-              <MappingFragment StoreEntitySet="ProductCategoryRelationTbl">
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
-                <ScalarProperty Name="Sno" ColumnName="Sno" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductContentTbls">
-            <EntityTypeMapping TypeName="PineLabsModel.ProductContentTbl">
-              <MappingFragment StoreEntitySet="ProductContentTbl">
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="ProdContent" ColumnName="ProdContent" />
-                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductDenominations">
-            <EntityTypeMapping TypeName="PineLabsModel.ProductDenomination">
-              <MappingFragment StoreEntitySet="ProductDenomination">
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Denomination" ColumnName="Denomination" />
-                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
-                <ScalarProperty Name="Sno" ColumnName="Sno" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductDiscounts">
-            <EntityTypeMapping TypeName="PineLabsModel.ProductDiscount">
-              <MappingFragment StoreEntitySet="ProductDiscounts">
-                <ScalarProperty Name="CouponPriority" ColumnName="CouponPriority" />
-                <ScalarProperty Name="CounponCode" ColumnName="CounponCode" />
-                <ScalarProperty Name="DiscountDesc" ColumnName="DiscountDesc" />
-                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
-                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductLists">
-            <EntityTypeMapping TypeName="PineLabsModel.ProductList">
-              <MappingFragment StoreEntitySet="ProductList">
-                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
-                <ScalarProperty Name="created" ColumnName="created" />
-                <ScalarProperty Name="numericCode" ColumnName="numericCode" />
-                <ScalarProperty Name="symbol" ColumnName="symbol" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="maxPrice" ColumnName="maxPrice" />
-                <ScalarProperty Name="minPrice" ColumnName="minPrice" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="sku" ColumnName="sku" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductThemeTbls">
-            <EntityTypeMapping TypeName="PineLabsModel.ProductThemeTbl">
-              <MappingFragment StoreEntitySet="ProductThemeTbl">
-                <ScalarProperty Name="ThemeSku" ColumnName="ThemeSku" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
-                <ScalarProperty Name="Sno" ColumnName="Sno" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RelatedProductLists">
-            <EntityTypeMapping TypeName="PineLabsModel.RelatedProductList">
-              <MappingFragment StoreEntitySet="RelatedProductList">
-                <ScalarProperty Name="RelatedSku" ColumnName="RelatedSku" />
-                <ScalarProperty Name="Sku" ColumnName="Sku" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="PineLabsModel.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblApiRequestResponses">
-            <EntityTypeMapping TypeName="PineLabsModel.tblApiRequestResponse">
-              <MappingFragment StoreEntitySet="tblApiRequestResponse">
-                <ScalarProperty Name="createdon" ColumnName="createdon" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="response" ColumnName="response" />
-                <ScalarProperty Name="request" ColumnName="request" />
-                <ScalarProperty Name="reqid" ColumnName="reqid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TblOrderRefNoes">
-            <EntityTypeMapping TypeName="PineLabsModel.TblOrderRefNo">
-              <MappingFragment StoreEntitySet="TblOrderRefNo">
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Userid" ColumnName="Userid" />
-                <ScalarProperty Name="RefNo" ColumnName="RefNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WohooProductLists">
-            <EntityTypeMapping TypeName="PineLabsModel.WohooProductList">
-              <MappingFragment StoreEntitySet="WohooProductList">
-                <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="TncLink" ColumnName="TncLink" />
-                <ScalarProperty Name="Sku" ColumnName="Sku" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="FormatExpiry" ColumnName="FormatExpiry" />
-                <ScalarProperty Name="ReloadCardNumber" ColumnName="ReloadCardNumber" />
-                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
-                <ScalarProperty Name="NumericCode" ColumnName="NumericCode" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Max" ColumnName="Max" />
-                <ScalarProperty Name="Min" ColumnName="Min" />
-                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Sno" ColumnName="Sno" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="companybaks">
-            <EntityTypeMapping TypeName="PineLabsModel.companybak">
-              <MappingFragment StoreEntitySet="companybak">
-                <ScalarProperty Name="LiveConsumerSecret" ColumnName="LiveConsumerSecret" />
-                <ScalarProperty Name="LiveConsumerKey" ColumnName="LiveConsumerKey" />
-                <ScalarProperty Name="AuthTokenGeneationDate" ColumnName="AuthTokenGeneationDate" />
-                <ScalarProperty Name="AuthToken" ColumnName="AuthToken" />
-                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
-                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="CompanyIFSCCode" ColumnName="CompanyIFSCCode" />
-                <ScalarProperty Name="CompanyAccountNumber" ColumnName="CompanyAccountNumber" />
-                <ScalarProperty Name="CompanyAccountType" ColumnName="CompanyAccountType" />
-                <ScalarProperty Name="CompanyBankName" ColumnName="CompanyBankName" />
-                <ScalarProperty Name="CompanyAccountName" ColumnName="CompanyAccountName" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ContactEmail2" ColumnName="ContactEmail2" />
-                <ScalarProperty Name="ContactEmail1" ColumnName="ContactEmail1" />
-                <ScalarProperty Name="ContactNo2" ColumnName="ContactNo2" />
-                <ScalarProperty Name="ContactNo1" ColumnName="ContactNo1" />
-                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="CreditPoint" ColumnName="CreditPoint" />
-                <ScalarProperty Name="Logo" ColumnName="Logo" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MessageApis">
-            <EntityTypeMapping TypeName="PineLabsModel.MessageApi">
-              <MappingFragment StoreEntitySet="MessageApi">
-                <ScalarProperty Name="MobileApp" ColumnName="MobileApp" />
-                <ScalarProperty Name="PortalType" ColumnName="PortalType" />
-                <ScalarProperty Name="sts" ColumnName="sts" />
-                <ScalarProperty Name="GetBalAPI" ColumnName="GetBalAPI" />
-                <ScalarProperty Name="BalanceCheckAPI" ColumnName="BalanceCheckAPI" />
-                <ScalarProperty Name="LoginAPI" ColumnName="LoginAPI" />
-                <ScalarProperty Name="IsServiceOTP" ColumnName="IsServiceOTP" />
-                <ScalarProperty Name="IsLoginOTP" ColumnName="IsLoginOTP" />
-                <ScalarProperty Name="IsFlight" ColumnName="IsFlight" />
-                <ScalarProperty Name="IsPromo" ColumnName="IsPromo" />
-                <ScalarProperty Name="favicn" ColumnName="favicn" />
-                <ScalarProperty Name="cmplogo" ColumnName="cmplogo" />
-                <ScalarProperty Name="AirTicket" ColumnName="AirTicket" />
-                <ScalarProperty Name="ShopingPortal" ColumnName="ShopingPortal" />
-                <ScalarProperty Name="mlmurl" ColumnName="mlmurl" />
-                <ScalarProperty Name="CompWeb" ColumnName="CompWeb" />
-                <ScalarProperty Name="Memusername" ColumnName="Memusername" />
-                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
-                <ScalarProperty Name="Activests" ColumnName="Activests" />
-                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
-                <ScalarProperty Name="passwrd" ColumnName="passwrd" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="msgapi" ColumnName="msgapi" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="messgeApis">
-            <EntityTypeMapping TypeName="PineLabsModel.messgeApi">
-              <MappingFragment StoreEntitySet="messgeApi">
-                <ScalarProperty Name="MobileApp" ColumnName="MobileApp" />
-                <ScalarProperty Name="PortalType" ColumnName="PortalType" />
-                <ScalarProperty Name="sts" ColumnName="sts" />
-                <ScalarProperty Name="GetBalAPI" ColumnName="GetBalAPI" />
-                <ScalarProperty Name="BalanceCheckAPI" ColumnName="BalanceCheckAPI" />
-                <ScalarProperty Name="LoginAPI" ColumnName="LoginAPI" />
-                <ScalarProperty Name="IsServiceOTP" ColumnName="IsServiceOTP" />
-                <ScalarProperty Name="IsLoginOTP" ColumnName="IsLoginOTP" />
-                <ScalarProperty Name="IsFlight" ColumnName="IsFlight" />
-                <ScalarProperty Name="IsPromo" ColumnName="IsPromo" />
-                <ScalarProperty Name="favicn" ColumnName="favicn" />
-                <ScalarProperty Name="cmplogo" ColumnName="cmplogo" />
-                <ScalarProperty Name="AirTicket" ColumnName="AirTicket" />
-                <ScalarProperty Name="ShopingPortal" ColumnName="ShopingPortal" />
-                <ScalarProperty Name="mlmurl" ColumnName="mlmurl" />
-                <ScalarProperty Name="CompWeb" ColumnName="CompWeb" />
-                <ScalarProperty Name="Memusername" ColumnName="Memusername" />
-                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
-                <ScalarProperty Name="Activests" ColumnName="Activests" />
-                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
-                <ScalarProperty Name="passwrd" ColumnName="passwrd" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="msgapi" ColumnName="msgapi" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SmsApis">
-            <EntityTypeMapping TypeName="PineLabsModel.SmsApi">
-              <MappingFragment StoreEntitySet="SmsApi">
-                <ScalarProperty Name="MobileApp" ColumnName="MobileApp" />
-                <ScalarProperty Name="PortalType" ColumnName="PortalType" />
-                <ScalarProperty Name="sts" ColumnName="sts" />
-                <ScalarProperty Name="GetBalAPI" ColumnName="GetBalAPI" />
-                <ScalarProperty Name="BalanceCheckAPI" ColumnName="BalanceCheckAPI" />
-                <ScalarProperty Name="LoginAPI" ColumnName="LoginAPI" />
-                <ScalarProperty Name="IsServiceOTP" ColumnName="IsServiceOTP" />
-                <ScalarProperty Name="IsLoginOTP" ColumnName="IsLoginOTP" />
-                <ScalarProperty Name="IsFlight" ColumnName="IsFlight" />
-                <ScalarProperty Name="IsPromo" ColumnName="IsPromo" />
-                <ScalarProperty Name="favicn" ColumnName="favicn" />
-                <ScalarProperty Name="cmplogo" ColumnName="cmplogo" />
-                <ScalarProperty Name="AirTicket" ColumnName="AirTicket" />
-                <ScalarProperty Name="ShopingPortal" ColumnName="ShopingPortal" />
-                <ScalarProperty Name="mlmurl" ColumnName="mlmurl" />
-                <ScalarProperty Name="CompWeb" ColumnName="CompWeb" />
-                <ScalarProperty Name="Memusername" ColumnName="Memusername" />
-                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
-                <ScalarProperty Name="Activests" ColumnName="Activests" />
-                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
-                <ScalarProperty Name="passwrd" ColumnName="passwrd" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="msgapi" ColumnName="msgapi" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TempCategories">
-            <EntityTypeMapping TypeName="PineLabsModel.TempCategory">
-              <MappingFragment StoreEntitySet="TempCategory">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ApiCatId" ColumnName="ApiCatId" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="SubcategoriesCount" ColumnName="SubcategoriesCount" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetAllChildCategoryList" FunctionName="PineLabsModel.Store.GetAllChildCategoryList" />
           <FunctionImportMapping FunctionImportName="GetAllParentCategoryList" FunctionName="PineLabsModel.Store.GetAllParentCategoryList" />
           <FunctionImportMapping FunctionImportName="getBillAddress" FunctionName="PineLabsModel.Store.getBillAddress">
@@ -2783,9 +2613,431 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="BillingAddresses">
+            <EntityTypeMapping TypeName="PineLabsModel.BillingAddress">
+              <MappingFragment StoreEntitySet="BillingAddress">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="AddLineTwo" ColumnName="AddLineTwo" />
+                <ScalarProperty Name="AddLineOne" ColumnName="AddLineOne" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarteDetails">
+            <EntityTypeMapping TypeName="PineLabsModel.CarteDetail">
+              <MappingFragment StoreEntitySet="CarteDetail">
+                <ScalarProperty Name="Posted" ColumnName="Posted" />
+                <ScalarProperty Name="currencyCode" ColumnName="currencyCode" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="ProdPrice" ColumnName="ProdPrice" />
+                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="PineLabsModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApiCatId" ColumnName="ApiCatId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="SubcategoriesCount" ColumnName="SubcategoriesCount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryMasters">
+            <EntityTypeMapping TypeName="PineLabsModel.CategoryMaster">
+              <MappingFragment StoreEntitySet="CategoryMaster">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="PineLabsModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="LiveConsumerSecret" ColumnName="LiveConsumerSecret" />
+                <ScalarProperty Name="LiveConsumerKey" ColumnName="LiveConsumerKey" />
+                <ScalarProperty Name="AuthTokenGeneationDate" ColumnName="AuthTokenGeneationDate" />
+                <ScalarProperty Name="AuthToken" ColumnName="AuthToken" />
+                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
+                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CompanyIFSCCode" ColumnName="CompanyIFSCCode" />
+                <ScalarProperty Name="CompanyAccountNumber" ColumnName="CompanyAccountNumber" />
+                <ScalarProperty Name="CompanyAccountType" ColumnName="CompanyAccountType" />
+                <ScalarProperty Name="CompanyBankName" ColumnName="CompanyBankName" />
+                <ScalarProperty Name="CompanyAccountName" ColumnName="CompanyAccountName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ContactEmail2" ColumnName="ContactEmail2" />
+                <ScalarProperty Name="ContactEmail1" ColumnName="ContactEmail1" />
+                <ScalarProperty Name="ContactNo2" ColumnName="ContactNo2" />
+                <ScalarProperty Name="ContactNo1" ColumnName="ContactNo1" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="CreditPoint" ColumnName="CreditPoint" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="PineLabsModel.Image">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="small" ColumnName="small" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobEMAILQues">
+            <EntityTypeMapping TypeName="PineLabsModel.JobEMAILQue">
+              <MappingFragment StoreEntitySet="JobEMAILQue">
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="FromEmailID" ColumnName="FromEmailID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RecTimeStamp" ColumnName="RecTimeStamp" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="EmailType" ColumnName="EmailType" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
+                <ScalarProperty Name="EmailDate" ColumnName="EmailDate" />
+                <ScalarProperty Name="EMailBody" ColumnName="EMailBody" />
+                <ScalarProperty Name="FormNo" ColumnName="FormNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobEmailSettings">
+            <EntityTypeMapping TypeName="PineLabsModel.JobEmailSetting">
+              <MappingFragment StoreEntitySet="JobEmailSetting">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SMSPassword" ColumnName="SMSPassword" />
+                <ScalarProperty Name="SMSUserName" ColumnName="SMSUserName" />
+                <ScalarProperty Name="SMTPServer" ColumnName="SMTPServer" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobFinalEmailQues">
+            <EntityTypeMapping TypeName="PineLabsModel.JobFinalEmailQue">
+              <MappingFragment StoreEntitySet="JobFinalEmailQue">
+                <ScalarProperty Name="JobEmailQueID" ColumnName="JobEmailQueID" />
+                <ScalarProperty Name="RectimeStamp" ColumnName="RectimeStamp" />
+                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
+                <ScalarProperty Name="EmailType" ColumnName="EmailType" />
+                <ScalarProperty Name="ToEmailID" ColumnName="ToEmailID" />
+                <ScalarProperty Name="FromEmailID" ColumnName="FromEmailID" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobFinalSMSQues">
+            <EntityTypeMapping TypeName="PineLabsModel.JobFinalSMSQue">
+              <MappingFragment StoreEntitySet="JobFinalSMSQue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsError" ColumnName="IsError" />
+                <ScalarProperty Name="RecTimeStamp" ColumnName="RecTimeStamp" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="SMSType" ColumnName="SMSType" />
+                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+                <ScalarProperty Name="IsSMSSent" ColumnName="IsSMSSent" />
+                <ScalarProperty Name="SMSDate" ColumnName="SMSDate" />
+                <ScalarProperty Name="SMSBody" ColumnName="SMSBody" />
+                <ScalarProperty Name="JOBSMSQueID" ColumnName="JOBSMSQueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSMSQues">
+            <EntityTypeMapping TypeName="PineLabsModel.JobSMSQue">
+              <MappingFragment StoreEntitySet="JobSMSQue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RecTimeStamp" ColumnName="RecTimeStamp" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="SMSType" ColumnName="SMSType" />
+                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+                <ScalarProperty Name="IsSMSSent" ColumnName="IsSMSSent" />
+                <ScalarProperty Name="SMSDate" ColumnName="SMSDate" />
+                <ScalarProperty Name="SMSBody" ColumnName="SMSBody" />
+                <ScalarProperty Name="FormNo" ColumnName="FormNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSMSSettings">
+            <EntityTypeMapping TypeName="PineLabsModel.JobSMSSetting">
+              <MappingFragment StoreEntitySet="JobSMSSetting">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="smsSenderId" ColumnName="smsSenderId" />
+                <ScalarProperty Name="SMSPassword" ColumnName="SMSPassword" />
+                <ScalarProperty Name="SMSUserName" ColumnName="SMSUserName" />
+                <ScalarProperty Name="SMSAPI" ColumnName="SMSAPI" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ledgers">
+            <EntityTypeMapping TypeName="PineLabsModel.Ledger">
+              <MappingFragment StoreEntitySet="Ledger">
+                <ScalarProperty Name="TxnID" ColumnName="TxnID" />
+                <ScalarProperty Name="RectimeStamp" ColumnName="RectimeStamp" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="PineLabsModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ResponceContent" ColumnName="ResponceContent" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CancelallowedWithIn" ColumnName="CancelallowedWithIn" />
+                <ScalarProperty Name="CancelAllowed" ColumnName="CancelAllowed" />
+                <ScalarProperty Name="refno" ColumnName="refno" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_card">
+            <EntityTypeMapping TypeName="PineLabsModel.order_card">
+              <MappingFragment StoreEntitySet="order_card">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="EnrptCardPin" ColumnName="EnrptCardPin" />
+                <ScalarProperty Name="EnrptCardNo" ColumnName="EnrptCardNo" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="lableValidity" ColumnName="lableValidity" />
+                <ScalarProperty Name="LableCardPin" ColumnName="LableCardPin" />
+                <ScalarProperty Name="LableCardNumber" ColumnName="LableCardNumber" />
+                <ScalarProperty Name="ProductTheme" ColumnName="ProductTheme" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="RecepientEmail" ColumnName="RecepientEmail" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
+                <ScalarProperty Name="LabelProductName" ColumnName="LabelProductName" />
+                <ScalarProperty Name="CardPin" ColumnName="CardPin" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ActivationUrl" ColumnName="ActivationUrl" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_product">
+            <EntityTypeMapping TypeName="PineLabsModel.order_product">
+              <MappingFragment StoreEntitySet="order_product">
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="OrderRefId" ColumnName="OrderRefId" />
+                <ScalarProperty Name="specialInstruction" ColumnName="specialInstruction" />
+                <ScalarProperty Name="productSku" ColumnName="productSku" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="small" ColumnName="small" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="cardBehaviour" ColumnName="cardBehaviour" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderPayments">
+            <EntityTypeMapping TypeName="PineLabsModel.OrderPayment">
+              <MappingFragment StoreEntitySet="OrderPayment">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategoryRelationTbls">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductCategoryRelationTbl">
+              <MappingFragment StoreEntitySet="ProductCategoryRelationTbl">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Sno" ColumnName="Sno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductContentTbls">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductContentTbl">
+              <MappingFragment StoreEntitySet="ProductContentTbl">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ProdContent" ColumnName="ProdContent" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDenominations">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductDenomination">
+              <MappingFragment StoreEntitySet="ProductDenomination">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Denomination" ColumnName="Denomination" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Sno" ColumnName="Sno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDiscounts">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductDiscount">
+              <MappingFragment StoreEntitySet="ProductDiscounts">
+                <ScalarProperty Name="CouponPriority" ColumnName="CouponPriority" />
+                <ScalarProperty Name="CounponCode" ColumnName="CounponCode" />
+                <ScalarProperty Name="DiscountDesc" ColumnName="DiscountDesc" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductLists">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductList">
+              <MappingFragment StoreEntitySet="ProductList">
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="numericCode" ColumnName="numericCode" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="maxPrice" ColumnName="maxPrice" />
+                <ScalarProperty Name="minPrice" ColumnName="minPrice" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductThemeTbls">
+            <EntityTypeMapping TypeName="PineLabsModel.ProductThemeTbl">
+              <MappingFragment StoreEntitySet="ProductThemeTbl">
+                <ScalarProperty Name="ThemeSku" ColumnName="ThemeSku" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="Sno" ColumnName="Sno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelatedProductLists">
+            <EntityTypeMapping TypeName="PineLabsModel.RelatedProductList">
+              <MappingFragment StoreEntitySet="RelatedProductList">
+                <ScalarProperty Name="RelatedSku" ColumnName="RelatedSku" />
+                <ScalarProperty Name="Sku" ColumnName="Sku" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="PineLabsModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblApiRequestResponses">
+            <EntityTypeMapping TypeName="PineLabsModel.tblApiRequestResponse">
+              <MappingFragment StoreEntitySet="tblApiRequestResponse">
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="response" ColumnName="response" />
+                <ScalarProperty Name="request" ColumnName="request" />
+                <ScalarProperty Name="reqid" ColumnName="reqid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblFundRequests">
+            <EntityTypeMapping TypeName="PineLabsModel.TblFundRequest">
+              <MappingFragment StoreEntitySet="TblFundRequest">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AdminRemark" ColumnName="AdminRemark" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ModeID" ColumnName="ModeID" />
+                <ScalarProperty Name="IsFundApprove" ColumnName="IsFundApprove" />
+                <ScalarProperty Name="HostIP" ColumnName="HostIP" />
+                <ScalarProperty Name="RectimeStamp" ColumnName="RectimeStamp" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblOrderRefNoes">
+            <EntityTypeMapping TypeName="PineLabsModel.TblOrderRefNo">
+              <MappingFragment StoreEntitySet="TblOrderRefNo">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="PineLabsModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
                 <ScalarProperty Name="OtpCode" ColumnName="OtpCode" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
@@ -2803,7 +3055,293 @@ warning 6002: The table/view 'PineLabs.dbo.TempCategory' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="WohooProductLists">
+            <EntityTypeMapping TypeName="PineLabsModel.WohooProductList">
+              <MappingFragment StoreEntitySet="WohooProductList">
+                <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TncLink" ColumnName="TncLink" />
+                <ScalarProperty Name="Sku" ColumnName="Sku" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="FormatExpiry" ColumnName="FormatExpiry" />
+                <ScalarProperty Name="ReloadCardNumber" ColumnName="ReloadCardNumber" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="NumericCode" ColumnName="NumericCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Max" ColumnName="Max" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
+                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sno" ColumnName="Sno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="companybaks">
+            <EntityTypeMapping TypeName="PineLabsModel.companybak">
+              <MappingFragment StoreEntitySet="companybak">
+                <ScalarProperty Name="LiveConsumerSecret" ColumnName="LiveConsumerSecret" />
+                <ScalarProperty Name="LiveConsumerKey" ColumnName="LiveConsumerKey" />
+                <ScalarProperty Name="AuthTokenGeneationDate" ColumnName="AuthTokenGeneationDate" />
+                <ScalarProperty Name="AuthToken" ColumnName="AuthToken" />
+                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
+                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CompanyIFSCCode" ColumnName="CompanyIFSCCode" />
+                <ScalarProperty Name="CompanyAccountNumber" ColumnName="CompanyAccountNumber" />
+                <ScalarProperty Name="CompanyAccountType" ColumnName="CompanyAccountType" />
+                <ScalarProperty Name="CompanyBankName" ColumnName="CompanyBankName" />
+                <ScalarProperty Name="CompanyAccountName" ColumnName="CompanyAccountName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ContactEmail2" ColumnName="ContactEmail2" />
+                <ScalarProperty Name="ContactEmail1" ColumnName="ContactEmail1" />
+                <ScalarProperty Name="ContactNo2" ColumnName="ContactNo2" />
+                <ScalarProperty Name="ContactNo1" ColumnName="ContactNo1" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="CreditPoint" ColumnName="CreditPoint" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageApis">
+            <EntityTypeMapping TypeName="PineLabsModel.MessageApi">
+              <MappingFragment StoreEntitySet="MessageApi">
+                <ScalarProperty Name="MobileApp" ColumnName="MobileApp" />
+                <ScalarProperty Name="PortalType" ColumnName="PortalType" />
+                <ScalarProperty Name="sts" ColumnName="sts" />
+                <ScalarProperty Name="GetBalAPI" ColumnName="GetBalAPI" />
+                <ScalarProperty Name="BalanceCheckAPI" ColumnName="BalanceCheckAPI" />
+                <ScalarProperty Name="LoginAPI" ColumnName="LoginAPI" />
+                <ScalarProperty Name="IsServiceOTP" ColumnName="IsServiceOTP" />
+                <ScalarProperty Name="IsLoginOTP" ColumnName="IsLoginOTP" />
+                <ScalarProperty Name="IsFlight" ColumnName="IsFlight" />
+                <ScalarProperty Name="IsPromo" ColumnName="IsPromo" />
+                <ScalarProperty Name="favicn" ColumnName="favicn" />
+                <ScalarProperty Name="cmplogo" ColumnName="cmplogo" />
+                <ScalarProperty Name="AirTicket" ColumnName="AirTicket" />
+                <ScalarProperty Name="ShopingPortal" ColumnName="ShopingPortal" />
+                <ScalarProperty Name="mlmurl" ColumnName="mlmurl" />
+                <ScalarProperty Name="CompWeb" ColumnName="CompWeb" />
+                <ScalarProperty Name="Memusername" ColumnName="Memusername" />
+                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
+                <ScalarProperty Name="Activests" ColumnName="Activests" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="passwrd" ColumnName="passwrd" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="msgapi" ColumnName="msgapi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="messgeApis">
+            <EntityTypeMapping TypeName="PineLabsModel.messgeApi">
+              <MappingFragment StoreEntitySet="messgeApi">
+                <ScalarProperty Name="MobileApp" ColumnName="MobileApp" />
+                <ScalarProperty Name="PortalType" ColumnName="PortalType" />
+                <ScalarProperty Name="sts" ColumnName="sts" />
+                <ScalarProperty Name="GetBalAPI" ColumnName="GetBalAPI" />
+                <ScalarProperty Name="BalanceCheckAPI" ColumnName="BalanceCheckAPI" />
+                <ScalarProperty Name="LoginAPI" ColumnName="LoginAPI" />
+                <ScalarProperty Name="IsServiceOTP" ColumnName="IsServiceOTP" />
+                <ScalarProperty Name="IsLoginOTP" ColumnName="IsLoginOTP" />
+                <ScalarProperty Name="IsFlight" ColumnName="IsFlight" />
+                <ScalarProperty Name="IsPromo" ColumnName="IsPromo" />
+                <ScalarProperty Name="favicn" ColumnName="favicn" />
+                <ScalarProperty Name="cmplogo" ColumnName="cmplogo" />
+                <ScalarProperty Name="AirTicket" ColumnName="AirTicket" />
+                <ScalarProperty Name="ShopingPortal" ColumnName="ShopingPortal" />
+                <ScalarProperty Name="mlmurl" ColumnName="mlmurl" />
+                <ScalarProperty Name="CompWeb" ColumnName="CompWeb" />
+                <ScalarProperty Name="Memusername" ColumnName="Memusername" />
+                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
+                <ScalarProperty Name="Activests" ColumnName="Activests" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="passwrd" ColumnName="passwrd" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="msgapi" ColumnName="msgapi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_card09092021">
+            <EntityTypeMapping TypeName="PineLabsModel.order_card09092021">
+              <MappingFragment StoreEntitySet="order_card09092021">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="EnrptCardPin" ColumnName="EnrptCardPin" />
+                <ScalarProperty Name="EnrptCardNo" ColumnName="EnrptCardNo" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="lableValidity" ColumnName="lableValidity" />
+                <ScalarProperty Name="LableCardPin" ColumnName="LableCardPin" />
+                <ScalarProperty Name="LableCardNumber" ColumnName="LableCardNumber" />
+                <ScalarProperty Name="ProductTheme" ColumnName="ProductTheme" />
+                <ScalarProperty Name="ProductSku" ColumnName="ProductSku" />
+                <ScalarProperty Name="RecepientEmail" ColumnName="RecepientEmail" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
+                <ScalarProperty Name="LabelProductName" ColumnName="LabelProductName" />
+                <ScalarProperty Name="CardPin" ColumnName="CardPin" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ActivationUrl" ColumnName="ActivationUrl" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_productbak09092021">
+            <EntityTypeMapping TypeName="PineLabsModel.order_productbak09092021">
+              <MappingFragment StoreEntitySet="order_productbak09092021">
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="OrderRefId" ColumnName="OrderRefId" />
+                <ScalarProperty Name="specialInstruction" ColumnName="specialInstruction" />
+                <ScalarProperty Name="productSku" ColumnName="productSku" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="small" ColumnName="small" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="cardBehaviour" ColumnName="cardBehaviour" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderbak09092021">
+            <EntityTypeMapping TypeName="PineLabsModel.orderbak09092021">
+              <MappingFragment StoreEntitySet="orderbak09092021">
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ResponceContent" ColumnName="ResponceContent" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CancelallowedWithIn" ColumnName="CancelallowedWithIn" />
+                <ScalarProperty Name="CancelAllowed" ColumnName="CancelAllowed" />
+                <ScalarProperty Name="refno" ColumnName="refno" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderPaymentbak09092021">
+            <EntityTypeMapping TypeName="PineLabsModel.OrderPaymentbak09092021">
+              <MappingFragment StoreEntitySet="OrderPaymentbak09092021">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="OrderRefNo" ColumnName="OrderRefNo" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SmsApis">
+            <EntityTypeMapping TypeName="PineLabsModel.SmsApi">
+              <MappingFragment StoreEntitySet="SmsApi">
+                <ScalarProperty Name="MobileApp" ColumnName="MobileApp" />
+                <ScalarProperty Name="PortalType" ColumnName="PortalType" />
+                <ScalarProperty Name="sts" ColumnName="sts" />
+                <ScalarProperty Name="GetBalAPI" ColumnName="GetBalAPI" />
+                <ScalarProperty Name="BalanceCheckAPI" ColumnName="BalanceCheckAPI" />
+                <ScalarProperty Name="LoginAPI" ColumnName="LoginAPI" />
+                <ScalarProperty Name="IsServiceOTP" ColumnName="IsServiceOTP" />
+                <ScalarProperty Name="IsLoginOTP" ColumnName="IsLoginOTP" />
+                <ScalarProperty Name="IsFlight" ColumnName="IsFlight" />
+                <ScalarProperty Name="IsPromo" ColumnName="IsPromo" />
+                <ScalarProperty Name="favicn" ColumnName="favicn" />
+                <ScalarProperty Name="cmplogo" ColumnName="cmplogo" />
+                <ScalarProperty Name="AirTicket" ColumnName="AirTicket" />
+                <ScalarProperty Name="ShopingPortal" ColumnName="ShopingPortal" />
+                <ScalarProperty Name="mlmurl" ColumnName="mlmurl" />
+                <ScalarProperty Name="CompWeb" ColumnName="CompWeb" />
+                <ScalarProperty Name="Memusername" ColumnName="Memusername" />
+                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
+                <ScalarProperty Name="Activests" ColumnName="Activests" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="passwrd" ColumnName="passwrd" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="msgapi" ColumnName="msgapi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempCategories">
+            <EntityTypeMapping TypeName="PineLabsModel.TempCategory">
+              <MappingFragment StoreEntitySet="TempCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ApiCatId" ColumnName="ApiCatId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="SubcategoriesCount" ColumnName="SubcategoriesCount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_FundRequest" FunctionName="PineLabsModel.Store.sp_FundRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.sp_FundRequest_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="RectimeStamp" ColumnName="RectimeStamp" />
+                <ScalarProperty Name="HostIP" ColumnName="HostIP" />
+                <ScalarProperty Name="IsFundApprove" ColumnName="IsFundApprove" />
+                <ScalarProperty Name="ModeID" ColumnName="ModeID" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AdminRemark" ColumnName="AdminRemark" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetBalance" FunctionName="PineLabsModel.Store.sp_GetBalance">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.sp_GetBalance_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="credit" ColumnName="credit" />
+                <ScalarProperty Name="debit" ColumnName="debit" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="ttlBalance" ColumnName="ttlBalance" />
+                <ScalarProperty Name="due" ColumnName="due" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetFundRequest" FunctionName="PineLabsModel.Store.sp_GetFundRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PineLabsModel.sp_GetFundRequest_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="RequestedBy" ColumnName="RequestedBy" />
+                <ScalarProperty Name="HostIP" ColumnName="HostIP" />
+                <ScalarProperty Name="IsFundApprove" ColumnName="IsFundApprove" />
+                <ScalarProperty Name="RequestedUserId" ColumnName="RequestedUserId" />
+                <ScalarProperty Name="RequestedToUserId" ColumnName="RequestedToUserId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

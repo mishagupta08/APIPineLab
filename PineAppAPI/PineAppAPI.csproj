@@ -218,6 +218,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryMaster.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CategoryResponce.cs" />
     <Compile Include="Models\Company.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
@@ -227,6 +230,7 @@
     </Compile>
     <Compile Include="Models\CompanyDetail.cs" />
     <Compile Include="Models\Filters.cs" />
+    <Compile Include="Models\FundRequestResponse.cs" />
     <Compile Include="Models\GetAllCategoryList_Result.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
@@ -278,6 +282,9 @@
     <Compile Include="Models\JobSMSSetting.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ledger.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MessageApi.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
@@ -291,8 +298,14 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\orderbak09092021.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrderContainer.cs" />
     <Compile Include="Models\OrderPayment.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderPaymentbak09092021.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderReport.cs" />
@@ -301,7 +314,13 @@
     <Compile Include="Models\order_card.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\order_card09092021.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\order_product.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\order_productbak09092021.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PartialClasses.cs" />
@@ -352,6 +371,15 @@
     <Compile Include="Models\SmsApi.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_FundRequest_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetBalance_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetFundRequest_Result.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_getOrderStatus_Result.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
@@ -368,6 +396,9 @@
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblApiRequestResponse.cs">
+      <DependentUpon>pineLabsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblFundRequest.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TblOrderRefNo.cs">

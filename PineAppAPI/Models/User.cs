@@ -28,5 +28,6 @@ namespace PineAppAPI.Models
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> RoleId { get; set; }
         public string OtpCode { get; set; }
+        public Nullable<int> ParentID { get; set; }
     }
 }

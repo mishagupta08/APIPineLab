@@ -30,6 +30,7 @@ namespace PineAppAPI.Models
         public virtual DbSet<BillingAddress> BillingAddresses { get; set; }
         public virtual DbSet<CarteDetail> CarteDetails { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<CategoryMaster> CategoryMasters { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<JobEMAILQue> JobEMAILQues { get; set; }
@@ -38,6 +39,7 @@ namespace PineAppAPI.Models
         public virtual DbSet<JobFinalSMSQue> JobFinalSMSQues { get; set; }
         public virtual DbSet<JobSMSQue> JobSMSQues { get; set; }
         public virtual DbSet<JobSMSSetting> JobSMSSettings { get; set; }
+        public virtual DbSet<Ledger> Ledgers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<order_card> order_card { get; set; }
         public virtual DbSet<order_product> order_product { get; set; }
@@ -51,14 +53,19 @@ namespace PineAppAPI.Models
         public virtual DbSet<RelatedProductList> RelatedProductLists { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<tblApiRequestResponse> tblApiRequestResponses { get; set; }
+        public virtual DbSet<TblFundRequest> TblFundRequests { get; set; }
         public virtual DbSet<TblOrderRefNo> TblOrderRefNoes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WohooProductList> WohooProductLists { get; set; }
         public virtual DbSet<companybak> companybaks { get; set; }
         public virtual DbSet<MessageApi> MessageApis { get; set; }
         public virtual DbSet<messgeApi> messgeApis { get; set; }
+        public virtual DbSet<order_card09092021> order_card09092021 { get; set; }
+        public virtual DbSet<order_productbak09092021> order_productbak09092021 { get; set; }
+        public virtual DbSet<orderbak09092021> orderbak09092021 { get; set; }
+        public virtual DbSet<OrderPaymentbak09092021> OrderPaymentbak09092021 { get; set; }
         public virtual DbSet<SmsApi> SmsApis { get; set; }
         public virtual DbSet<TempCategory> TempCategories { get; set; }
-        public virtual DbSet<User> Users { get; set; }
     
         public virtual ObjectResult<GetCategoryListWithFilter_Result> GetCategoryListWithFilter(Nullable<int> pageNo, Nullable<int> noOfrecord)
         {
@@ -522,6 +529,33 @@ namespace PineAppAPI.Models
                 new ObjectParameter("Userid", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UpdateCartDetail_Result>("UpdateCartDetail", useridParameter);
+        }
+    
+        public virtual ObjectResult<sp_FundRequest_Result> sp_FundRequest(string regXML)
+        {
+            var regXMLParameter = regXML != null ?
+                new ObjectParameter("regXML", regXML) :
+                new ObjectParameter("regXML", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_FundRequest_Result>("sp_FundRequest", regXMLParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetBalance_Result> sp_GetBalance(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBalance_Result>("sp_GetBalance", userIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetFundRequest_Result> sp_GetFundRequest(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetFundRequest_Result>("sp_GetFundRequest", userIDParameter);
         }
     }
 }

@@ -47,6 +47,8 @@ namespace PineAppAPI.Models
         public WalletResponse WalletResponse { get; set; }
         public Distributor Distributor { get; set; }
         public string OrderId { get; set; }
+        public List<FundRequestResponse> lstFundRequest{ get; set; }
+        public FundRequest objFundRequest { get; set; }
 
     }
 }

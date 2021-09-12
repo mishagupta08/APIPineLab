@@ -229,6 +229,23 @@ namespace PineAppAPI.Controllers
             var result = await this.basicmlmRepository.Confirmvoucher(requestObject);
             return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
         }
-
+        [HttpPost, Route("api/Home/ManageFundRequest/{userId}")]
+        public async Task<IHttpActionResult> ManageFundRequest(Int32 userId)
+        {
+            this.repository = new Repository();
+            var postDataJson = await Request.Content.ReadAsStringAsync();
+            var requestObject = JsonConvert.DeserializeObject<User>(postDataJson);
+            var result = await this.repository.ManageFundRequest(requestObject, userId);
+            return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
+        }
+        [HttpPost, Route("api/Home/FundRequest")]
+        public async Task<IHttpActionResult> FundRequest()
+        {
+            this.repository = new Repository();
+            var postDataJson = await Request.Content.ReadAsStringAsync();
+            var requestObject = JsonConvert.DeserializeObject<FundRequest>(postDataJson);
+            var result = await this.repository.SaveFundRequest(requestObject);
+            return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
+        }
     }
 }

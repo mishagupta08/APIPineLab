@@ -2226,12 +2226,12 @@ namespace PineAppAPI.Repositories
                 }
             }
         }
-        public async Task<ResponceDetail> ManageFundRequest(User objUser, Int32 userId)
+        public async Task<ResponceDetail> ManageFundRequest(User objUser)
         {
             var res = new ResponceDetail();
             try
             {
-                DataSet ds = GetFundRequest(userId);
+                DataSet ds = GetFundRequest(Convert.ToInt32(objUser.Id));
                 List<FundRequestResponse> lstFundRequest = new List<FundRequestResponse>();
                 FundRequestResponse fundRequest = new FundRequestResponse();
                 if (ds.Tables[0].Rows.Count > 0)
@@ -2246,10 +2246,10 @@ namespace PineAppAPI.Repositories
                         fundRequest.RequestDate = Convert.ToString(dr["RequestDate"]);
                         fundRequest.UserName = Convert.ToString(dr["RequestedBy"]);
                         fundRequest.HostIP = Convert.ToString(dr["HostIP"]);
-                        fundRequest.IsFundApprove = Convert.ToBoolean(dr["IsFundApprove"]);
+                        //fundRequest.IsFundApprove = Convert.ToBoolean(dr["IsFundApprove"]);
                         fundRequest.RequestedUserId = Convert.ToInt32(dr["RequestedUserId"]);
                         fundRequest.RequestedToUserId = Convert.ToInt32(dr["RequestedToUserId"]);
-                        fundRequest.Mobile = Convert.ToString(dr["Mobille"]);
+                        fundRequest.Mobile = Convert.ToString(dr["Mobile"]);
                         fundRequest.Remark = Convert.ToString(dr["Remark"]);
                         lstFundRequest.Add(fundRequest);
                     }
@@ -2325,7 +2325,7 @@ namespace PineAppAPI.Repositories
                 {
                     foreach (DataRow dr in ds.Tables[0].Rows)
                     {
-                       
+                        FundRequest.ID = Convert.ToInt32(dr["ID"]);
                     }
 
                     res.objFundRequest = FundRequest;

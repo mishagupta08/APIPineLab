@@ -22,6 +22,7 @@ namespace PineAppAPI.Models
     }
     public class FundRequest
     {
+        public Int32 ID { get; set; }
         public Int32 UserID { get; set; }
         public decimal Amount { get; set; }
         public Int32 CreatedBy { get; set; }

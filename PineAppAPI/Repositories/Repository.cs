@@ -2311,7 +2311,7 @@ namespace PineAppAPI.Repositories
                 sb.AppendLine(("<Remark> "
                                 + objFundRequest.Remark + "</Remark>"));
                 sb.AppendLine(("<CreatedBy>"
-                                + objFundRequest.CreatedBy + "</CreatedBy>"));               
+                                + objFundRequest.CreatedBy + "</CreatedBy>"));
                 //sb.AppendLine(("<UpdatedDate>"
                 //               + (Convert.ToString("0").Trim() + "</UpdatedDate>")));
                 sb.AppendLine(("<HostIP>"
@@ -2350,6 +2350,58 @@ namespace PineAppAPI.Repositories
               };
                 var CONNECTION_STRING = LiveCONNECTION_STRING;
                 using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "sp_FundRequest", parameters))
+                {
+                    //check if any record exist or not
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        dsReturn = ds;
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+
+
+            return dsReturn;
+        }
+        public async Task<ResponceDetail> UpdateFundRequest(int reqId, string remark, int updatedBy)
+        {
+            var res = new ResponceDetail();
+            try
+            {
+                DataSet ds = UpdateFund(1, reqId, remark, updatedBy);               
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                   res.Status = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return res;
+        }
+        public DataSet UpdateFund(int statusId, int reqId, string remark, int updatedBy)
+        {
+            DataSet dsReturn = null;
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+              {
+                  new SqlParameter("@StatusId", statusId),
+                  new SqlParameter("@requestFundID", reqId),
+                  new SqlParameter("@remark", remark),
+                  new SqlParameter("@UpdatedBy", updatedBy)
+
+
+              };
+                var CONNECTION_STRING = LiveCONNECTION_STRING;
+                using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "sp_UpdateFund", parameters))
                 {
                     //check if any record exist or not
                     if (ds.Tables[0].Rows.Count > 0)

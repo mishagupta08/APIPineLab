@@ -14,13 +14,13 @@ namespace PineAppAPI.Controllers
 {
     public class HomeController : ApiController
     {
-        public PineLabRepository pineRepository;       
+        public PineLabRepository pineRepository;
         public BasicmlmRepository basicmlmRepository;
         public Repository repository;
 
         [HttpPost, Route("api/Home/LoginSuperAdmin")]
         public async Task<IHttpActionResult> LoginSuperAdmin()
-        {           
+        {
             var detail = await Request.Content.ReadAsStringAsync();
             var filters = JsonConvert.DeserializeObject<User>(detail);
             this.repository = new Repository();
@@ -112,10 +112,10 @@ namespace PineAppAPI.Controllers
         }
 
         [HttpPost, Route("api/Home/OrderReport")]
-        public async Task<IHttpActionResult>OrderReport()
+        public async Task<IHttpActionResult> OrderReport()
         {
             this.repository = new Repository();
-             var postDataJson = await Request.Content.ReadAsStringAsync();
+            var postDataJson = await Request.Content.ReadAsStringAsync();
             var requestObject = JsonConvert.DeserializeObject<User>(postDataJson);
             var result = await this.repository.OrderReport(requestObject);
             return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
@@ -247,5 +247,15 @@ namespace PineAppAPI.Controllers
             var result = await this.repository.SaveFundRequest(requestObject);
             return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
         }
+        [HttpPost, Route("api/Home/UpdateFundRequest")]
+        public async Task<IHttpActionResult> UpdateFundRequest(FundRequest objFundRequest)
+        {
+            this.repository = new Repository();
+            var postDataJson = await Request.Content.ReadAsStringAsync();
+            var requestObject = JsonConvert.DeserializeObject<FundRequest>(postDataJson);
+            var result = await this.repository.UpdateFundRequest(objFundRequest.ID, objFundRequest.Remark, objFundRequest.CreatedBy);
+            return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
+        }
+
     }
 }

@@ -136,6 +136,7 @@ namespace PineAppAPI.Repositories
                     var usr = bulkList.FirstOrDefault();
                     var role = await Task.Run(() => entity.Roles.FirstOrDefault(g => g.Name.Contains("User")));
                     var user = await Task.Run(() => entity.Users.FirstOrDefault(g => g.Username == usr.Username && g.Password == usr.Password && g.Status == true && g.RoleId == role.Id && g.CompanyId == usr.CompanyId));
+                    var responseDetail1 = await Task.Run(() => GetBalance(Convert.ToDecimal(user.ParentID)));
                     if (user == null)
                     {
                         responseDetail.Message = "Invalid username or password.";
@@ -144,6 +145,7 @@ namespace PineAppAPI.Repositories
                     {
                         responseDetail.Status = true;
                         responseDetail.UserDetail = user;
+                        responseDetail.Balance = responseDetail1.Balance;
                     }
                 }
                 else if (operation == "Edit" || operation == "Delete" || operation == "UpdateStatus")
@@ -238,272 +240,289 @@ namespace PineAppAPI.Repositories
             try
             {
                 string orderId = string.Empty;
-                orderId = "DT" + DateTime.Now.ToString("yyyyMMddHHmmssfff"); ;
-                if (operation == "SaveBillingAddress")
+                var user1 = await Task.Run(() => entity.Users.FirstOrDefault(g => g.Id == order.UserId));
+                var responseDetail1 = await Task.Run(() => GetBalance(Convert.ToDecimal(user1.ParentID)));
+                var cartRes = await this.ManageCart(new CarteDetail { UserId = order.UserId }, "ListCartByUserId");
+                var total = 0;
+                if (cartRes != null && cartRes.CartList != null && cartRes.CartList.Count > 0)
                 {
-                    if (order.billingAddress == null)
+                    // orderReq.payments = new List<Payment1>();
+                    total = Convert.ToInt32(cartRes.CartList.Sum(p => p.TotalPrice));
+                    var totalQty = cartRes.CartList.Sum(p => p.Quantity);
+                }
+                if (responseDetail1.Balance >= total)
+                {
+                    orderId = "DT" + DateTime.Now.ToString("yyyyMMddHHmmssfff"); ;
+                    if (operation == "SaveBillingAddress")
                     {
-                        responseDetail.Message = "Please send complete detail.";
+                        if (order.billingAddress == null)
+                        {
+                            responseDetail.Message = "Please send complete detail.";
+                        }
+                        else
+                        {
+                            var exist = await Task.Run(() => entity.BillingAddresses.FirstOrDefault(p => p.UserId == order.UserId && (string.IsNullOrEmpty(p.OrderId) || p.OrderId.Equals("0.0"))));
+                            if (exist == null)
+                            {
+                                order.billingAddress.UserId = order.UserId;
+                                order.billingAddress.CreatedDate = System.DateTime.Now;
+                                order.billingAddress.OrderId = orderId;
+                                entity.BillingAddresses.Add(order.billingAddress);
+                            }
+                            else
+                            {
+                                exist.AddLineOne = order.billingAddress.AddLineOne;
+                                exist.AddLineTwo = order.billingAddress.AddLineTwo;
+                                exist.City = order.billingAddress.City;
+                                exist.Country = order.billingAddress.Country;
+                                exist.Email = order.billingAddress.Email;
+                                exist.Firstname = order.billingAddress.Firstname;
+                                exist.lastname = order.billingAddress.lastname;
+                                exist.Mobile = order.billingAddress.Mobile;
+                                exist.PostCode = order.billingAddress.PostCode;
+                                exist.State = order.billingAddress.State;
+                                exist.OrderId = orderId;
+                                //exist.CreatedDate = System.DateTime.Now;
+
+                            }
+                            await entity.SaveChangesAsync();
+
+                            responseDetail.Message = "Address saved successfully.";
+                            responseDetail.OrderId = orderId;
+                            responseDetail.Status = true;
+                        }
                     }
-                    else
+                    else if (operation == "CreateOrder")
                     {
-                        var exist = await Task.Run(() => entity.BillingAddresses.FirstOrDefault(p => p.UserId == order.UserId && (string.IsNullOrEmpty(p.OrderId) || p.OrderId.Equals("0.0"))));
+                        var exist = await Task.Run(() => entity.BillingAddresses.FirstOrDefault(p => p.UserId == order.UserId && p.OrderId == order.orderId));
                         if (exist == null)
                         {
-                            order.billingAddress.UserId = order.UserId;
-                            order.billingAddress.CreatedDate = System.DateTime.Now;
-                            order.billingAddress.OrderId = orderId;
-                            entity.BillingAddresses.Add(order.billingAddress);
+                            responseDetail.Message = "Address detail not found.";
                         }
                         else
                         {
-                            exist.AddLineOne = order.billingAddress.AddLineOne;
-                            exist.AddLineTwo = order.billingAddress.AddLineTwo;
-                            exist.City = order.billingAddress.City;
-                            exist.Country = order.billingAddress.Country;
-                            exist.Email = order.billingAddress.Email;
-                            exist.Firstname = order.billingAddress.Firstname;
-                            exist.lastname = order.billingAddress.lastname;
-                            exist.Mobile = order.billingAddress.Mobile;
-                            exist.PostCode = order.billingAddress.PostCode;
-                            exist.State = order.billingAddress.State;
-                            exist.OrderId = orderId;
-                            //exist.CreatedDate = System.DateTime.Now;
+                            //exist.OrderId = "DT" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                            var Userid = Convert.ToString(order.UserId);
+                            var OrderRefNo = await Task.Run(() => entity.TblOrderRefNoes.FirstOrDefault(p => p.Userid == Userid && p.RefNo == exist.OrderId));
 
-                        }
-                        await entity.SaveChangesAsync();
-
-                        responseDetail.Message = "Address saved successfully.";
-                        responseDetail.OrderId = orderId;
-                        responseDetail.Status = true;
-                    }
-                }
-                else if (operation == "CreateOrder")
-                {
-                    var exist = await Task.Run(() => entity.BillingAddresses.FirstOrDefault(p => p.UserId == order.UserId && p.OrderId == order.orderId));
-                    if (exist == null)
-                    {
-                        responseDetail.Message = "Address detail not found.";
-                    }
-                    else
-                    {
-                        //exist.OrderId = "DT" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
-                        var Userid = Convert.ToString(order.UserId);
-                        var OrderRefNo = await Task.Run(() => entity.TblOrderRefNoes.FirstOrDefault(p => p.Userid == Userid && p.RefNo == exist.OrderId));
-
-                        if (OrderRefNo == null)
-                        {
-                            TblOrderRefNo data = new TblOrderRefNo()
+                            if (OrderRefNo == null)
                             {
-                                Userid = Userid,
-                                RefNo = exist.OrderId,
-                                Created = System.DateTime.Now
-                            };
-
-                            entity.TblOrderRefNoes.Add(data);
-                            await entity.SaveChangesAsync();
-                        }
-                        responseDetail = await CreateOrderReqModel(order, responseDetail, exist);
-                        if (responseDetail == null)
-                        {
-                            responseDetail.Message = "Something went wrong. Please try again later.";
-                        }
-                        else
-                        {
-                            //save order responce in DB
-                            if (responseDetail.Status)
-                            {
-                                //in case of successfull create order.
-                                if (responseDetail.CreateOrderResponceDetail != null)
+                                TblOrderRefNo data = new TblOrderRefNo()
                                 {
-                                    var orderDetail = new Order();
-                                    if (responseDetail.CreateOrderResponceDetail.cancel != null)
-                                    {
-                                        orderDetail.CancelAllowed = responseDetail.CreateOrderResponceDetail.cancel.allowed;
-                                        orderDetail.CancelallowedWithIn = responseDetail.CreateOrderResponceDetail.cancel.allowedWithIn;
-                                    }
+                                    Userid = Userid,
+                                    RefNo = exist.OrderId,
+                                    Created = System.DateTime.Now
+                                };
 
-                                    orderDetail.orderId = responseDetail.CreateOrderResponceDetail.orderId;
-                                    orderDetail.refno = responseDetail.CreateOrderResponceDetail.refno;
-                                    orderDetail.status = responseDetail.CreateOrderResponceDetail.status;
-                                    orderDetail.ResponceContent = responseDetail.orderContent;
-                                    orderDetail.UserId = Convert.ToString(order.UserId);
-                                    orderDetail.Created = System.DateTime.Now;
-                                    entity.Orders.Add(orderDetail);
-                                    await entity.SaveChangesAsync();
-                                    if (responseDetail.CreateOrderResponceDetail.payments != null)
+                                entity.TblOrderRefNoes.Add(data);
+                                await entity.SaveChangesAsync();
+                            }
+                            responseDetail = await CreateOrderReqModel(order, responseDetail, exist);
+                            if (responseDetail == null)
+                            {
+                                responseDetail.Message = "Something went wrong. Please try again later.";
+                            }
+                            else
+                            {
+                                //save order responce in DB
+                                if (responseDetail.Status)
+                                {
+                                    //in case of successfull create order.
+                                    if (responseDetail.CreateOrderResponceDetail != null)
                                     {
-                                        var pay = new OrderPayment();
-                                        foreach (var paymt in responseDetail.CreateOrderResponceDetail.payments)
+                                        var orderDetail = new Order();
+                                        if (responseDetail.CreateOrderResponceDetail.cancel != null)
                                         {
-                                            pay = new OrderPayment();
-                                            pay.balance = string.IsNullOrEmpty(paymt.balance) ? 0 : Convert.ToDecimal(paymt.balance);
-                                            pay.code = paymt.code;
-                                            pay.OrderRefNo = exist.OrderId;
-                                            pay.Created = System.DateTime.Now;
-                                            entity.OrderPayments.Add(pay);
+                                            orderDetail.CancelAllowed = responseDetail.CreateOrderResponceDetail.cancel.allowed;
+                                            orderDetail.CancelallowedWithIn = responseDetail.CreateOrderResponceDetail.cancel.allowedWithIn;
                                         }
+
+                                        orderDetail.orderId = responseDetail.CreateOrderResponceDetail.orderId;
+                                        orderDetail.refno = responseDetail.CreateOrderResponceDetail.refno;
+                                        orderDetail.status = responseDetail.CreateOrderResponceDetail.status;
+                                        orderDetail.ResponceContent = responseDetail.orderContent;
+                                        orderDetail.UserId = Convert.ToString(order.UserId);
+                                        orderDetail.Created = System.DateTime.Now;
+                                        entity.Orders.Add(orderDetail);
                                         await entity.SaveChangesAsync();
-
-                                    }
-
-                                    if (responseDetail.CreateOrderResponceDetail.cards != null)
-                                    {
-
-                                        var cartRes1 = await this.ManageCart(new CarteDetail { UserId = order.UserId }, "UpdteCartAftrOdrComplete");
-
-                                        var cards = new order_card();
-
-                                        foreach (var crd in responseDetail.CreateOrderResponceDetail.cards)
+                                        if (responseDetail.CreateOrderResponceDetail.payments != null)
                                         {
-                                            cards = new order_card();
-                                            if (crd.activationCode == null)
+                                            var pay = new OrderPayment();
+                                            foreach (var paymt in responseDetail.CreateOrderResponceDetail.payments)
                                             {
-                                                cards.ActivationCode = "";
+                                                pay = new OrderPayment();
+                                                pay.balance = string.IsNullOrEmpty(paymt.balance) ? 0 : Convert.ToDecimal(paymt.balance);
+                                                pay.code = paymt.code;
+                                                pay.OrderRefNo = exist.OrderId;
+                                                pay.Created = System.DateTime.Now;
+                                                entity.OrderPayments.Add(pay);
                                             }
-                                            else
-                                            {
-                                                cards.ActivationCode = crd.activationCode.ToString();
-                                            }
-                                            if (crd.activationUrl == null)
-                                            {
-                                                cards.ActivationUrl = "";
-                                            }
-                                            else
-                                            {
-                                                cards.ActivationUrl = crd.activationUrl.ToString();
-                                            }
+                                            await entity.SaveChangesAsync();
 
+                                        }
 
-                                            cards.Amount = crd.amount;
-                                            if (crd.barcode == null)
-                                            {
-                                                cards.barcode = "";
-                                            }
-                                            else
-                                            {
-                                                cards.barcode = crd.barcode.ToString();
-                                            }
+                                        if (responseDetail.CreateOrderResponceDetail.cards != null)
+                                        {
 
-                                            cards.CardId = crd.cardId;
-                                            cards.CardNumber = crd.cardNumber;
-                                            cards.EnrptCardNo = Encrypt(cards.CardNumber, KeyByte, IVByte);
-                                            var decr = Decrypt(cards.EnrptCardNo, KeyByte, IVByte);
-                                            cards.CardPin = crd.cardPin;
-                                            cards.EnrptCardPin = Encrypt(cards.CardPin, KeyByte, IVByte);
-                                            var d = Decrypt(cards.EnrptCardPin, KeyByte, IVByte);
-                                            cards.LabelProductName = crd.productName;
-                                            if (crd.labels != null)
+                                            var cartRes1 = await this.ManageCart(new CarteDetail { UserId = order.UserId }, "UpdteCartAftrOdrComplete");
+
+                                            var cards = new order_card();
+
+                                            foreach (var crd in responseDetail.CreateOrderResponceDetail.cards)
                                             {
-                                                cards.LableCardNumber = crd.cardNumber;
-                                                cards.LableCardPin = crd.cardPin;
-                                                if (crd.validity == null)
+                                                cards = new order_card();
+                                                if (crd.activationCode == null)
                                                 {
-                                                    cards.lableValidity = "";
+                                                    cards.ActivationCode = "";
                                                 }
                                                 else
                                                 {
-                                                    cards.lableValidity = crd.validity.ToString();
+                                                    cards.ActivationCode = crd.activationCode.ToString();
+                                                }
+                                                if (crd.activationUrl == null)
+                                                {
+                                                    cards.ActivationUrl = "";
+                                                }
+                                                else
+                                                {
+                                                    cards.ActivationUrl = crd.activationUrl.ToString();
                                                 }
 
-                                            }
 
-                                            cards.OrderRefNo = exist.OrderId;
-                                            cards.ProductSku = crd.sku;
-                                            cards.ProductTheme = crd.theme;
-                                            if (crd.recipientDetails != null)
+                                                cards.Amount = crd.amount;
+                                                if (crd.barcode == null)
+                                                {
+                                                    cards.barcode = "";
+                                                }
+                                                else
+                                                {
+                                                    cards.barcode = crd.barcode.ToString();
+                                                }
+
+                                                cards.CardId = crd.cardId;
+                                                cards.CardNumber = crd.cardNumber;
+                                                cards.EnrptCardNo = Encrypt(cards.CardNumber, KeyByte, IVByte);
+                                                var decr = Decrypt(cards.EnrptCardNo, KeyByte, IVByte);
+                                                cards.CardPin = crd.cardPin;
+                                                cards.EnrptCardPin = Encrypt(cards.CardPin, KeyByte, IVByte);
+                                                var d = Decrypt(cards.EnrptCardPin, KeyByte, IVByte);
+                                                cards.LabelProductName = crd.productName;
+                                                if (crd.labels != null)
+                                                {
+                                                    cards.LableCardNumber = crd.cardNumber;
+                                                    cards.LableCardPin = crd.cardPin;
+                                                    if (crd.validity == null)
+                                                    {
+                                                        cards.lableValidity = "";
+                                                    }
+                                                    else
+                                                    {
+                                                        cards.lableValidity = crd.validity.ToString();
+                                                    }
+
+                                                }
+
+                                                cards.OrderRefNo = exist.OrderId;
+                                                cards.ProductSku = crd.sku;
+                                                cards.ProductTheme = crd.theme;
+                                                if (crd.recipientDetails != null)
+                                                {
+                                                    cards.RecepientEmail = crd.recipientDetails.email;
+                                                }
+                                                if (crd.validity == null)
+                                                {
+                                                    cards.Validity = "";
+                                                }
+                                                else
+                                                {
+                                                    cards.Validity = crd.validity.ToString();
+                                                }
+
+                                                cards.Created = System.DateTime.Now;
+                                                entity.order_card.Add(cards);
+
+                                                //sms = "Dear" + addressdetail.Firstname + " Your Pin No is" + crd.cardPin + "and Card No" + crd.cardNumber + "and validity" + crd.validity.ToString() + "";
+                                                //  var  statusId = SaveJobSMSQue(addressdetail.UserId), sms, Convert.ToString(txtMobileNo.Value), "Login OTP", Convert.ToString(Session["SponsorFormNo"]));
+
+                                            }
+                                            await entity.SaveChangesAsync();
+                                            string sms = string.Empty;
+                                            string productsku = string.Empty;
+                                            string cardNo = string.Empty;
+                                            string pinNo = string.Empty;
+                                            string Amount = string.Empty;
+                                            string validity = string.Empty;
+                                            var addressdetail = await Task.Run(() => entity.BillingAddresses.FirstOrDefault(p => p.UserId == order.UserId && p.OrderId == exist.OrderId));
+
+                                            sms = " you have  just received your gift voucher.your code:";
+                                            foreach (var item in responseDetail.CreateOrderResponceDetail.cards)
                                             {
-                                                cards.RecepientEmail = crd.recipientDetails.email;
+                                                productsku = item.sku;
+                                                cardNo = item.cardNumber;
+                                                pinNo = item.cardPin; ;
+                                                Amount = item.amount;
+                                                validity = Convert.ToDateTime(item.validity).ToString("dd/MM/yyyy");
+                                                sms += "voucher code" + cardNo + "Activition Pin: voucher pin" + cardNo + " of Rs." + Amount + "will Expire on " + validity + "Use the given detail for redeeming at BIgbazar uBRe";
                                             }
-                                            if (crd.validity == null)
+                                            string sms1 = sms;
+
+                                            var statusId = SaveJobSMSQue(Convert.ToInt32(addressdetail.UserId), sms1, Convert.ToString(addressdetail.Mobile.Replace("91", "")), "giftVoucher", "1");
+
+                                            string msgbody = string.Empty;
+                                            var user = await Task.Run(() => entity.Users.FirstOrDefault(p => p.Id == order.UserId));
+                                            string URL = System.Web.HttpContext.Current.Request.Url.Host.ToUpper().Replace("HTTP://", "").Replace("HTTPS://", "").Replace("WWW.", "").Replace("/", "").Replace("Utility.", "").Replace("Care.", "");// System.Web.HttpContext.Current.Request.UserHostName;
+                                            msgbody = "<div class='container'><h3> Hello " + user.Firstname + "" + user.Lastname + "(" + user.Username + ")!!</h3>";
+                                            msgbody += "<p>You have just received your gift voucher worth Rs." + responseDetail.CreateOrderResponceDetail.cards.Sum(s => Convert.ToDecimal(s.amount)) + ".Please find the details of E-gift Voucher and use the given details for redemption at respective shop.</p></div>";
+                                            msgbody += "<div class='col-md-12'> <table cellpadding='5' cellspacing='1' border='2' style='font-family:Arial'><thead style='background-color:Aqua;text-transform:uppercase;font-weight:bold;font-size:13px'><tr align='center'><th>Amount</th><th>ForUse</th><th>VoucherCode</th><th>Pin</th><th>Expiry</th></tr></thead>";
+                                            msgbody += "<tbody style='font-size:12px'>";
+                                            foreach (var data in responseDetail.CreateOrderResponceDetail.cards)
                                             {
-                                                cards.Validity = "";
+                                                msgbody += "<tr align='center'><td>" + Convert.ToString(data.amount) + "</td>";
+                                                msgbody += "<td>" + data.sku + "</td>";
+                                                msgbody += "<td>" + data.cardNumber + "</td>";
+                                                msgbody += "<td>" + data.cardPin + "</td>";
+                                                msgbody += "<td>" + Convert.ToDateTime(data.validity).ToString("dd/MM/yyyy") + "</td>";
+                                                msgbody += "</tr>";
                                             }
-                                            else
-                                            {
-                                                cards.Validity = crd.validity.ToString();
-                                            }
+                                            msgbody += "</tbody></table></div></div>";
 
-                                            cards.Created = System.DateTime.Now;
-                                            entity.order_card.Add(cards);
-
-                                            //sms = "Dear" + addressdetail.Firstname + " Your Pin No is" + crd.cardPin + "and Card No" + crd.cardNumber + "and validity" + crd.validity.ToString() + "";
-                                            //  var  statusId = SaveJobSMSQue(addressdetail.UserId), sms, Convert.ToString(txtMobileNo.Value), "Login OTP", Convert.ToString(Session["SponsorFormNo"]));
-
+                                            var status = SaveJobEmailQue(Convert.ToInt32(addressdetail.UserId), msgbody, Convert.ToString(addressdetail.Email), "Gift Voucher", Convert.ToInt32(1), "PineShop more E-Gift Voucher Order no" + exist.OrderId, "");
                                         }
-                                        await entity.SaveChangesAsync();
-                                        string sms = string.Empty;
-                                        string productsku = string.Empty;
-                                        string cardNo = string.Empty;
-                                        string pinNo = string.Empty;
-                                        string Amount = string.Empty;
-                                        string validity = string.Empty;
-                                        var addressdetail = await Task.Run(() => entity.BillingAddresses.FirstOrDefault(p => p.UserId == order.UserId && p.OrderId == exist.OrderId));
-
-                                        sms = " you have  just received your gift voucher.your code:";
-                                        foreach (var item in responseDetail.CreateOrderResponceDetail.cards)
+                                        //var cartRes1 = await this.ManageCart(new CarteDetail { UserId = order.UserId }, "UpdteCartAftrOdrComplete");
+                                        //await entity.SaveChangesAsync();
+                                        if (responseDetail.CreateOrderResponceDetail.products != null)
                                         {
-                                            productsku = item.sku;
-                                            cardNo = item.cardNumber;
-                                            pinNo = item.cardPin; ;
-                                            Amount = item.amount;
-                                            validity = Convert.ToDateTime(item.validity).ToString("dd/MM/yyyy");
-                                            sms += "voucher code" + cardNo + "Activition Pin: voucher pin" + cardNo + " of Rs." + Amount + "will Expire on " + validity + "Use the given detail for redeeming at BIgbazar uBRe";
+
+                                            var op = new order_product();
+                                            var orderProd = new Product();
+                                            //                                        await entity.SaveChangesAsync();
+
                                         }
-                                        string sms1 = sms;
-
-                                        var statusId = SaveJobSMSQue(Convert.ToInt32(addressdetail.UserId), sms1, Convert.ToString(addressdetail.Mobile.Replace("91", "")), "giftVoucher", "1");
-
-                                        string msgbody = string.Empty;
-                                        var user = await Task.Run(() => entity.Users.FirstOrDefault(p => p.Id == order.UserId));
-                                        string URL = System.Web.HttpContext.Current.Request.Url.Host.ToUpper().Replace("HTTP://", "").Replace("HTTPS://", "").Replace("WWW.", "").Replace("/", "").Replace("Utility.", "").Replace("Care.", "");// System.Web.HttpContext.Current.Request.UserHostName;
-                                        msgbody = "<div class='container'><h3> Hello " + user.Firstname + "" + user.Lastname + "(" + user.Username + ")!!</h3>";
-                                        msgbody += "<p>You have just received your gift voucher worth Rs." + responseDetail.CreateOrderResponceDetail.cards.Sum(s => Convert.ToDecimal(s.amount)) + ".Please find the details of E-gift Voucher and use the given details for redemption at respective shop.</p></div>";
-                                        msgbody += "<div class='col-md-12'> <table cellpadding='5' cellspacing='1' border='2' style='font-family:Arial'><thead style='background-color:Aqua;text-transform:uppercase;font-weight:bold;font-size:13px'><tr align='center'><th>Amount</th><th>ForUse</th><th>VoucherCode</th><th>Pin</th><th>Expiry</th></tr></thead>";
-                                        msgbody += "<tbody style='font-size:12px'>";
-                                        foreach (var data in responseDetail.CreateOrderResponceDetail.cards)
+                                        if (responseDetail.CreateOrderResponceDetail.status == "COMPLETE")
                                         {
-                                            msgbody += "<tr align='center'><td>" + Convert.ToString(data.amount) + "</td>";
-                                            msgbody += "<td>" + data.sku + "</td>";
-                                            msgbody += "<td>" + data.cardNumber + "</td>";
-                                            msgbody += "<td>" + data.cardPin + "</td>";
-                                            msgbody += "<td>" + Convert.ToDateTime(data.validity).ToString("dd/MM/yyyy") + "</td>";
-                                            msgbody += "</tr>";
+                                            responseDetail.Message = "Order created successfully RefNo. " + exist.OrderId;
+
+                                            //
+
                                         }
-                                        msgbody += "</tbody></table></div></div>";
+                                        else if (responseDetail.CreateOrderResponceDetail.status == "PROCESSING")
+                                        {
+                                            responseDetail.Message = " Please wait 5 to 10 min Still we could not Process Your order RefNo. " + exist.OrderId;
+                                        }
 
-                                        var status = SaveJobEmailQue(Convert.ToInt32(addressdetail.UserId), msgbody, Convert.ToString(addressdetail.Email), "Gift Voucher", Convert.ToInt32(1), "PineShop more E-Gift Voucher Order no" + exist.OrderId, "");
+
+                                        //}
                                     }
-                                    //var cartRes1 = await this.ManageCart(new CarteDetail { UserId = order.UserId }, "UpdteCartAftrOdrComplete");
-                                    //await entity.SaveChangesAsync();
-                                    if (responseDetail.CreateOrderResponceDetail.products != null)
-                                    {
-
-                                        var op = new order_product();
-                                        var orderProd = new Product();
-                                        //                                        await entity.SaveChangesAsync();
-
-                                    }
-                                    if (responseDetail.CreateOrderResponceDetail.status == "COMPLETE")
-                                    {
-                                        responseDetail.Message = "Order created successfully RefNo. " + exist.OrderId;
-
-                                        //
-
-                                    }
-                                    else if (responseDetail.CreateOrderResponceDetail.status == "PROCESSING")
-                                    {
-                                        responseDetail.Message = " Please wait 5 to 10 min Still we could not Process Your order RefNo. " + exist.OrderId;
-                                    }
-
-
-                                    //}
                                 }
+
+
                             }
-
-
                         }
                     }
+                }
+                else
+                {
+                    responseDetail.Message = "Contact to admin";
                 }
             }
             catch (Exception e)
@@ -2369,15 +2388,33 @@ namespace PineAppAPI.Repositories
 
             return dsReturn;
         }
-        public async Task<ResponceDetail> UpdateFundRequest(int reqId, string remark, int updatedBy)
+        public async Task<ResponceDetail> UpdateFundRequest(int statusId, int reqId, string remark, int updatedBy)
         {
             var res = new ResponceDetail();
             try
             {
-                DataSet ds = UpdateFund(1, reqId, remark, updatedBy);               
+                DataSet ds = UpdateFund(statusId, reqId, remark, updatedBy);
                 if (ds.Tables[0].Rows.Count > 0)
                 {
-                   res.Status = true;
+                    res.Status = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return res;
+        }
+        public async Task<ResponceDetail> GetBalance(decimal userId)
+        {
+            var res = new ResponceDetail();
+            try
+            {
+                DataSet ds = GetBalanceds(userId);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = true;
+                    res.Balance = Convert.ToDecimal(ds.Tables[0].Rows[0]["balance"]);
                 }
             }
             catch (Exception ex)
@@ -2421,6 +2458,39 @@ namespace PineAppAPI.Repositories
 
             return dsReturn;
         }
+        public DataSet GetBalanceds(decimal userId)
+        {
+            DataSet dsReturn = null;
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+              {
+                  new SqlParameter("@UserID", userId)
+
+
+              };
+                var CONNECTION_STRING = LiveCONNECTION_STRING;
+                using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "sp_GetBalance", parameters))
+                {
+                    //check if any record exist or not
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        dsReturn = ds;
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+
+
+            return dsReturn;
+        }
+
     }
 }
 

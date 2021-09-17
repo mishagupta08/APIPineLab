@@ -29,5 +29,6 @@ namespace PineAppAPI.Models
         public Int32 ModeID { get; set; }        
         public string Remark { get; set; }
         public string HostIP { get; set; }
+        public Int32 StatusId { get; set; }
     }
 }

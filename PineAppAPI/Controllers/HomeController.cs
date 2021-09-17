@@ -253,7 +253,16 @@ namespace PineAppAPI.Controllers
             this.repository = new Repository();
             var postDataJson = await Request.Content.ReadAsStringAsync();
             var requestObject = JsonConvert.DeserializeObject<FundRequest>(postDataJson);
-            var result = await this.repository.UpdateFundRequest(objFundRequest.ID, objFundRequest.Remark, objFundRequest.CreatedBy);
+            var result = await this.repository.UpdateFundRequest(objFundRequest.StatusId, objFundRequest.ID, objFundRequest.Remark, objFundRequest.CreatedBy);
+            return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
+        }
+        [HttpPost, Route("api/Home/GetBalance")]
+        public async Task<IHttpActionResult> GetBalance()
+        {
+            this.repository = new Repository();
+            var postDataJson = await Request.Content.ReadAsStringAsync();
+            var requestObject = JsonConvert.DeserializeObject<User>(postDataJson);
+            var result = await this.repository.GetBalance(requestObject.Id);
             return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
         }
 

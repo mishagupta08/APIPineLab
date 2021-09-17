@@ -49,6 +49,7 @@ namespace PineAppAPI.Models
         public string OrderId { get; set; }
         public List<FundRequestResponse> lstFundRequest{ get; set; }
         public FundRequest objFundRequest { get; set; }
+        public decimal Balance { get; set; }
 
     }
 }

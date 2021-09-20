@@ -265,6 +265,14 @@ namespace PineAppAPI.Controllers
             var result = await this.repository.GetBalance(requestObject.Id);
             return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
         }
-
+        [HttpPost, Route("api/Home/ManageOrderWithWallet/{operation}")]
+        public async Task<IHttpActionResult> ManageOrderWithWallet(string operation)
+        {
+            this.repository = new Repository();
+            var postDataJson = await Request.Content.ReadAsStringAsync();
+            var requestObject = JsonConvert.DeserializeObject<OrderContainer>(postDataJson);
+            var result = await this.repository.ManageOrderWithWallet(requestObject, operation);
+            return Content(HttpStatusCode.OK, result, Configuration.Formatters.JsonFormatter);
+        }
     }
 }

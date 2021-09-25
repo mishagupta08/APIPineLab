@@ -20,6 +20,8 @@ namespace PineAppAPI.Models
         public string ProductName { get; set; }
         public string ProductSku { get; set; }
          public string refno { get; set; }
+        public string UserName { get; set; }
+        public string CompanyUserName { get; set; }
     }
     public class MyOrderDetail
     {

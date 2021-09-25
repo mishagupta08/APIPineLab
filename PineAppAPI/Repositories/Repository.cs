@@ -1903,6 +1903,8 @@ namespace PineAppAPI.Repositories
                             ProductSku = Convert.ToString(ProductSku),
                             EnrptCardNo = Convert.ToString(EnrptCardNo),
                             EnrptCardPin = Convert.ToString(EnrptCardPin),
+                            UserName = Convert.ToString(dr["UserName"]),
+                            CompanyUserName = Convert.ToString(dr["CompanyUser"]),
 
                         };
                         order.Add(od);
@@ -2493,6 +2495,7 @@ namespace PineAppAPI.Repositories
         }
         public async Task<ResponceDetail> ManageOrderWithWallet(OrderContainer order, string operation)
         {
+            this.basicmlmRepository = new BasicmlmRepository();
             ResponceDetail responseDetail = new ResponceDetail();
             try
             {
@@ -2512,6 +2515,8 @@ namespace PineAppAPI.Repositories
                     string agentid = "";
                     agentid = DateTime.Now.ToString("yyyyMMddHHmmssfff");
                     user1.TxnData = "" + agentid + ";" + total + ";Shopping";
+                    user1.Username = "GW223344";
+                    user1.Password = "123456";
                     var result = await this.basicmlmRepository.DeductWalletBalance(user1);
                     if (operation == "CreateOrder" && result.Status)
                     {

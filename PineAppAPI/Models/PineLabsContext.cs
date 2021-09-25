@@ -12,7 +12,7 @@ namespace PineAppAPI.Models
         public PineLabsContext()
             : base("PineLabs")
         {
-            this.Database.Connection.ConnectionString = ("data source=103.71.99.8;initial catalog=LivePineLabs;persist security info=True;user id=usrPine;password=P2345566;MultipleActiveResultSets=True;App=EntityFramework");
+            this.Database.Connection.ConnectionString = ("data source=103.71.99.8,1533;initial catalog=LivePineLabs;persist security info=True;user id=usrPine;password=P2345566;MultipleActiveResultSets=True;App=EntityFramework");
         }
     }
 }

@@ -415,6 +415,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\WohooProductList.cs">
       <DependentUpon>pineLabsEntity.tt</DependentUpon>
     </Compile>

@@ -2762,6 +2762,72 @@ namespace PineAppAPI.Repositories
 
             return responseDetail;
         }
+        
+        public DataSet GetUsers(int companyId)
+        {
+            DataSet dsReturn = null;
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+              {
+                  new SqlParameter("@Companyid", companyId)
+
+
+              };
+                var CONNECTION_STRING = LiveCONNECTION_STRING;
+                using (DataSet ds = SqlHelper.ExecuteDataset(CONNECTION_STRING, "sp_GetUsers", parameters))
+                {
+                    //check if any record exist or not
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        dsReturn = ds;
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+
+
+            return dsReturn;
+        }
+        public async Task<ResponceDetail> ManageUsers(int companyId)
+        {
+            var res = new ResponceDetail();
+            try
+            {
+                DataSet ds = GetUsers(Convert.ToInt32(companyId));
+                List<UsersModel> lstUsers = new List<UsersModel>();
+                UsersModel users = new UsersModel();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        users = new UsersModel();
+                        users.ID = Convert.ToInt32(dr["ID"]);
+                        users.UserName = Convert.ToString(dr["UserName"]);
+                        users.Password = Convert.ToString(dr["Password"]);
+                        users.FirstName = Convert.ToString(dr["FirstName"]);
+                        users.MobileNo = Convert.ToString(dr["Mobile"]);
+                        users.EmailId = Convert.ToString(dr["Email"]);
+                        users.CompanyUserName = Convert.ToString(dr["CompanyUserName"]);
+                        lstUsers.Add(users);
+                    }
+
+                    res.UserDetails = lstUsers;
+                    res.Status = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return res;
+        }
 
     }
 }

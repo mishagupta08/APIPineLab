@@ -50,6 +50,6 @@ namespace PineAppAPI.Models
         public List<FundRequestResponse> lstFundRequest{ get; set; }
         public FundRequest objFundRequest { get; set; }
         public decimal Balance { get; set; }
-
+        public List<UsersModel> UserDetails { get; set; }
     }
 }
